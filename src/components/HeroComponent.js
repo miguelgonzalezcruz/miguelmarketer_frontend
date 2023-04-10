@@ -31,7 +31,9 @@ const HeroComponent = () => {
         setIsLoading(false);
       } else {
         try {
-          const response = await fetch("http://localhost:3001/api/hero-image");
+          const response = await fetch(
+            "https://api.miguelmarketer.com/api/hero-image"
+          );
           const data = await response.json();
           const timestamp = Date.now();
           setHeroImage(data);

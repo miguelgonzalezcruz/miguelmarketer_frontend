@@ -21,7 +21,9 @@ const HeroComponent = () => {
   useEffect(() => {
     const fetchHeroImage = async () => {
       try {
-        const response = await fetch("http://localhost:3001/api/hero-image");
+        const response = await fetch(
+          "https://api.miguelmarketer.com/api/hero-image"
+        );
         const data = await response.json();
         setHeroImage(data);
         setIsLoading(false);
