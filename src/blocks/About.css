@@ -1,0 +1,135 @@
+.about {
+  padding-left: 5vw;
+  padding-right: 5vw;
+  padding-top: 5vw;
+  background-color: #f5f5f5;
+  font-family: "Inter", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-title {
+  display: flex;
+  font-size: 5vw;
+  margin-bottom: 3vw;
+  font-family: "Inter", sans-serif;
+  font-weight: 900;
+  justify-content: center;
+}
+
+.about-subtitle {
+  display: flex;
+  justify-content: center;
+  font-size: 5vw;
+  margin-top: 4vw;
+  margin-bottom: 2.5vw;
+  font-family: "Inter", sans-serif;
+  font-weight: 900;
+}
+
+.about-description {
+  padding-top: 1.5vw;
+  padding-left: 50px;
+  font-size: 25px;
+  margin-bottom: 1vw;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  text-align: left;
+}
+
+.about-skills-card {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  padding: 0.5vw;
+  flex-basis: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.about-skills-card-title {
+  font-size: 25px;
+  font-weight: 700;
+  font-family: "Inter", sans-serif;
+  margin-top: 1vw;
+  margin-bottom: 1vw;
+  padding-bottom: 0;
+}
+
+.card-text {
+  font-size: 20px;
+  justify-content: center;
+}
+
+.card {
+  padding: 10px;
+}
+
+.about-lottie {
+  max-width: 400px;
+  max-height: 400px;
+}
+
+@media screen and (max-width: 1400px) {
+  .card-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    gap: 1.5vw;
+    padding: 10px;
+  }
+  .about-description {
+    font-size: 20px;
+  }
+  .about-skills-card-title {
+    font-size: 20px;
+  }
+
+  .card-text {
+    font-size: 17px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .card-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vw;
+    padding: 10px;
+  }
+  .about-description {
+    font-size: 15px;
+  }
+
+  .about-skills-card-title {
+    font-size: 15px;
+  }
+
+  .card-text {
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .about-lottie {
+    display: none;
+  }
+  .about-description-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .about-description {
+    font-size: 10px;
+    padding-left: 0px;
+  }
+
+  .about-skills-card-title {
+    font-size: 12px;
+  }
+
+  .card-text {
+    font-size: 10px;
+  }
+}

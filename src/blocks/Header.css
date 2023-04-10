@@ -1,0 +1,20 @@
+.header {
+  margin-top: 50px;
+  padding: 20px 40px 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #6c757d;
+}
+
+.mr-auto {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.mr-2 {
+  margin-right: 5px;
+}

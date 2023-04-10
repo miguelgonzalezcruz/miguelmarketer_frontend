@@ -1,0 +1,37 @@
+.job-logos {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-top: 20px;
+  font-family: "Open Sans", sans-serif;
+}
+
+.job-logos-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.job-logos-container .card {
+  width: 250px;
+  height: 250px;
+  margin: 5px;
+  padding: 10px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+}
+
+.job-logos-container .card img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.job-logos-title {
+  font-size: 50px;
+  font-weight: 500;
+  font-style: normal;
+  color: #333;
+  margin-bottom: 20px;
+}

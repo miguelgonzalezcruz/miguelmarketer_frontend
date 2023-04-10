@@ -1,0 +1,147 @@
+.hero-text {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 55px;
+  font-weight: 400;
+  font-family: "Nabla", cursive;
+  /* font-family: "Inter", sans-serif; */
+  font-style: italic;
+  z-index: 2;
+}
+
+.hero-text h1 {
+  font-size: 150px;
+  color: white;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.hero-text h2 {
+  font-size: 35px;
+  color: white;
+  font-weight: 500;
+  font-style: normal;
+  font-family: "Inter", sans-serif;
+}
+
+.hero-author {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 10px;
+  color: white;
+  font-size: 18px;
+  z-index: 2;
+}
+
+.hero-logo {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  padding: 10px;
+}
+
+.hero-author p {
+  margin: 0;
+}
+
+.hero-author a {
+  color: white;
+  text-decoration: underline;
+}
+
+.hero-author img {
+  height: 25px;
+  width: 25px;
+  margin-left: 10px;
+  border-radius: 50%;
+}
+
+.hero-image-container {
+  position: relative;
+}
+
+.gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 10%,
+    rgba(0, 0, 0, 1) 80%
+  );
+}
+
+@media screen and (max-width: 1500px) {
+  .hero-text {
+    color: white;
+    font-size: 55px;
+    font-weight: 400;
+    /* font-family: "Inter", sans-serif; */
+    font-style: italic;
+    z-index: 2;
+  }
+  .hero-text h1 {
+    font-size: 90px;
+  }
+
+  .hero-text h2 {
+    font-size: 20px;
+  }
+
+  .hero-author {
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .hero-text {
+    color: white;
+    font-size: 55px;
+    font-weight: 400;
+    /* font-family: "Inter", sans-serif; */
+    font-style: italic;
+    z-index: 2;
+  }
+  .hero-text h1 {
+    font-size: 100px;
+  }
+
+  .hero-text h2 {
+    font-size: 20px;
+    font-family: "Inter", sans-serif;
+  }
+
+  .hero-author {
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .hero-text {
+    /* font-family: "Inter", sans-serif; */
+  }
+
+  .hero-text h1 {
+    font-size: 55px;
+  }
+
+  .hero-text h2 {
+    font-size: 12px;
+    font-family: "Inter", sans-serif;
+  }
+
+  .hero-author {
+    font-size: 8px;
+    display: flex;
+    align-items: center;
+  }
+}

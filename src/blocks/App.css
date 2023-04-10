@@ -1,0 +1,9 @@
+.app {
+  background-color: #f6f6f6;
+}
+
+.app-container {
+  margin: 0 auto; /* center horizontally */
+  max-width: 1840px; /* set max width */
+  width: 100%; /* ensure full width within container */
+}
