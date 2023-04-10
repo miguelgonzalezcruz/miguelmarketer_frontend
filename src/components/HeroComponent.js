@@ -7,8 +7,6 @@ import { ParallaxProvider, ParallaxBanner } from "react-scroll-parallax";
 
 import emojis from "../emoji.json";
 
-import logo from "../images/job_logos/logomiguelmarketer.svg";
-
 const HeroComponent = () => {
   const getRandomEmoji = () => {
     const randomIndex = Math.floor(Math.random() * emojis.length);
@@ -32,7 +30,7 @@ const HeroComponent = () => {
       } else {
         try {
           const response = await fetch(
-            "https://api.miguelmarketer.com/api/hero-image"
+            "https://api.miguelmarketer/api/hero-image"
           );
           const data = await response.json();
           const timestamp = Date.now();

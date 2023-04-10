@@ -2,7 +2,6 @@
 import React from "react";
 import Header from "./Header";
 import About from "./About";
-import Hero from "./Hero";
 import Timeline from "./Timeline";
 import Contact from "./Contact";
 import Footer from "./Footer";
@@ -16,8 +15,6 @@ function App() {
   return (
     <div className="app">
       <Header></Header>
-
-      {/* <Hero></Hero> */}
 
       <HeroComponent></HeroComponent>
 

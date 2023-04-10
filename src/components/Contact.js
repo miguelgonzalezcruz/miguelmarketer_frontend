@@ -35,7 +35,7 @@ const Contact = () => {
       body: JSON.stringify(formData),
     };
 
-    fetch("http://localhost:3001/api/create-contact", requestOptions)
+    fetch("http://api.miguelmarketer.com/api/create-contact", requestOptions)
       .then((response) => {
         console.log(response);
         if (response.ok) {
