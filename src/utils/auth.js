@@ -1,4 +1,9 @@
-const baseURL = "http://localhost:3001";
+// const baseURL = "http://localhost:3001";
+
+const baseURL =
+  process.env.NODE_ENV === "production"
+    ? "https://api.miguelmarketer.com"
+    : "http://localhost:3001";
 
 function checkResponse(res) {
   if (res.ok) {
