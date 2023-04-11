@@ -1,4 +1,14 @@
 import ieselogo from "../images/history/iese.jpeg";
+import fitboologo from "../images/history/fitboo.jpeg";
+import geniuzzlogo from "../images/history/geniuzz.jpeg";
+import hotelbedslogo from "../images/history/hotelbeds.jpeg";
+import lowcostlogo from "../images/history/lowcost.jpeg";
+import portbluelogo from "../images/history/portblue.jpeg";
+import practicumlogo from "../images/history/practicum.jpeg";
+import rnalogo from "../images/history/rna.jpeg";
+import syncrentalslogo from "../images/history/syncrentals.jpeg";
+import roibacklogo from "../images/history/roiback.jpeg";
+import logitravellogo from "../images/history/logitravel.jpeg";
 
 const workdata = [
   // {
@@ -58,7 +68,7 @@ const workdata = [
       text: "Descubre más",
     },
     logo: {
-      img: "https://media.licdn.com/dms/image/C560BAQGHcl-tYGfEug/company-logo_100_100/0/1568046787287?e=1687996800&v=beta&t=9eUKPUSzV6dvSXpxGyezKSxGLOQGWcmrrqfv3cF5sUY",
+      img: practicumlogo,
       alt: "Practicum USA",
     },
     description:
@@ -79,7 +89,7 @@ const workdata = [
       text: "Descubre más",
     },
     logo: {
-      img: "https://media.licdn.com/dms/image/C4D0BAQE3HmhMBURvEA/company-logo_100_100/0/1553182684471?e=1687996800&v=beta&t=gEt42nr1cgtwF9EO1FfUig99PiI7_Itwtn7H-8Kg8-8",
+      img: roibacklogo,
       alt: "Roiback",
     },
     description:
@@ -100,7 +110,7 @@ const workdata = [
       text: "Descubre más",
     },
     logo: {
-      img: "https://media.licdn.com/dms/image/C560BAQEbEtm8nZjPRA/company-logo_100_100/0/1540972595121?e=1687996800&v=beta&t=MTUuJjnj6GSGEy28oWSAmL8Y2QwXx2X-zK3rXTzcjIA",
+      img: hotelbedslogo,
       alt: "Hotelbeds",
     },
     description:
@@ -121,7 +131,7 @@ const workdata = [
       text: "Descubre más",
     },
     logo: {
-      img: "https://media.licdn.com/dms/image/C560BAQFj7y_B0BEjjA/company-logo_100_100/0/1557261489924?e=1687996800&v=beta&t=viwpwwqTQ4d9gS3owDj3vo0o7YYNc1m1Wc34HfAosGM",
+      img: syncrentalslogo,
       alt: "Sync Rentals",
     },
     description:
@@ -142,7 +152,7 @@ const workdata = [
       text: "Descubre más",
     },
     logo: {
-      img: "https://media.licdn.com/dms/image/D4D0BAQEY3hc1OqK41g/company-logo_100_100/0/1666028579930?e=1687996800&v=beta&t=Obc9144dfnf3aosyW9pvljsMeWhjqek2-MnYq1AQKhw",
+      img: rnalogo,
       alt: "Rafa Nadal Academy by Movistar",
     },
     description:
@@ -163,7 +173,7 @@ const workdata = [
       text: "Descubre más",
     },
     logo: {
-      img: "https://media.licdn.com/dms/image/C4E0BAQElsvzBOTaSJw/company-logo_100_100/0/1519902171285?e=1687996800&v=beta&t=Numcv2gBsFZMbZ147MjIUZk6OquZka_ArHtli0V_VTI",
+      img: geniuzzlogo,
       alt: "Geniuzz",
     },
     description:
@@ -184,7 +194,7 @@ const workdata = [
       text: "Descubre más",
     },
     logo: {
-      img: "https://media.licdn.com/dms/image/C4D0BAQHyPq8Y7zM6yA/company-logo_100_100/0/1568124525019?e=1687996800&v=beta&t=9zS6dD54xTmraduebKqAxZgCHCm52URyzc2gQ-24Gpg",
+      img: portbluelogo,
       alt: "PortBlue Hotels & Resorts",
     },
     description:
@@ -205,7 +215,7 @@ const workdata = [
       text: "Descubre más",
     },
     logo: {
-      img: "https://media.licdn.com/dms/image/C4E0BAQFPQF-rfkLdpg/company-logo_200_200/0/1519863807074?e=1687996800&v=beta&t=FTouvVwRY69r77WQtv-ga_rn9IrpVsCxse9t_1dx7Nk",
+      img: fitboologo,
       alt: "fitboo",
     },
     description:
@@ -226,7 +236,7 @@ const workdata = [
       text: "Descubre más",
     },
     logo: {
-      img: "https://media.licdn.com/dms/image/C510BAQGLR68nQgKuCg/company-logo_100_100/0/1519874716033?e=1687996800&v=beta&t=OI06mPUZrUMek_QR9YgcNGJfsjhqL4USdSBTHPrlhYc",
+      img: lowcostlogo,
       alt: "lowcostholidays",
     },
     description:
@@ -247,7 +257,7 @@ const workdata = [
       text: "Descubre más",
     },
     logo: {
-      img: "https://media.licdn.com/dms/image/C4D0BAQHQnHcoW7g9jg/company-logo_100_100/0/1664282458610?e=1687996800&v=beta&t=X7ugPRcmZGmZMv5nYr4WqVtC0qiYN5ao5RSxyaGVl24",
+      img: logitravellogo,
       alt: "Logitravel",
     },
     description:

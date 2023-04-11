@@ -129,9 +129,9 @@ const About = () => {
                   </Card.Title>
                   <Card.Text className="card-text">
                     <p>
-                      Me focalizo en TravelTech, EdTech y Fitness. Cada año
-                      selecciono un proyecto en el que participar tanto con
-                      capital como con consultoría de marketing.
+                      Mis intereses abarcan diversos sectores pero me focalizo
+                      en TravelTech, EdTech y Fitness. Me apasiona conocer
+                      nuevos proyectos que resuelvan problemas reales.
                     </p>
                     <p>
                       Si ya tienes el MVP, cuentas con una pequeña base de
