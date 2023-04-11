@@ -8,6 +8,11 @@ import { ParallaxProvider, ParallaxBanner } from "react-scroll-parallax";
 import emojis from "../emoji.json";
 
 const HeroComponent = () => {
+  const baseURL =
+    process.env.NODE_ENV === "production"
+      ? "https://api.miguelmarketer.com"
+      : "http://localhost:3001";
+
   const getRandomEmoji = () => {
     const randomIndex = Math.floor(Math.random() * emojis.length);
     return emojis[randomIndex].emoji;
@@ -29,9 +34,7 @@ const HeroComponent = () => {
         setIsLoading(false);
       } else {
         try {
-          const response = await fetch(
-            "https://api.miguelmarketer/api/hero-image"
-          );
+          const response = await fetch(`${baseURL}/api/hero-image`);
           const data = await response.json();
           const timestamp = Date.now();
           setHeroImage(data);

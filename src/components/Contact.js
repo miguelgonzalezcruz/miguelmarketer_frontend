@@ -8,6 +8,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../blocks/Contact.css";
 
 const Contact = () => {
+  const baseURL =
+    process.env.NODE_ENV === "production"
+      ? "https://api.miguelmarketer.com"
+      : "http://localhost:3001";
+
   const [formData, setFormData] = useState({
     email: "",
     firstname: "",
@@ -35,7 +40,7 @@ const Contact = () => {
       body: JSON.stringify(formData),
     };
 
-    fetch("https://api.miguelmarketer.com/api/create-contact", requestOptions)
+    fetch(`${baseURL}/api/create-contact`, requestOptions)
       .then((response) => {
         console.log(response);
         if (response.ok) {
