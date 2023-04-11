@@ -1,3 +1,5 @@
+import ieselogo from "../images/history/iese.jpeg";
+
 const workdata = [
   // {
   //   id: 1,
@@ -35,7 +37,7 @@ const workdata = [
       text: "Descubre más",
     },
     logo: {
-      img: "https://media.licdn.com/dms/image/C4D0BAQFPGWYsxlqfHA/company-logo_200_200/0/1549960155201?e=1687996800&v=beta&t=59VmcxFk0Y_3RnpNqNJ9Eyf982iBnlTkdcNHijF49dw",
+      img: ieselogo,
       alt: "IESE Business School",
     },
     description:
