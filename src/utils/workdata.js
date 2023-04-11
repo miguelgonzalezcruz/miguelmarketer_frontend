@@ -261,7 +261,7 @@ const workdata = [
       alt: "Logitravel",
     },
     description:
-      "Exitosa ejecución de una estrategia de marketing completamente optimizada, generando un aumento significativo de la facturación anual (multiplicamos por cuatro en tres años). Logramos posicionarnos como uno de los principales anunciantes de viajes en España, superamos nuestros objetivos, mejoramos el alcance de nuestros canales de marketing y logramos tasas de conversión muy altas para una amplia gama de productos turísticos.",
+      "Exitosa ejecución de una estrategia de marketing completamente optimizada, generando un aumento significativo de la facturación anual. Logramos posicionarnos como uno de los principales anunciantes de viajes en España, superamos nuestros objetivos, mejoramos el alcance de nuestros canales de marketing y logramos tasas de conversión muy altas para una amplia gama de productos turísticos.",
   },
 ];
 

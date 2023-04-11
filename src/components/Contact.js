@@ -147,7 +147,7 @@ const Contact = () => {
                       onChange={(e) => handleChange(e)}
                       className="form-control"
                       required
-                      placeholder="Tienes 140 caracteres para contarme tu idea."
+                      placeholder="Tienes 140 caracteres. Seamos concretos por favor"
                       maxength="140"
                     ></textarea>
                   </div>
