@@ -105,19 +105,39 @@ const HeroComponent = () => {
                   {heroImage.imageAuthor && heroImage.imageAuthorUrl && (
                     <p>
                       Image by{" "}
-                      <a
-                        href={heroImage.imageAuthorUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        {heroImage.imageAuthor}
-                      </a>{" "}
+                      {(() => {
+                        try {
+                          const url = new URL(heroImage.imageAuthorUrl);
+                          url.searchParams.set("utm_source", "miguelmarketer");
+                          url.searchParams.set("utm_medium", "referral");
+                          return (
+                            <a
+                              href={url.toString()}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              {heroImage.imageAuthor}
+                            </a>
+                          );
+                        } catch (error) {
+                          console.log(error);
+                          return <span>{heroImage.imageAuthor}</span>;
+                        }
+                      })()}
                       {heroImage.imageAuthorProfileImage && (
                         <img
                           src={heroImage.imageAuthorProfileImage}
                           alt={heroImage.imageAuthor}
                         />
-                      )}
+                      )}{" "}
+                      a través de{" "}
+                      <a
+                        href="https://unsplash.com/?utm_source=miguelmarketer&utm_medium=referral"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        Unsplash
+                      </a>
                     </p>
                   )}
                 </div>

@@ -4,10 +4,12 @@ import "./index.css";
 import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
+import GTMNoScript from "../src/components/GTMNoScript";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
+    <GTMNoScript />
     <App />
   </React.StrictMode>
 );
