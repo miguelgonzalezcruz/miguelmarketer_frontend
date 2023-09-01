@@ -4,7 +4,7 @@ import geniuzzlogo from "../images/history/geniuzz.jpeg";
 import hotelbedslogo from "../images/history/hotelbeds.jpeg";
 import lowcostlogo from "../images/history/lowcost.jpeg";
 import portbluelogo from "../images/history/portblue.jpeg";
-import practicumlogo from "../images/history/practicum.jpeg";
+import tripletenlogo from "../images/history/tripleten.jpeg";
 import rnalogo from "../images/history/rna.jpeg";
 import syncrentalslogo from "../images/history/syncrentals.jpeg";
 import roibacklogo from "../images/history/roiback.jpeg";
@@ -56,7 +56,7 @@ const workdata = [
   {
     id: 5,
     title: "Full Stack Software Engineer",
-    text: "Practicum USA",
+    text: "Tripleten USA",
     datestart: "2022",
     date: "2022",
     category: {
@@ -64,15 +64,15 @@ const workdata = [
       color: "#495057",
     },
     link: {
-      url: "https://drive.google.com/file/d/104d9Qo2C0BsQYYw0dfhCvO0Ru648LvlG/edit",
+      url: "https://drive.google.com/file/d/10ZG0zTMiiDpMY_0hBbOq4lTSI0UbgSor/edit",
       text: "Descubre más",
     },
     logo: {
-      img: practicumlogo,
-      alt: "Practicum USA",
+      img: tripletenlogo,
+      alt: "Tripleten USA",
     },
     description:
-      "Practicum es un bootcamp online a tiempo parcial. He aprendido Desarrollo de Software a través de su plataforma interactiva, con la ayuda tutores expertos, otros miembros de la comunidad y la orientación de estudiantes senior. Ha sido una experiencia alucinante que me permite desarrollar desde cero páginas web como esta.",
+      "Tripleten es un bootcamp online a tiempo parcial. He aprendido Desarrollo de Software a través de su plataforma interactiva, con la ayuda tutores expertos, otros miembros de la comunidad y la orientación de estudiantes senior. Ha sido una experiencia alucinante que me permite desarrollar desde cero páginas web como esta.",
   },
   {
     id: 3,
