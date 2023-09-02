@@ -1,0 +1,42 @@
+/* General Styles */
+.blog-post-excerpt {
+  padding: 15px 20px;
+  background-color: #f9f9f9; /* Light gray background for each post excerpt */
+  margin-bottom: 20px; /* Space between excerpts */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.blog-post-excerpt:hover {
+  background-color: #f5f5f5; /* Slightly darker gray on hover */
+}
+
+/* Link Styles */
+.blog-post-excerpt h2 a {
+  text-decoration: none; /* Remove default underline */
+  color: #333; /* Dark text color */
+  transition: color 0.3s; /* Smooth transition for hover effect */
+}
+
+.blog-post-excerpt h2 a:hover {
+  color: #007bff; /* Change color when hovered */
+  text-decoration: underline; /* Underline on hover for emphasis */
+}
+
+/* Excerpt Summary Text */
+.blog-post-excerpt p {
+  color: #666; /* Slightly muted text for the summary */
+  margin-top: 10px; /* A bit of spacing between title and summary */
+}
+
+/* Responsive Design */
+@media screen and (max-width: 600px) {
+  .blog-post-excerpt {
+    padding: 10px 15px; /* Smaller padding on smaller screens */
+  }
+
+  .blog-post-excerpt h2 a {
+    font-size: 1.2em; /* Smaller font for post titles */
+  }
+}
