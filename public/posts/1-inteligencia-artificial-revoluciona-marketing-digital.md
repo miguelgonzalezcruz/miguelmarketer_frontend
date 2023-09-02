@@ -1,4 +1,4 @@
-![Sample Image](./images/1-inteligencia-artificial-revoluciona-marketing-digital.jpg)
+![Sample Image](/posts/images/1-inteligencia-artificial-revoluciona-marketing-digital.jpg)
 
 # Cómo la Inteligencia Artificial Revoluciona el Marketing Digital
 

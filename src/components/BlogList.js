@@ -5,13 +5,19 @@ import "../blocks/BlogList.css";
 
 const BlogList = () => {
   return (
-    <div>
+    <div className="blog-list-container">
       {posts.map((post) => (
-        <div key={post.id} className="blog-post-excerpt">
-          <h2>
-            <Link to={`/blog/${post.id}`}>{post.title}</Link>
-          </h2>
-          <p>{post.summary}</p>
+        <div
+          key={post.id}
+          className="blog-post-excerpt"
+          style={{ backgroundImage: `url(${post.imagePath})` }}
+        >
+          <div className="blog-post-content">
+            <h2>{post.title}</h2>
+            <Link to={`/blog/${post.id}`} className="read-more-btn">
+              Leer post
+            </Link>
+          </div>
         </div>
       ))}
     </div>

@@ -46,12 +46,12 @@
 }
 
 .blog-post-detail img:first-of-type {
-  /* Your hero image styles here */
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  margin-bottom: 20px;
+  display: block; /* This ensures the image is treated as a block-level element */
+  width: 100%; /* The image will take the full width of its container */
+  max-width: 1200px;
+  max-height: 630px; /* The image will not exceed 630px in height */
+  height: auto; /* Height will adjust automatically based on the width while preserving aspect ratio */
+  margin: 20px auto; /* Centers the image horizontally and adds 20px margin at the bottom */
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-  object-fit: cover;
 }
