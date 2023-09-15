@@ -1,24 +1,61 @@
 .blog-post-detail {
-  padding-left: 5vw;
-  padding-right: 5vw;
-  padding-bottom: 3vw;
-  padding-top: 3vw;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  padding: 5vw;
   background-color: #f5f5f5;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   font-family: "Inter", sans-serif;
   max-width: 1800px;
-  margin-left: 35px;
-  margin-right: 35px;
-  margin-top: 35px;
-  margin-bottom: 35px;
+  margin: 0 auto; /* Center the container on the page */
   border-radius: 5px;
 }
 
-.blog-post-detail h1 {
-  font-size: 2.5em;
+.blog-post-detail .header-container {
+  position: relative;
+  height: 50vh; /* Adjust this value to get the desired height */
+}
+
+.blog-post-detail .header-container h1 {
+  position: absolute;
+  z-index: 2;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Ensure it is perfectly centered */
+  font-size: 4em; /* Increase font size */
   font-weight: 900;
-  margin-bottom: 15px;
-  color: #333;
+  color: #fff; /* Adjust color to suit the image background */
+  text-align: center; /* Align text to the center */
+}
+
+.blog-post-detail .header-container img {
+  display: block;
+  width: 100%; /* Full width to the container */
+  height: 100%; /* Full height to the container */
+  object-fit: cover; /* Maintain aspect ratio during resize */
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Adding overlay to the image */
+.blog-post-detail .header-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Change the last value to adjust the overlay transparency */
+  border-radius: 5px; /* Apply border-radius to overlay */
+  pointer-events: none; /* Ensure overlay does not interfere with other elements */
+}
+
+.blog-post-detail .content {
+  padding-top: 2em;
 }
 
 .blog-post-detail h2 {
@@ -43,15 +80,4 @@
 .blog-post-detail p a:hover {
   color: #0056b3;
   text-decoration: underline;
-}
-
-.blog-post-detail img:first-of-type {
-  display: block; /* This ensures the image is treated as a block-level element */
-  width: 100%; /* The image will take the full width of its container */
-  max-width: 1200px;
-  max-height: 630px; /* The image will not exceed 630px in height */
-  height: auto; /* Height will adjust automatically based on the width while preserving aspect ratio */
-  margin: 20px auto; /* Centers the image horizontally and adds 20px margin at the bottom */
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 }
