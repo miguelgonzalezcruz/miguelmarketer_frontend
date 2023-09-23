@@ -12,7 +12,7 @@ function Header() {
   return (
     <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
       <Container>
-        <Navbar.Brand href="#home" className="mr-auto">
+        <Navbar.Brand as={Link} to="/" className="mr-auto">
           <Image
             src={logo}
             alt="Miguel Marketer Logo"

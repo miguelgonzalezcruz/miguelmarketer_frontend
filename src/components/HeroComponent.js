@@ -104,7 +104,7 @@ const HeroComponent = () => {
                 <div className="hero-author">
                   {heroImage.imageAuthor && heroImage.imageAuthorUrl && (
                     <p>
-                      Image by{" "}
+                      Imágen de{" "}
                       {(() => {
                         try {
                           const url = new URL(heroImage.imageAuthorUrl);
@@ -129,15 +129,7 @@ const HeroComponent = () => {
                           src={heroImage.imageAuthorProfileImage}
                           alt={heroImage.imageAuthor}
                         />
-                      )}{" "}
-                      a través de{" "}
-                      <a
-                        href="https://unsplash.com/?utm_source=miguelmarketer&utm_medium=referral"
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        Unsplash
-                      </a>
+                      )}
                     </p>
                   )}
                 </div>

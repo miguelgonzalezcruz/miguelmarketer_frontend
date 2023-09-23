@@ -3,11 +3,10 @@
   grid-template-rows: auto 1fr;
   padding: 5vw;
   background-color: #f5f5f5;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+
   font-family: "Inter", sans-serif;
-  max-width: 1800px;
+
   margin: 0 auto; /* Center the container on the page */
-  border-radius: 5px;
 }
 
 .blog-post-detail .header-container {
