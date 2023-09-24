@@ -1,7 +1,7 @@
+import Helmet from "react-helmet";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
-import { Helmet } from "react-helmet-async";
 
 import "../blocks/BlogPost.css";
 
@@ -60,8 +60,11 @@ function BlogPost() {
         </div>
       </div>
       <Helmet>
-        <title>Miguel Marketer</title>
-
+        <title>Miguel González - Marketing</title>
+        <description>
+          "Miguel González es un profesional del marketing digital con más de 15
+          años de experiencia en el sector."
+        </description>
         <meta property="og:title" content="Miguel González - Marketing" />
         <meta
           property="og:description"
@@ -76,16 +79,11 @@ function BlogPost() {
         <meta property="og:site_name" content="Miguel Marketer" />
         <meta property="og:locale" content="es_ES" />
         <meta name="author" content="Miguel González" />
-        <meta property="og:title" content="Your Page Title" />
         <meta
           property="image"
           content="https://www.miguelmarketer.com/posts/images/Miguel%20Marketer.jpg"
         />
         <meta property="title" content="Miguel González - Marketing" />
-        <meta
-          property="description"
-          content="Miguel González es un profesional del marketing digital con más de 15 años de experiencia en el sector."
-        />
       </Helmet>
     </div>
   );
