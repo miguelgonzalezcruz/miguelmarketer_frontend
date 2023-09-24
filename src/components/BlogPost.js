@@ -78,12 +78,12 @@ function BlogPost() {
         <meta name="author" content="Miguel González" />
         <meta property="og:title" content="Your Page Title" />
         <meta
-          property="linkedin:image"
+          property="image"
           content="https://www.miguelmarketer.com/posts/images/Miguel%20Marketer.jpg"
         />
-        <meta property="linkedin:title" content="Miguel González - Marketing" />
+        <meta property="title" content="Miguel González - Marketing" />
         <meta
-          property="linkedin:description"
+          property="description"
           content="Miguel González es un profesional del marketing digital con más de 15 años de experiencia en el sector."
         />
       </Helmet>
