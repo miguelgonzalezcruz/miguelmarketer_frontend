@@ -59,17 +59,18 @@ function BlogPost() {
         <meta property="og:description" content={description} />
         <meta property="og:image" content={imageURL} />
         <meta property="og:url" content={window.location.href} />
-        <meta property="og:site_name" content="Your Site Name" />
+        <meta property="og:site_name" content="Miguel Marketer" />
 
-        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:card" content="Miguel Marketer" />
         <meta property="twitter:url" content={window.location.href} />
         <meta property="twitter:title" content={title} />
         <meta property="twitter:description" content={description} />
         <meta property="twitter:image" content={imageURL} />
+        <meta property="og:locale" content="es_ES" />
       </Helmet>
       <div className="blog-post-detail">
         <div className="header-container">
-          <img src={imageURL} alt="Header Image" />
+          <img src={imageURL} alt={title} />
           <h1>{title}</h1>
         </div>
         <div className="content">

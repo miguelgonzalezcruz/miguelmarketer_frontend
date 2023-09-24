@@ -1,6 +1,6 @@
 ![Blockchain](/posts/images/2-blockchain-marketing-digital-una-revolucion.jpg)
 
-# La Revolución del Blockchain en el Marketing Digital: Rumbo a un Futuro Transparente y Seguro
+# La Revolución del Blockchain en el Marketing Digital
 
 La atención de todos parece estar puesta en la inteligencia artificial, como si no existiera nada más. Aunque estoy convencido de que la IA va a transformar el mundo al igual que lo hicieron Internet o el teléfono móvil, hay otra tecnología emergente que considero que tiene el potencial de cambiar positivamente todas nuestras estrategias de Marketing Digital.
 
