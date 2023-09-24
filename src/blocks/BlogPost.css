@@ -80,3 +80,17 @@
   color: #0056b3;
   text-decoration: underline;
 }
+
+@media screen and (max-width: 768px) {
+  .blog-post-detail .header-container h1 {
+    position: absolute;
+    z-index: 2;
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%);
+    font-weight: 900;
+    color: #fff; /* Adjust color to suit the image background */
+    text-align: center; /* Align text to the center */
+    font-size: 2em; /* Increase font size */
+  }
+}
