@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
+import { Helmet } from "react-helmet-async";
 
 import "../blocks/BlogPost.css";
 
@@ -58,6 +59,34 @@ function BlogPost() {
           <ReactMarkdown className="markdown">{postContent}</ReactMarkdown>
         </div>
       </div>
+      <Helmet>
+        <title>Miguel Marketer</title>
+
+        <meta property="og:title" content="Miguel González - Marketing" />
+        <meta
+          property="og:description"
+          content="Miguel González es un profesional del marketing digital con más de 15 años de experiencia en el sector."
+        />
+        <meta
+          property="og:image"
+          content="https://www.miguelmarketer.com/posts/images/Miguel%20Marketer.jpg"
+        />
+        <meta property="og:url" content="https://www.miguelmarketer.com/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Miguel Marketer" />
+        <meta property="og:locale" content="es_ES" />
+        <meta name="author" content="Miguel González" />
+        <meta property="og:title" content="Your Page Title" />
+        <meta
+          property="linkedin:image"
+          content="https://www.miguelmarketer.com/posts/images/Miguel%20Marketer.jpg"
+        />
+        <meta property="linkedin:title" content="Miguel González - Marketing" />
+        <meta
+          property="linkedin:description"
+          content="Miguel González es un profesional del marketing digital con más de 15 años de experiencia en el sector."
+        />
+      </Helmet>
     </div>
   );
 }
