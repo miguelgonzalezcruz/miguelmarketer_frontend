@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
-import { Helmet } from "react-helmet";
+
 import "../blocks/BlogPost.css";
 
 function BlogPost() {
@@ -49,25 +49,6 @@ function BlogPost() {
 
   return (
     <div>
-      <Helmet>
-        <title>{title}</title>
-        <meta name="description" content={description} />
-
-        {/* Open Graph / Facebook / LinkedIn */}
-        <meta property="og:type" content="article" />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:image" content={imageURL} />
-        <meta property="og:url" content={window.location.href} />
-        <meta property="og:site_name" content="Miguel Marketer" />
-
-        <meta property="twitter:card" content="Miguel Marketer" />
-        <meta property="twitter:url" content={window.location.href} />
-        <meta property="twitter:title" content={title} />
-        <meta property="twitter:description" content={description} />
-        <meta property="twitter:image" content={imageURL} />
-        <meta property="og:locale" content="es_ES" />
-      </Helmet>
       <div className="blog-post-detail">
         <div className="header-container">
           <img src={imageURL} alt={title} />
