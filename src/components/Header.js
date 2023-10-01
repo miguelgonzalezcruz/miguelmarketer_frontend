@@ -1,47 +1,41 @@
-import Nav from "react-bootstrap/Nav";
+import logo from "../images/job_logos/logomiguelmarketer.svg";
+
 import { Link } from "react-router-dom";
-import Navbar from "react-bootstrap/Navbar";
-import Image from "react-bootstrap/Image";
 
 import "../blocks/Header.css";
 
-import logo from "../images/job_logos/logomiguelmarketer.svg";
-
 function Header() {
   return (
-    <div>
-      <Navbar bg="dark" variant="dark" expand="lg" sticky="top" fluid>
-        <div className="container">
-          <Navbar.Brand as={Link} to="/" className="mr-auto">
-            <Image
-              src={logo}
-              alt="Miguel Marketer Logo"
-              height="32"
-              className="mr-2"
-            />
+    <header className="header">
+      <div className="header__container">
+        <div className="header__logo">
+          <Link to="/">
+            <img className="header__logo-image" src={logo} alt="logo" />
+          </Link>
+          <Link className="header__menu-list-item-brand" to="/">
             Miguel Marketer
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto"></Nav>
-            <Nav>
-              <Nav.Link as={Link} to="/#about">
-                Sobre mi
-              </Nav.Link>
-              <Nav.Link as={Link} to="/#career">
-                Trayectoria
-              </Nav.Link>
-              <Nav.Link as={Link} to="/#contact">
-                Contacto
-              </Nav.Link>
-              <Nav.Link as={Link} to="/blog">
-                Blog
-              </Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
+          </Link>
         </div>
-      </Navbar>
-    </div>
+        <div className="header__menu">
+          <ul className="header__menu-list">
+            <li className="header__menu-list-item">
+              <Link className="header__menu-list-item-link" to="/#about">
+                Sobre mi
+              </Link>
+              <Link className="header__menu-list-item-link" to="/#career">
+                Trayectoria
+              </Link>
+              <Link className="header__menu-list-item-link" to="/#contact">
+                Contacto
+              </Link>
+              <Link className="header__menu-list-item-link" to="/blog">
+                Blog
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
   );
 }
 

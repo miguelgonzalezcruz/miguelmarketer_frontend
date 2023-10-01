@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 
 import Header from "./Header";
+import HeaderBurger from "./HeaderBurger";
 import About from "./About";
 import Timeline from "./Timeline";
 import Contact from "./Contact";
@@ -18,7 +19,6 @@ import ScrollToTop from "./ScrollToTop";
 import PageContent from "./PageContent";
 
 import "../blocks/App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   //   return (
@@ -45,6 +45,7 @@ function App() {
         <div className="page">
           <div className="page__content">
             <Header />
+            <HeaderBurger />
             <Routes>
               <Route path="/" element={<PageContent />} />
               <Route path="/sobre-mi" element={<About />} />

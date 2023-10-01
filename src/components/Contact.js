@@ -4,7 +4,6 @@ import lottie from "lottie-web";
 
 import animationData from "../utils/118202-success-icon.json";
 
-import "bootstrap/dist/css/bootstrap.min.css";
 import "../blocks/Contact.css";
 
 const Contact = () => {
@@ -65,19 +64,24 @@ const Contact = () => {
   const isFormValid = email && firstname && lastname && message.length >= 1;
 
   useEffect(() => {
-    console.log("useEffect called");
+    let animation;
     if (responseStatus === 201) {
-      const animation = lottie.loadAnimation({
+      animation = lottie.loadAnimation({
         container: animationContainer.current,
         renderer: "svg",
-        loop: false,
+        loop: false, // Ensure the animation doesn’t loop
         autoplay: true,
         animationData: animationData,
       });
-      console.log("animation object created", animation);
+
+      animation.addEventListener("complete", () => {
+        setResponseStatus(null); // Reset status to hide animation
+      });
+
       return () => {
-        animation.destroy();
-        console.log("animation destroyed");
+        if (animation) {
+          animation.destroy();
+        }
       };
     }
   }, [responseStatus]);
@@ -101,7 +105,7 @@ const Contact = () => {
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-md-8">
-            <div className="card">
+            <div className="contact-card">
               <div className="card-body">
                 <form onSubmit={(e) => handleSubmit(e)}>
                   <input type="hidden" name="_csrf" value={formData._csrf} />
@@ -147,8 +151,8 @@ const Contact = () => {
                       onChange={(e) => handleChange(e)}
                       className="form-control"
                       required
-                      placeholder="Tienes 140 caracteres. Seamos concretos por favor"
-                      maxength="140"
+                      placeholder="¿En qué puedo ayudarte?"
+                      maxength="500"
                     ></textarea>
                   </div>
                   <div className="form-group btn-block">

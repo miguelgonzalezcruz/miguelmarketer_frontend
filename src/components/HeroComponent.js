@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-
-import "bootstrap/dist/css/bootstrap.min.css";
-import "../blocks/Hero.css";
-import { ParallaxProvider, ParallaxBanner } from "react-scroll-parallax";
-
 import emojis from "../emoji.json";
+import "../blocks/Hero.css";
 
 const HeroComponent = () => {
   const baseURL =
@@ -56,88 +51,42 @@ const HeroComponent = () => {
     "https://images.unsplash.com/photo-1672243776760-67aec979f591?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80";
 
   return (
-    <div id="home">
-      <ParallaxProvider>
-        <div className="hero-image-container">
-          {!isLoading && heroImage && (
-            <ParallaxBanner
-              layers={[
-                {
-                  image: heroImage.imageUrl || backupImageUrl,
-                  amount: 0.3,
-                  speed: -50,
-                },
-              ]}
-              style={{
-                height: "100vh",
-              }}
-            />
-          )}
-          <div className="gradient-overlay"></div>
-        </div>
-        <Container fluid>
-          <Row>
-            <Col>
-              <div className="hero-text">
-                <h1>
-                  ¡Hola! Soy
-                  <br />
-                  Miguel González {getRandomEmoji()}
-                </h1>
-                <h2>Marketing && Software Development</h2>
-              </div>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              {/* <div className="hero-logo">
+    <div
+      id="home"
+      className="hero-image-container"
+      style={{
+        backgroundImage: `url(${
+          !isLoading && heroImage ? heroImage.imageUrl : backupImageUrl
+        })`,
+      }}
+    >
+      <div className="gradient-overlay"></div>
+      <div className="hero-text">
+        <h1>Miguel González {getRandomEmoji()}</h1>
+        <h2>Marketing && Software Development</h2>
+      </div>
+      {!isLoading && heroImage && (
+        <div className="hero-author">
+          {heroImage.imageAuthor && heroImage.imageAuthorUrl && (
+            <p>
+              Imágen de{" "}
+              <a
+                href={heroImage.imageAuthorUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {heroImage.imageAuthor}
+              </a>
+              {heroImage.imageAuthorProfileImage && (
                 <img
-                  src={logo}
-                  alt="Miguel González"
-                  width="100"
-                  height="100"
+                  src={heroImage.imageAuthorProfileImage}
+                  alt={heroImage.imageAuthor}
                 />
-              </div> */}
-            </Col>
-            <Col>
-              {!isLoading && heroImage && (
-                <div className="hero-author">
-                  {heroImage.imageAuthor && heroImage.imageAuthorUrl && (
-                    <p>
-                      Imágen de{" "}
-                      {(() => {
-                        try {
-                          const url = new URL(heroImage.imageAuthorUrl);
-                          url.searchParams.set("utm_source", "miguelmarketer");
-                          url.searchParams.set("utm_medium", "referral");
-                          return (
-                            <a
-                              href={url.toString()}
-                              target="_blank"
-                              rel="noreferrer"
-                            >
-                              {heroImage.imageAuthor}
-                            </a>
-                          );
-                        } catch (error) {
-                          console.log(error);
-                          return <span>{heroImage.imageAuthor}</span>;
-                        }
-                      })()}
-                      {heroImage.imageAuthorProfileImage && (
-                        <img
-                          src={heroImage.imageAuthorProfileImage}
-                          alt={heroImage.imageAuthor}
-                        />
-                      )}
-                    </p>
-                  )}
-                </div>
               )}
-            </Col>
-          </Row>
-        </Container>
-      </ParallaxProvider>
+            </p>
+          )}
+        </div>
+      )}
     </div>
   );
 };

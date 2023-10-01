@@ -7,20 +7,21 @@
   color: white;
   font-size: 55px;
   font-weight: 400;
+  font-family: "Nabla", cursive;
+  /* font-family: "Inter", sans-serif; */
   font-style: italic;
   z-index: 2;
 }
 
 .hero-text h1 {
-  font-size: 85px;
+  font-size: 150px;
   color: white;
   font-weight: 700;
   font-style: normal;
-  margin-bottom: 0px;
 }
 
 .hero-text h2 {
-  font-size: 30px;
+  font-size: 35px;
   color: white;
   font-weight: 500;
   font-style: normal;
@@ -31,10 +32,18 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  padding: 25px;
+  padding: 10px;
   color: white;
   font-size: 18px;
   z-index: 2;
+}
+
+.hero-logo {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  padding: 10px;
 }
 
 .hero-author p {
@@ -55,9 +64,6 @@
 
 .hero-image-container {
   position: relative;
-  height: 100vh;
-  background-size: cover;
-  background-position: center;
 }
 
 .gradient-overlay {
@@ -75,24 +81,45 @@
 }
 
 @media screen and (max-width: 1500px) {
+  .hero-text {
+    color: white;
+    font-size: 55px;
+    font-weight: 400;
+    /* font-family: "Inter", sans-serif; */
+    font-style: italic;
+    z-index: 2;
+  }
   .hero-text h1 {
     font-size: 90px;
   }
+
   .hero-text h2 {
     font-size: 20px;
   }
+
   .hero-author {
     font-size: 10px;
   }
 }
 
 @media screen and (max-width: 1200px) {
+  .hero-text {
+    color: white;
+    font-size: 55px;
+    font-weight: 400;
+    /* font-family: "Inter", sans-serif; */
+    font-style: italic;
+    z-index: 2;
+  }
   .hero-text h1 {
     font-size: 100px;
   }
+
   .hero-text h2 {
     font-size: 20px;
+    font-family: "Inter", sans-serif;
   }
+
   .hero-author {
     font-size: 10px;
   }
@@ -108,9 +135,12 @@
   .hero-text h1 {
     font-size: 55px;
   }
+
   .hero-text h2 {
     font-size: 12px;
+    font-family: "Inter", sans-serif;
   }
+
   .hero-author {
     font-size: 8px;
     display: flex;

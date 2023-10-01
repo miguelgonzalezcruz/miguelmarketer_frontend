@@ -1,3 +1,18 @@
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2c3e50;
+  --background-color: #ecf0f1;
+  --text-color: #2c3e50;
+  --error-color: #e74c3c;
+  --success-color: #2ecc71;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
 .contact-container {
   margin-top: 50px;
   display: flex;
@@ -16,72 +31,204 @@
   font-family: "Inter", sans-serif;
   font-weight: 900;
   justify-content: center;
+  margin-bottom: 0px;
+}
+.contact-card {
+  position: relative;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 50px;
+  min-width: 600px;
 }
 
-.contact-description {
-  padding-top: 1.5vw;
-  padding-left: 50px;
-  font-size: 25px;
-  margin-bottom: 1vw;
+.card-body {
+  padding: 40px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.contact-field label {
+  display: block;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid var(--secondary-color);
+  color: var(--text-color);
+  margin-bottom: 10px;
+  outline: none;
   font-family: "Inter", sans-serif;
-  font-weight: 400;
-  text-align: left;
+}
+
+.form-control:focus {
+  border-color: var(--primary-color);
+}
+
+.form-control:focus:invalid {
+  border-color: var(--error-color);
+}
+
+textarea.form-control {
+  min-height: 100px;
+  max-height: 150px;
+}
+
+input[type="submit"]:disabled,
+button:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+/* Standard button styling */
+.btn {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Focused state (tab navigation, etc.) */
+.btn:focus {
+  outline: none;
+  box-shadow: 0px 0px 5px 0px rgba(52, 152, 219, 0.5); /* var(--primary-color) */
+}
+
+/* Hover and active effects for non-disabled buttons */
+.btn-primary:not(:disabled):hover,
+.btn-primary:not(:disabled):active {
+  background-color: #2980b9; /* A darker shade of primary color */
+  transform: scale(
+    0.98
+  ); /* Slightly reduces the button size for a "press" effect */
+}
+
+/* Disabled button styling */
+.btn:disabled {
+  background-color: #bdc3c7; /* Light grey */
+  cursor: not-allowed;
+  transform: none; /* Ensures no 'press' effect */
 }
 
 .btn-block {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 24px;
-  margin-top: 24px;
-}
-
-.contact-field {
-  margin-bottom: 24px;
-  margin-top: 24px;
+  text-align: right;
 }
 
 .lottie-overlay {
-  position: absolute;
+  position: absolute; /* Positioned within the card */
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1000;
   display: flex;
-  justify-content: center;
   align-items: center;
-  background-color: rgba(250, 250, 250, 0.5);
+  justify-content: center;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Optional: semi-transparent background */
 }
 
 .lottie-container {
-  width: 100%;
-  height: 100%;
-  z-index: 1001; /* Set the z-index of the Lottie animation higher than the overlay */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 0;
-  left: 0;
+  width: 100px;
+  height: 100px;
 }
 
-@media screen and (max-width: 1400px) {
-  .contact-description {
-    font-size: 20px;
-    padding-left: 0px;
+@media only screen and (max-width: 1100px) {
+  .contact-container {
+    height: 95vh;
   }
 }
 
-@media screen and (max-width: 800px) {
-  .contact-description {
-    font-size: 15px;
-    padding-left: 0px;
+/* For tablets screens */
+@media only screen and (max-width: 768px) {
+  .contact-container {
+    height: 95vh;
+  }
+
+  .contact-title {
+    font-size: 4rem; /* Adjust font size to something reasonable on tablets */
+  }
+  .contact-card {
+    min-width: auto;
+    width: 80%; /* Make card width relative to screen width */
+  }
+  .card-body {
+    padding: 20px; /* Reduce padding */
+  }
+  .lottie-container {
+    width: 75px;
+    height: 75px;
   }
 }
 
-@media screen and (max-width: 600px) {
-  .contact-description {
-    font-size: 15px;
-    padding-left: 0px;
+/* For mobile screens */
+@media only screen and (max-width: 480px) {
+  .contact-title {
+    font-size: 2rem; /* Adjust title size for smaller screens */
+    margin-bottom: 1rem;
+  }
+  .contact-card {
+    box-shadow: none; /* Optional: remove shadow for a cleaner mobile look */
+    width: 90%; /* Take up more of the screen width */
+  }
+  .card-body {
+    padding: 15px; /* Less padding on smaller screens */
+  }
+  .form-group {
+    margin-bottom: 15px; /* Less vertical space between inputs */
+  }
+  .btn {
+    padding: 12px 25px; /* Larger touch target for buttons */
+  }
+
+  .lottie-container {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .contact-title {
+    font-size: 1.5rem; /* Adjust title size to fit smaller screens */
+    margin-bottom: 1rem;
+  }
+  .contact-card {
+    width: 95%; /* Take almost the full width of the screen */
+    margin-top: 20px; /* Less top margin to utilize space */
+  }
+  .card-body {
+    padding: 10px; /* Reduced padding inside the card */
+  }
+  .form-group,
+  .btn-block {
+    margin-bottom: 10px; /* Smaller vertical space between elements */
+  }
+  .contact-field label {
+    font-size: 12px; /* Smaller font size for labels */
+  }
+  .form-control {
+    font-size: 14px; /* Ensure the input text is legible */
+    padding: 8px; /* Slightly smaller padding */
+  }
+  .btn {
+    padding: 10px 15px; /* Adequate padding and still large enough touch target */
+    font-size: 14px; /* Legible font size for button text */
+  }
+  .lottie-container {
+    width: 40px; /* Smaller Lottie animation */
+    height: 40px;
   }
 }

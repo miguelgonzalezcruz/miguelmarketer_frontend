@@ -13,8 +13,9 @@ const Timeline = () =>
     <>
       <div id="career" className="timeline-block">
         <h1 className="timeline-title">Trayectoria</h1>
-        <div className="userimage"></div>
+
         <div className="timeline-container">
+          <div className="userimage"></div>
           {sortedWorkData.map((data, idx) => (
             <TimelineItem data={data} key={idx} />
           ))}
