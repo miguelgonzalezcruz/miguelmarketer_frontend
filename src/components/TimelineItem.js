@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../blocks/Timeline.css";
+import "../blocks/TimelineItem.css";
 
 const TimelineItem = ({ data }) => (
   <div className="timeline-item">

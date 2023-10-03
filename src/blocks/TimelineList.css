@@ -1,0 +1,86 @@
+.timeline-block {
+  padding: 20px 40px 20px 40px;
+}
+
+.timeline-title {
+  display: flex;
+  font-size: 5vw;
+  margin-bottom: 3vw;
+  margin-top: 3vw;
+  font-family: "Inter", sans-serif;
+  font-weight: 900;
+  justify-content: center;
+}
+
+.timeline-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  flex-wrap: wrap;
+  font-family: "Inter", sans-serif;
+}
+
+.timeline-container::after {
+  background-color: #adb5bd;
+  content: "";
+  position: absolute;
+  left: calc(50% - 2px);
+  width: 2px;
+  height: 100%;
+}
+
+.userimage {
+  background-color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 85px;
+  height: 85px;
+  z-index: 50;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("../images/job_logos/miguel.jpeg");
+  margin: 0 auto;
+}
+
+.userimage-now {
+  background-color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 85px;
+  height: 85px;
+  z-index: 50;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("../images/job_logos/miguel_now.jpeg");
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 1023px) {
+  .timeline-block {
+    padding: 20px 10px 20px 10px;
+  }
+
+  .timeline-item-content {
+    text-align: left;
+  }
+
+  .timeline-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .timeline-container::after {
+    background-color: #adb5bd;
+    content: "";
+    position: absolute;
+    left: calc(50% - 2px);
+    width: 2px;
+    height: 100%;
+  }
+
+  .userimage {
+    margin-bottom: 25px;
+  }
+}
