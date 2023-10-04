@@ -9,7 +9,7 @@ const TimelineItem = ({ data }) => (
         {data.category.tag}
       </span> */}
 
-      <p className="timeline-item-content-title ">{data.title}</p>
+      <p className="timeline-item-content-title">{data.title}</p>
       <p className="timeline-item-content-subtitle">{data.text}</p>
       <p className="timeline-item-content-date">
         Desde {data.datestart} hasta {data.date}

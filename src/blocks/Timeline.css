@@ -18,6 +18,8 @@
   position: relative;
   flex-wrap: wrap;
   font-family: "Inter", sans-serif;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .timeline-container::after {
@@ -34,17 +36,15 @@
   justify-content: flex-end;
   padding-right: 50px;
   position: relative;
-  margin: 10px 0;
-  width: 50%;
-  margin-left: -40px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .timeline-item:nth-child(odd) {
   align-self: flex-end;
   justify-content: flex-start;
-  padding-left: 50px;
-  padding-right: 0;
-  margin-right: -40px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .timeline-item-content {

@@ -77,8 +77,8 @@
 
 .burgerheader__menu-list-item-brand {
   list-style-type: none;
-  font-size: 24px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 500;
   font-family: "Inter", sans-serif;
   margin: 0;
   display: flex;

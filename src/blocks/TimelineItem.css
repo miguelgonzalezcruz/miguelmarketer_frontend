@@ -25,8 +25,7 @@
   align-items: flex-end;
   padding: 15px;
   position: relative;
-  width: 500px;
-  max-width: 70%;
+  max-width: 650px;
   text-align: right;
 }
 
@@ -35,15 +34,15 @@
   align-items: flex-start;
 }
 
-.timeline-item-content title {
+.timeline-item-content-title {
   color: #333;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 25px;
   font-weight: bold;
 }
 
 .timeline-item-content-subtitle {
-  font-size: 16px;
+  font-size: 24px;
   line-height: 24px;
   margin-top: 0;
   margin-bottom: 5px;
@@ -53,7 +52,7 @@
 
 .timeline-item-content-date {
   color: #6c757d;
-  font-size: 12px;
+  font-size: 18px;
   font-weight: normal;
 }
 
@@ -61,7 +60,7 @@
   /* Descubre más */
   color: #adb5bd;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 20px;
   font-weight: normal;
 }
 
@@ -82,6 +81,11 @@
 .timeline-item:nth-child(odd) .timeline-item-content .circle {
   right: auto;
   left: -65px;
+}
+
+.timeline-item-content-description {
+  font-size: 20px;
+  font-weight: normal;
 }
 
 @media screen and (max-width: 1023px) {
@@ -106,6 +110,23 @@
     padding-left: 0px;
     padding-right: 0px;
     margin-right: 0px;
+  }
+
+  .timeline-item-content {
+    align-items: flex-start;
+  }
+
+  .timeline-item-content-description {
+    font-size: 20px;
+    font-weight: normal;
+  }
+
+  .timeline-item-content a {
+    /* Descubre más */
+    color: #adb5bd;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: normal;
   }
 
   .timeline-item-content::after {
