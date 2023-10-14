@@ -10,7 +10,6 @@
 .contact-container {
   font-family: "Inter", sans-serif;
   background-color: var(--background-color);
-  color: var(--text-color);
   margin-top: 50px;
   display: flex;
   position: relative;

@@ -53,33 +53,13 @@ const workdata = [
     description:
       "Gracias a este programa directivo fortalecí mi pensamiento estratégico y habilidades para la dirección. Conseguí una visión global 360 a través del método del caso, que aúna el aprendizaje individual, las discusiones de equipo y el diálogo en un pleno interdisciplinar. Es muy enriquecedora la discusión con distintos puntos de vista y experiencias de diferentes sectores, además de formar amistades que perduran.",
   },
-  {
-    id: 5,
-    title: "Full Stack Software Engineer",
-    text: "Tripleten USA",
-    datestart: "2022",
-    date: "2022",
-    category: {
-      tag: "formación",
-      color: "#495057",
-    },
-    link: {
-      url: "https://drive.google.com/file/d/10ZG0zTMiiDpMY_0hBbOq4lTSI0UbgSor/edit",
-      text: "Descubre más",
-    },
-    logo: {
-      img: tripletenlogo,
-      alt: "Tripleten USA",
-    },
-    description:
-      "Tripleten es un bootcamp online a tiempo parcial. He aprendido Desarrollo de Software a través de su plataforma interactiva, con la ayuda tutores expertos, otros miembros de la comunidad y la orientación de estudiantes senior. Ha sido una experiencia alucinante que me permite desarrollar desde cero páginas web como esta.",
-  },
+
   {
     id: 3,
     title: "Head Of Marketing & Communications",
     text: "Roiback",
     datestart: "2022",
-    date: "2023",
+    date: "Actualmente",
     category: {
       tag: "trabajo",
       color: "#495057",
@@ -94,6 +74,27 @@ const workdata = [
     },
     description:
       "Es una galardonada traveltech especializada en la gestión del canal directo para hoteles. Roiback ofrece a más de 2.000 hoteles independientes y cadenas hoteleras de todo el mundo un motor de reservas líder en el mercado, soluciones web enfocadas a la conversión y servicios de gestión integral del marketing online enfocado en la generación de reservas.",
+  },
+  {
+    id: 5,
+    title: "Software Engineer",
+    text: "Tripleten USA",
+    datestart: "2022",
+    date: "2023",
+    category: {
+      tag: "formación",
+      color: "#495057",
+    },
+    link: {
+      url: "https://drive.google.com/file/d/10ZG0zTMiiDpMY_0hBbOq4lTSI0UbgSor/edit",
+      text: "Descubre más",
+    },
+    logo: {
+      img: tripletenlogo,
+      alt: "Tripleten USA",
+    },
+    description:
+      "Tripleten es un bootcamp online a tiempo parcial. He aprendido Desarrollo de Software a través de su plataforma interactiva, con la ayuda tutores expertos, otros miembros de la comunidad y la orientación de estudiantes senior. Ha sido una experiencia alucinante que me permite desarrollar desde cero páginas web como esta.",
   },
   {
     id: 6,

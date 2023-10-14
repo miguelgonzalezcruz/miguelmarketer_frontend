@@ -24,10 +24,10 @@ const About = () => {
 
   const cardContent = [
     {
-      title: "Bienestar",
+      title: "Marketing Digital",
       description: [
-        "Abarca desde la salud física hasta el bienestar emocional y mental.",
-        "Pasar tiempo con mi familia, mantener hobbies activos - como tocar la batería o salir a la montaña - y cuidar mis finanzas personales con el objetivo de conseguir la independencia financiera son componentes cruciales de mi bienestar general.",
+        "Me apasiona el marketing digital y su capacidad para generar resultados medibles y escalables.",
+        "La combinación de creatividad, datos y tecnología es clave para desarrollar estrategias de marketing efectivas y eficientes.",
       ],
     },
     {
