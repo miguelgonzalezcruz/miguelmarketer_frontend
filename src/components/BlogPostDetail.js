@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-// import Head from "next/head";
+import { Helmet } from "react-helmet";
 import "../blocks/BlogPost.css";
 
 const BlogPostDetail = () => {
@@ -53,15 +53,19 @@ const BlogPostDetail = () => {
 
   return (
     <div className="blog-post-detail">
-      {/* <Head>
+      <Helmet>
         <title>{title}</title>
         <meta name="description" content={description} />
+        {/* Add Open Graph (OG) tags for social media previews */}
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
-        {heroImageUrl && <meta property="og:image" content={heroImageUrl} />}
-        <meta property="og:url" content={`${baseURL}/blog/${slug}`} />
-        <meta property="og:image:alt" content={title} />
-      </Head> */}
+        <meta property="og:image" content={heroImageUrl} />
+        {/* Add Twitter Card tags if needed */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={heroImageUrl} />
+      </Helmet>
       <div className="header-container">
         <h1>{title}</h1>
         {heroImageUrl && <img src={heroImageUrl} alt={title} />}
