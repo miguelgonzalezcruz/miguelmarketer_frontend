@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import Head from "next/head";
 import "../blocks/BlogPost.css";
 
 const BlogPostDetail = () => {
@@ -52,6 +53,15 @@ const BlogPostDetail = () => {
 
   return (
     <div className="blog-post-detail">
+      <Head>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        {heroImageUrl && <meta property="og:image" content={heroImageUrl} />}
+        <meta property="og:url" content={`${baseURL}/blog/${slug}`} />
+        <meta property="og:image:alt" content={title} />
+      </Head>
       <div className="header-container">
         <h1>{title}</h1>
         {heroImageUrl && <img src={heroImageUrl} alt={title} />}
