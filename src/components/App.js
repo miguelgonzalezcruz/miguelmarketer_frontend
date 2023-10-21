@@ -1,10 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  useLocation,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Header from "./Header";
 import HeaderBurger from "./HeaderBurger";
@@ -17,27 +12,12 @@ import BlogList from "./BlogList";
 import BlogPost from "./BlogPost";
 import ScrollToTop from "./ScrollToTop";
 import PageContent from "./PageContent";
+import NewBlogPosts from "./NewBlogPosts";
+import BlogPostDetail from "./BlogPostDetail";
 
 import "../blocks/App.css";
 
 function App() {
-  //   return (
-  //     <Router>
-  //       <div className="app">
-  //         <Header />
-
-  //         <Routes>
-  //           <Route path="/" element={<Home />} />
-  //           <Route path="/blog/:postId" element={<BlogPost />} />
-  //           <Route path="/blog" element={<BlogList />} />
-  //         </Routes>
-
-  //         <Footer />
-  //       </div>
-  //     </Router>
-  //   );
-  // }
-
   return (
     <main className="app-container">
       <Router>
@@ -53,6 +33,12 @@ function App() {
               <Route path="/contacta" element={<Contact />} />
               <Route path="/blog" element={<BlogList />} />
               <Route path="/blog/:postId" element={<BlogPost />} />
+              <Route exact path="/blog-posts" element={<NewBlogPosts />} />
+              <Route
+                exact
+                path="/blog-posts/:slug"
+                element={<BlogPostDetail />}
+              />
             </Routes>
             <Footer />
           </div>
@@ -63,12 +49,3 @@ function App() {
 }
 
 export default App;
-
-{
-  /* <HeroComponent />
-<main className="app-container">
-  <About />
-  <Timeline />
-  <Contact />
-</main> */
-}

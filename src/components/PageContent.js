@@ -6,6 +6,7 @@ import HeroComponent from "./HeroComponent";
 import About from "./About";
 import Timeline from "./Timeline";
 import Contact from "./Contact";
+import NewBlogPosts from "./NewBlogPosts";
 
 function PageContent() {
   return (
@@ -15,6 +16,7 @@ function PageContent() {
         <About />
         <Timeline />
         <Contact />
+        <NewBlogPosts />
       </main>
     </>
   );
