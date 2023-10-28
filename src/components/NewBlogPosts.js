@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+import "../blocks/BlogList.css";
+
 const NewBlogPosts = () => {
   const baseURL =
     process.env.NODE_ENV === "production"
@@ -30,25 +32,34 @@ const NewBlogPosts = () => {
 
   return (
     <div>
+      <h1 className="blog-title">Blog</h1>
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
       {!loading && !error && (
-        <div>
-          {posts.map((post, index) => (
-            <div key={index}>
-              <h2>
-                <Link to={`/blog-posts/${post.slug}`}>{post.title}</Link>
-              </h2>
-              <h2>{post.title}</h2>
-              <p>{post.description}</p>
-              {post.heroImageUrl && (
-                <img src={post.heroImageUrl} alt={post.title} />
-              )}
-              <div>{post.content}</div>
-              <p>By: {post.author}</p>
-              <p>Date: {post.date}</p>
-            </div>
-          ))}
+        <div className="blog-list-container">
+          <div className="blog-list-list">
+            {posts.map((post, index) => (
+              <div
+                key={post.id}
+                className="blog-post-excerpt"
+                style={{ backgroundImage: `url(${post.heroImageUrl})` }}
+              >
+                <div className="blog-post-excerpt" key={index}>
+                  <div className="blog-post-content">
+                    <h2>{post.title}</h2>
+                    <h2>
+                      <Link
+                        to={`/blog-posts/${post.slug}`}
+                        className="read-more-btn"
+                      >
+                        Leer post
+                      </Link>
+                    </h2>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>
@@ -56,26 +67,3 @@ const NewBlogPosts = () => {
 };
 
 export default NewBlogPosts;
-
-{
-  /* <div>
-{loading && <p>Loading...</p>}
-{error && <p>Error: {error}</p>}
-{!loading && !error && (
-  <div>
-    {posts.map((post, index) => (
-      <div key={index}>
-        <h2>{post.title}</h2>
-        <p>{post.description}</p>
-        {post.heroImageUrl && (
-          <img src={post.heroImageUrl} alt={post.title} />
-        )}
-        <div>{post.content}</div>
-        <p>By: {post.author}</p>
-        <p>Date: {post.date}</p>
-      </div>
-    ))}
-  </div>
-)}
-</div> */
-}

@@ -8,7 +8,6 @@ import About from "./About";
 import Timeline from "./Timeline";
 import Contact from "./Contact";
 import Footer from "./Footer";
-import HeroComponent from "./HeroComponent";
 import BlogList from "./BlogList";
 import BlogPost from "./BlogPost";
 import ScrollToTop from "./ScrollToTop";

@@ -19,16 +19,19 @@ function Header() {
         <div className="header__menu">
           <ul className="header__menu-list">
             <li className="header__menu-list-item">
-              <Link className="header__menu-list-item-link" to="/#about">
+              <Link className="header__menu-list-item-link" to="/sobre-mi">
                 Sobre mi
               </Link>
-              <Link className="header__menu-list-item-link" to="/#career">
+              <Link
+                className="header__menu-list-item-link"
+                to="/mi-trayectoria"
+              >
                 Trayectoria
               </Link>
-              <Link className="header__menu-list-item-link" to="/#contact">
+              <Link className="header__menu-list-item-link" to="/contacta">
                 Contacto
               </Link>
-              <Link className="header__menu-list-item-link" to="/blog">
+              <Link className="header__menu-list-item-link" to="/blog-posts">
                 Blog
               </Link>
             </li>
