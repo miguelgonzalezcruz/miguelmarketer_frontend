@@ -75,7 +75,7 @@ function HeaderBurger() {
               <li className="burgerheader__menu-list-item">
                 <Link
                   className="burgerheader__menu-list-item-link"
-                  to="/#about"
+                  to="/sobre-mi"
                   onClick={() => setIsOpen(false)}
                 >
                   Sobre mi
@@ -84,7 +84,7 @@ function HeaderBurger() {
               <li className="burgerheader__menu-list-item">
                 <Link
                   className="burgerheader__menu-list-item-link"
-                  to="/#career"
+                  to="/mi-trayectoria"
                   onClick={() => setIsOpen(false)}
                 >
                   Trayectoria
@@ -93,7 +93,7 @@ function HeaderBurger() {
               <li className="burgerheader__menu-list-item">
                 <Link
                   className="burgerheader__menu-list-item-link"
-                  to="/#contact"
+                  to="/contacta"
                   onClick={() => setIsOpen(false)}
                 >
                   Contacto
@@ -102,7 +102,7 @@ function HeaderBurger() {
               <li className="burgerheader__menu-list-item">
                 <Link
                   className="burgerheader__menu-list-item-link"
-                  to="/blog"
+                  to="/blog-posts"
                   onClick={() => setIsOpen(false)}
                 >
                   Blog
