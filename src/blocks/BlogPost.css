@@ -3,15 +3,15 @@
   grid-template-rows: auto 1fr;
   padding: 5vw;
   background-color: #f5f5f5;
-
   font-family: "Inter", sans-serif;
-
   margin: 0 auto; /* Center the container on the page */
+  width: 90%;
+  max-width: 1200px; /* Limit the width of the container */
 }
 
 .blog-post-detail .header-container {
   position: relative;
-  height: 50vh; /* Adjust this value to get the desired height */
+  height: 35vh; /* Adjust this value to get the desired height */
 }
 
 .blog-post-detail .header-container h1 {
@@ -82,6 +82,13 @@
 }
 
 @media screen and (max-width: 768px) {
+  .blog-post-detail .header-container {
+    position: relative;
+    height: 25vh; /* Adjust this value to get the desired height */
+    width: 90%;
+    margin: 0 auto;
+  }
+
   .blog-post-detail .header-container h1 {
     position: absolute;
     z-index: 2;
@@ -92,5 +99,19 @@
     color: #fff; /* Adjust color to suit the image background */
     text-align: center; /* Align text to the center */
     font-size: 2em; /* Increase font size */
+  }
+
+  .blog-post-detail .header-container img {
+    display: block;
+    width: 100%; /* Full width to the container */
+    height: 100%; /* Full height to the container */
+    object-fit: cover; /* Maintain aspect ratio during resize */
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  }
+  .blog-post-detail p {
+    font-size: 12px;
+    margin-bottom: 20px;
+    color: #666;
   }
 }

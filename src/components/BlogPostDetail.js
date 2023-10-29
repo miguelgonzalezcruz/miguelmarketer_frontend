@@ -72,7 +72,7 @@ const BlogPostDetail = () => {
       </div>
       <div>{documentToReactComponents(richContent)}</div>
       <p>
-        By: {author} ({date})
+        Por {author} ({date})
       </p>
     </div>
   );

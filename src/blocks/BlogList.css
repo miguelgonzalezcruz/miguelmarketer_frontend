@@ -84,6 +84,10 @@
 
 /* Mobile styles */
 @media (max-width: 768px) {
+  .blog-title {
+    font-size: 45px;
+  }
+
   .blog-post-excerpt {
     flex: 0 1 100%;
     margin-bottom: 15px;
@@ -104,6 +108,10 @@
 
 /* Tablet styles */
 @media (min-width: 769px) and (max-width: 1024px) {
+  .blog-title {
+    font-size: 55px;
+  }
+
   .blog-post-excerpt {
     flex: 0 1 calc(50% - 15px);
     height: 350px;
