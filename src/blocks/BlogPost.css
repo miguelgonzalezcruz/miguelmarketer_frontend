@@ -20,7 +20,7 @@
   top: 50%; /* Center vertically */
   left: 50%; /* Center horizontally */
   transform: translate(-50%, -50%); /* Ensure it is perfectly centered */
-  font-size: 4em; /* Increase font size */
+  font-size: 2em; /* Increase font size */
   font-weight: 900;
   color: #fff; /* Adjust color to suit the image background */
   text-align: center; /* Align text to the center */
