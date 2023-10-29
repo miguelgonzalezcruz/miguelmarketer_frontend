@@ -55,6 +55,7 @@
   background-size: cover;
   background-image: url("../images/job_logos/miguel_now.jpeg");
   margin: 0 auto;
+  margin-bottom: 35px;
 }
 
 @media screen and (max-width: 1023px) {
