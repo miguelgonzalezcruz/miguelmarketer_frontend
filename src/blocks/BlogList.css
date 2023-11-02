@@ -105,7 +105,7 @@
     padding: 8px 16px;
   }
   .blog-list-list {
-    display: flexbox;
+    display: flex;
     flex-direction: column;
     padding: 20px 30px;
     grid-gap: 20px;
