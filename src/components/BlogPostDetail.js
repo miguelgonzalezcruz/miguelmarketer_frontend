@@ -49,8 +49,6 @@ const BlogPostDetail = () => {
     date,
   } = post;
 
-  console.log(content);
-
   return (
     <div className="blog-post-detail">
       <Helmet>
