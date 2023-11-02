@@ -62,8 +62,12 @@ const HeroComponent = () => {
     >
       <div className="gradient-overlay"></div>
       <div className="hero-text">
-        <h1>Miguel González {getRandomEmoji()}</h1>
-        <h2>Marketing && Software Development</h2>
+        <h1>
+          Marketing &&
+          <br />
+          Software Development {getRandomEmoji()}
+        </h1>
+        {/* <h2>Marketing && Software Development</h2> */}
       </div>
       {!isLoading && heroImage && (
         <div className="hero-author">
