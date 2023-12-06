@@ -10,7 +10,7 @@ function BlogPost() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [imageURL, setImageURL] = useState("");
-  const [isContentLoaded, setIsContentLoaded] = useState(false);
+  const [isContentLoaded, setIsContentLoaded] = useState(true);
   const { postId } = useParams();
 
   useEffect(() => {
@@ -63,6 +63,7 @@ function BlogPost() {
 
   useEffect(() => {
     if (isContentLoaded) {
+      console.log("Setting prerenderReady to true");
       window.prerenderReady = true;
     }
   }, [isContentLoaded]);
