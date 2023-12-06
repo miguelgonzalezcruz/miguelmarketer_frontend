@@ -59,7 +59,7 @@ function BlogPost() {
           <ReactMarkdown className="markdown">{postContent}</ReactMarkdown>
         </div>
       </div>
-      <Helmet>
+      {/* <Helmet>
         <title>Miguel González - Marketing</title>
         <description>
           "Miguel González es un profesional del marketing digital con más de 15
@@ -84,7 +84,7 @@ function BlogPost() {
           content="https://www.miguelmarketer.com/posts/images/Miguel%20Marketer.jpg"
         />
         <meta property="title" content="Miguel González - Marketing" />
-      </Helmet>
+      </Helmet> */}
     </div>
   );
 }
