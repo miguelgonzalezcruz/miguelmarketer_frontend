@@ -51,6 +51,16 @@ function BlogPost() {
   return (
     <div>
       <div className="blog-post-detail">
+        <Helmet>
+          <title>{title}</title>
+          <meta name="description" content={description} />
+          <meta property="og:title" content={title} />
+          <meta property="og:description" content={description} />
+          <meta property="og:image" content={imageURL} />
+          <meta property="og:url" content={window.location.href} />
+          <meta property="og:type" content="article" />
+          {/* Other relevant OG tags */}
+        </Helmet>
         <div className="header-container">
           <img src={imageURL} alt={title} />
           <h1>{title}</h1>
@@ -59,32 +69,6 @@ function BlogPost() {
           <ReactMarkdown className="markdown">{postContent}</ReactMarkdown>
         </div>
       </div>
-      {/* <Helmet>
-        <title>Miguel González - Marketing</title>
-        <description>
-          "Miguel González es un profesional del marketing digital con más de 15
-          años de experiencia en el sector."
-        </description>
-        <meta property="og:title" content="Miguel González - Marketing" />
-        <meta
-          property="og:description"
-          content="Miguel González es un profesional del marketing digital con más de 15 años de experiencia en el sector."
-        />
-        <meta
-          property="og:image"
-          content="https://www.miguelmarketer.com/posts/images/Miguel%20Marketer.jpg"
-        />
-        <meta property="og:url" content="https://www.miguelmarketer.com/" />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Miguel Marketer" />
-        <meta property="og:locale" content="es_ES" />
-        <meta name="author" content="Miguel González" />
-        <meta
-          property="image"
-          content="https://www.miguelmarketer.com/posts/images/Miguel%20Marketer.jpg"
-        />
-        <meta property="title" content="Miguel González - Marketing" />
-      </Helmet> */}
     </div>
   );
 }
