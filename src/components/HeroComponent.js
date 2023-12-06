@@ -63,7 +63,7 @@ const HeroComponent = () => {
       <div className="gradient-overlay"></div>
       <div className="hero-text">
         <h1>
-          Marketing &&
+          Marketing &
           <br />
           Software Development {getRandomEmoji()}
         </h1>
