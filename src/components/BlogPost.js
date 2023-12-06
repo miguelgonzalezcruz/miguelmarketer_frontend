@@ -10,6 +10,7 @@ function BlogPost() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [imageURL, setImageURL] = useState("");
+  const [isContentLoaded, setIsContentLoaded] = useState(false);
   const { postId } = useParams();
 
   useEffect(() => {
@@ -44,9 +45,27 @@ function BlogPost() {
 
         // Set the post content state with the updated text (without the first image)
         setPostContent(text);
+
+        // Loading image to ensure it's loaded
+        // Make sure imageURL is set before loading the image
+        if (imageURL) {
+          const img = new Image();
+          img.onload = () => setIsContentLoaded(true);
+          img.onerror = () => setIsContentLoaded(true); // Consider load complete even if the image fails to load
+          img.src = imageURL;
+        } else {
+          // If there is no image URL, consider the content loaded
+          setIsContentLoaded(true);
+        }
       })
       .catch((error) => console.error(error));
-  }, [postId]);
+  }, [postId, imageURL]);
+
+  useEffect(() => {
+    if (isContentLoaded) {
+      window.prerenderReady = true;
+    }
+  }, [isContentLoaded]);
 
   return (
     <div>
