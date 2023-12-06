@@ -73,11 +73,15 @@ function BlogPost() {
         <Helmet>
           <title>{title}</title>
           <meta name="description" content={description} />
-          <meta property="og:title" content={title} />
-          <meta property="og:description" content={description} />
-          <meta property="og:image" content={imageURL} />
-          <meta property="og:url" content={window.location.href} />
-          <meta property="og:type" content="article" />
+          <meta name="title" property="og:title" content={title} />
+          <meta
+            name="description"
+            property="og:description"
+            content={description}
+          />
+          <meta name="image" property="og:image" content={imageURL} />
+          <meta name="url" property="og:url" content={window.location.href} />
+          <meta name="type" property="og:type" content="article" />
           {/* Other relevant OG tags */}
         </Helmet>
         <div className="header-container">
