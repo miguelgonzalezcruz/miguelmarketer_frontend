@@ -55,9 +55,13 @@ const BlogPostDetail = () => {
         <title>{title}</title>
         <meta name="description" content={description} />
         {/* Add Open Graph (OG) tags for social media previews */}
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:image" content={heroImageUrl} />
+        <meta name="title" property="og:title" content={title} />
+        <meta
+          name="description"
+          property="og:description"
+          content={description}
+        />
+        <meta name="image" property="og:image" content={heroImageUrl} />
         {/* Add Twitter Card tags if needed */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={title} />
