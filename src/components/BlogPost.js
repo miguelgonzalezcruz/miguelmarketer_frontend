@@ -17,49 +17,46 @@ function BlogPost() {
     fetch(`/posts/${postId}.md`)
       .then((response) => response.text())
       .then((text) => {
-        // Extract and set the title, description, and image URL from the markdown content
+        // Extract title
         const titleMatch = text.match(/^#\s(.+)$/m);
         if (titleMatch && titleMatch[1]) {
           setTitle(titleMatch[1]);
-
-          // Remove the first occurrence of the title in the markdown content
           text = text.replace(titleMatch[0], "");
         }
 
+        // Extract description
         const descriptionMatch =
           text.match(/^##\s(.+)$/m) || text.match(/^\w[\s\S]{0,160}\./);
         if (descriptionMatch && descriptionMatch[0]) {
           setDescription(descriptionMatch[0]);
         }
 
+        // Extract image URL and set it
         const imageMatch = text.match(/!\[.*?\]\((.+?)\)/);
         if (imageMatch && imageMatch[1]) {
-          let imgSrc = imageMatch[1];
-          setImageURL(
-            imgSrc.startsWith("http") ? imgSrc : window.location.origin + imgSrc
-          );
-
-          // Remove the first occurrence of the image in the markdown content
+          let imgSrc = imageMatch[1].startsWith("http")
+            ? imageMatch[1]
+            : window.location.origin + imageMatch[1];
+          setImageURL(imgSrc);
           text = text.replace(imageMatch[0], "");
         }
 
-        // Set the post content state with the updated text (without the first image)
         setPostContent(text);
-
-        // Loading image to ensure it's loaded
-        // Make sure imageURL is set before loading the image
-        if (imageURL) {
-          const img = new Image();
-          img.onload = () => setIsContentLoaded(true);
-          img.onerror = () => setIsContentLoaded(true); // Consider load complete even if the image fails to load
-          img.src = imageURL;
-        } else {
-          // If there is no image URL, consider the content loaded
-          setIsContentLoaded(true);
-        }
       })
       .catch((error) => console.error(error));
-  }, [postId, imageURL]);
+  }, [postId]);
+
+  useEffect(() => {
+    if (imageURL) {
+      const img = new Image();
+      img.onload = () => setIsContentLoaded(true);
+      img.onerror = () => setIsContentLoaded(true); // Consider load complete even if the image fails to load
+      img.src = imageURL;
+    } else {
+      // If there is no image URL, consider the content loaded
+      setIsContentLoaded(true);
+    }
+  }, [imageURL]);
 
   useEffect(() => {
     if (isContentLoaded) {
