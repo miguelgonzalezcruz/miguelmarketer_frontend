@@ -13,39 +13,110 @@ const HeroComponent = () => {
     return emojis[randomIndex].emoji;
   };
 
-  const [heroImage, setHeroImage] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const heroImageFromLocalStorage = JSON.parse(
+    localStorage.getItem("heroImage")
+  );
+
+  const initialHeroImage = heroImageFromLocalStorage
+    ? heroImageFromLocalStorage.data
+    : null;
+
+  const [heroImage, setHeroImage] = useState(
+    heroImageFromLocalStorage?.data || null
+  );
+  const [isLoading, setIsLoading] = useState(!heroImageFromLocalStorage);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
+    const shouldFetchImage =
+      !initialHeroImage ||
+      Date.now() - heroImageFromLocalStorage?.timestamp >= 180000;
+
     const fetchHeroImage = async () => {
-      const heroImageFromLocalStorage = JSON.parse(
-        localStorage.getItem("heroImage")
-      );
-      if (
-        heroImageFromLocalStorage &&
-        Date.now() - heroImageFromLocalStorage.timestamp < 180000 // 3 minutes in milliseconds
-      ) {
-        setHeroImage(heroImageFromLocalStorage.data);
-        setIsLoading(false);
-      } else {
+      if (shouldFetchImage) {
+        setIsLoading(true);
+        console.log("SetIsLoading true Fetching hero image...");
         try {
           const response = await fetch(`${baseURL}/api/hero-image`);
           const data = await response.json();
           const timestamp = Date.now();
-          setHeroImage(data);
+          const imageUrlWithCacheBuster = `${data.imageUrl}?v=${timestamp}`;
+          setHeroImage({ ...data, imageUrl: imageUrlWithCacheBuster });
           localStorage.setItem(
             "heroImage",
-            JSON.stringify({ data, timestamp })
+            JSON.stringify({
+              data: { ...data, imageUrl: imageUrlWithCacheBuster },
+              timestamp,
+            })
           );
-          setIsLoading(false);
+
+          // Introduce a slight delay
+          // setTimeout(() => {
+          //   setHeroImage({ ...data, imageUrl: imageUrlWithCacheBuster });
+          //   localStorage.setItem(
+          //     "heroImage",
+          //     JSON.stringify({
+          //       data: { ...data, imageUrl: imageUrlWithCacheBuster },
+          //       timestamp,
+          //     })
+          //   );
+          // }, 500); // Delay in milliseconds
+
+          setHasError(false);
         } catch (error) {
           console.log(error);
+          setHasError(true);
+        } finally {
           setIsLoading(false);
+          console.log("SetIsLoading false");
         }
       }
     };
+
     fetchHeroImage();
-  }, []);
+  }, [initialHeroImage]);
+
+  // const [heroImage, setHeroImage] = useState(null);
+  // const [isLoading, setIsLoading] = useState(true);
+  // const [hasError, setHasError] = useState(false);
+
+  // useEffect(() => {
+  //   const fetchHeroImage = async () => {
+  //     setHasError(false);
+  //     const heroImageFromLocalStorage = JSON.parse(
+  //       localStorage.getItem("heroImage")
+  //     );
+  //     if (
+  //       heroImageFromLocalStorage &&
+  //       Date.now() - heroImageFromLocalStorage.timestamp < 180000 // 3 minutes in milliseconds
+  //     ) {
+  //       setHeroImage(heroImageFromLocalStorage.data);
+  //       setIsLoading(false);
+  //     } else {
+  //       try {
+  //         const response = await fetch(`${baseURL}/api/hero-image`);
+  //         const data = await response.json();
+  //         const timestamp = Date.now();
+  //         const imageUrlWithCacheBuster = `${data.imageUrl}?v=${timestamp}`;
+  //         setHeroImage(data);
+  //         setHeroImage({ ...data, imageUrl: imageUrlWithCacheBuster });
+  //         localStorage.setItem(
+  //           "heroImage",
+  //           JSON.stringify({
+  //             data: { ...data, imageUrl: imageUrlWithCacheBuster },
+  //             timestamp,
+  //           })
+  //         );
+  //         setIsLoading(false);
+  //       } catch (error) {
+  //         console.log(error);
+  //         setIsLoading(false);
+  //         setHasError(true);
+  //       }
+  //     }
+  //   };
+  //   fetchHeroImage();
+  // }, []);
 
   const backupImageUrl =
     "https://images.unsplash.com/photo-1672243776760-67aec979f591?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80";
@@ -56,7 +127,7 @@ const HeroComponent = () => {
       className="hero-image-container"
       style={{
         backgroundImage: `url(${
-          !isLoading && heroImage ? heroImage.imageUrl : backupImageUrl
+          isLoading || hasError ? backupImageUrl : heroImage.imageUrl
         })`,
       }}
     >
@@ -73,7 +144,7 @@ const HeroComponent = () => {
         <div className="hero-author">
           {heroImage.imageAuthor && heroImage.imageAuthorUrl && (
             <p>
-              Imágen de{" "}
+              Imagen de{" "}
               <a
                 href={heroImage.imageAuthorUrl}
                 target="_blank"
