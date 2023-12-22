@@ -144,7 +144,7 @@ const HeroComponent = () => {
         <div className="hero-author">
           {heroImage.imageAuthor && heroImage.imageAuthorUrl && (
             <p>
-              {/* Imagen cortesia de{" "} */}
+              Imagen de{" "}
               <a
                 href={heroImage.imageAuthorUrl}
                 target="_blank"
