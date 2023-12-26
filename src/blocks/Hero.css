@@ -74,6 +74,26 @@
   );
 }
 
+.loading-message {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: white;
+  padding: 10px;
+  animation: fadeInOut 2s linear infinite;
+  z-index: 2;
+}
+
+@keyframes fadeInOut {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
 @media screen and (max-width: 1500px) {
   .hero-text h1 {
     font-size: 90px;

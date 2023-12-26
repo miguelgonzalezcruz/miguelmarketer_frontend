@@ -21,84 +21,26 @@ const HeroComponent = () => {
     ? heroImageFromLocalStorage.data
     : null;
 
-  const [heroImage, setHeroImage] = useState(
-    heroImageFromLocalStorage?.data || null
-  );
-  const [isLoading, setIsLoading] = useState(!heroImageFromLocalStorage);
-  const [hasError, setHasError] = useState(false);
-
-  useEffect(() => {
-    const shouldFetchImage =
-      !initialHeroImage ||
-      Date.now() - heroImageFromLocalStorage?.timestamp >= 180000;
-
-    const fetchHeroImage = async () => {
-      if (shouldFetchImage) {
-        setIsLoading(true);
-        console.log("SetIsLoading true Fetching hero image...");
-        try {
-          const response = await fetch(`${baseURL}/api/hero-image`);
-          const data = await response.json();
-          const timestamp = Date.now();
-          const imageUrlWithCacheBuster = `${data.imageUrl}?v=${timestamp}`;
-          setHeroImage({ ...data, imageUrl: imageUrlWithCacheBuster });
-          localStorage.setItem(
-            "heroImage",
-            JSON.stringify({
-              data: { ...data, imageUrl: imageUrlWithCacheBuster },
-              timestamp,
-            })
-          );
-
-          // Introduce a slight delay
-          // setTimeout(() => {
-          //   setHeroImage({ ...data, imageUrl: imageUrlWithCacheBuster });
-          //   localStorage.setItem(
-          //     "heroImage",
-          //     JSON.stringify({
-          //       data: { ...data, imageUrl: imageUrlWithCacheBuster },
-          //       timestamp,
-          //     })
-          //   );
-          // }, 500); // Delay in milliseconds
-
-          setHasError(false);
-        } catch (error) {
-          console.log(error);
-          setHasError(true);
-        } finally {
-          setIsLoading(false);
-          console.log("SetIsLoading false");
-        }
-      }
-    };
-
-    fetchHeroImage();
-  }, [initialHeroImage]);
-
-  // const [heroImage, setHeroImage] = useState(null);
-  // const [isLoading, setIsLoading] = useState(true);
+  // const [heroImage, setHeroImage] = useState(
+  //   heroImageFromLocalStorage?.data || null
+  // );
+  // const [isLoading, setIsLoading] = useState(!heroImageFromLocalStorage);
   // const [hasError, setHasError] = useState(false);
 
   // useEffect(() => {
+  //   const shouldFetchImage =
+  //     !initialHeroImage ||
+  //     Date.now() - heroImageFromLocalStorage?.timestamp >= 180000;
+
   //   const fetchHeroImage = async () => {
-  //     setHasError(false);
-  //     const heroImageFromLocalStorage = JSON.parse(
-  //       localStorage.getItem("heroImage")
-  //     );
-  //     if (
-  //       heroImageFromLocalStorage &&
-  //       Date.now() - heroImageFromLocalStorage.timestamp < 180000 // 3 minutes in milliseconds
-  //     ) {
-  //       setHeroImage(heroImageFromLocalStorage.data);
-  //       setIsLoading(false);
-  //     } else {
+  //     if (shouldFetchImage) {
+  //       setIsLoading(true);
+  //       console.log("SetIsLoading true Fetching hero image...");
   //       try {
   //         const response = await fetch(`${baseURL}/api/hero-image`);
   //         const data = await response.json();
   //         const timestamp = Date.now();
   //         const imageUrlWithCacheBuster = `${data.imageUrl}?v=${timestamp}`;
-  //         setHeroImage(data);
   //         setHeroImage({ ...data, imageUrl: imageUrlWithCacheBuster });
   //         localStorage.setItem(
   //           "heroImage",
@@ -107,16 +49,76 @@ const HeroComponent = () => {
   //             timestamp,
   //           })
   //         );
-  //         setIsLoading(false);
+
+  //         // Introduce a slight delay
+  //         setTimeout(() => {
+  //           setHeroImage({ ...data, imageUrl: imageUrlWithCacheBuster });
+  //           localStorage.setItem(
+  //             "heroImage",
+  //             JSON.stringify({
+  //               data: { ...data, imageUrl: imageUrlWithCacheBuster },
+  //               timestamp,
+  //             })
+  //           );
+  //         }, 500); // Delay in milliseconds
+
+  //         setHasError(false);
   //       } catch (error) {
   //         console.log(error);
-  //         setIsLoading(false);
   //         setHasError(true);
+  //       } finally {
+  //         setIsLoading(false);
+  //         console.log("SetIsLoading false");
   //       }
   //     }
   //   };
+
   //   fetchHeroImage();
-  // }, []);
+  // }, [initialHeroImage]);
+
+  const [heroImage, setHeroImage] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    const fetchHeroImage = async () => {
+      setIsLoading(true);
+      setHasError(false);
+
+      try {
+        const response = await fetch(`${baseURL}/api/hero-image`);
+        const data = await response.json();
+        const timestamp = Date.now();
+        const imageUrlWithCacheBuster = `${data.imageUrl}?v=${timestamp}`;
+
+        // Create a new image and set the source
+        const image = new Image();
+        image.src = imageUrlWithCacheBuster;
+        image.onload = () => {
+          // Set the hero image state only after the image has fully loaded
+          setHeroImage({ ...data, imageUrl: imageUrlWithCacheBuster });
+          localStorage.setItem(
+            "heroImage",
+            JSON.stringify({
+              data: { ...data, imageUrl: imageUrlWithCacheBuster },
+              timestamp,
+            })
+          );
+          setIsLoading(false);
+        };
+        image.onerror = () => {
+          setHasError(true);
+          setIsLoading(false);
+        };
+      } catch (error) {
+        console.log(error);
+        setHasError(true);
+        setIsLoading(false);
+      }
+    };
+
+    fetchHeroImage();
+  }, []);
 
   const backupImageUrl =
     "https://images.unsplash.com/photo-1672243776760-67aec979f591?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80";
@@ -129,6 +131,7 @@ const HeroComponent = () => {
         backgroundImage: `url(${
           isLoading || hasError ? backupImageUrl : heroImage.imageUrl
         })`,
+        position: "relative",
       }}
     >
       <div className="gradient-overlay"></div>
@@ -161,6 +164,10 @@ const HeroComponent = () => {
             </p>
           )}
         </div>
+      )}
+
+      {isLoading && (
+        <div className="loading-message">Importando siguiente imagen...</div>
       )}
     </div>
   );
