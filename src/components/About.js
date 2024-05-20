@@ -31,9 +31,23 @@ const About = () => {
       ],
     },
     {
+      title: "Pop-Rock - Carmen Supermarket",
+      description: [
+        "Toco la batería en una banda de pop-rock llamada Carmen Supermarket. Reivindicamos las guitarras despreocupadas de los 90.",
+        "Hemos lanzado nuestos primeros dos singles en Spotify y estamos programando conciertos en Mallorca",
+      ],
+    },
+    {
+      title: "Educación - Formación",
+      description: [
+        "Me encanta compartir mis conocimientos y experiencias con otros. Es una buena forma de devolver a la comunidad y seguir aprendiendo.",
+        "He impartido algunas clases y talleres sobre marketing digital. Si tienes un centro educativo, no dudes en contactarme.",
+      ],
+    },
+    {
       title: "Inteligencia Artificial",
       description: [
-        "Me intriga las muchas posibilidades que la IA ofrece para optimizar y escalar las acciones de marketing y mejorar la experiencia del cliente.",
+        "Son incontables las muchas posibilidades que la IA ofrece para optimizar y escalar las acciones de marketing y mejorar la experiencia del cliente.",
         "Podemos aprovechar los datos para obtener información sobre la audiencia, personalizar mensajes y crear flujos de trabajo y automatizaciones más eficientes.",
       ],
     },

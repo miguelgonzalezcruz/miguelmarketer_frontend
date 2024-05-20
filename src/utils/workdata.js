@@ -9,6 +9,7 @@ import rnalogo from "../images/history/rna.jpeg";
 import syncrentalslogo from "../images/history/syncrentals.jpeg";
 import roibacklogo from "../images/history/roiback.jpeg";
 import logitravellogo from "../images/history/logitravel.jpeg";
+import carmensupermarket from "../images/history/CarmenSupermarketPortada-bn-mov.png";
 
 const workdata = [
   // {
@@ -263,6 +264,27 @@ const workdata = [
     },
     description:
       "Exitosa ejecución de una estrategia de marketing completamente optimizada, generando un aumento significativo de la facturación anual. Logramos posicionarnos como uno de los principales anunciantes de viajes en España, superamos nuestros objetivos, mejoramos el alcance de nuestros canales de marketing y logramos tasas de conversión muy altas para una amplia gama de productos turísticos.",
+  },
+  {
+    id: 3,
+    title: "Drummer",
+    text: "Carmen Supermarket",
+    datestart: "2024",
+    date: "Actualmente",
+    category: {
+      tag: "trabajo",
+      color: "#495057",
+    },
+    link: {
+      url: "https://open.spotify.com/artist/4Ms17M4YF5EZfoUPEUCGny?si=eNnehIINTnqMk35ygfjNew",
+      text: "Escúchanos en Spotify",
+    },
+    logo: {
+      img: carmensupermarket,
+      alt: "Roiback",
+    },
+    description:
+      "Banda de Pop-Rock desde Mallorca. Sonidos guitarreros de los 90 con letras en castellano. Hemos lanzado dos singles en Spotify y estamos programando conciertos en Mallorca.",
   },
 ];
 
