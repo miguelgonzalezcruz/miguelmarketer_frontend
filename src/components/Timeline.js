@@ -4,8 +4,6 @@ import "../blocks/TimelineList.css";
 import TimelineItem from "./TimelineItem";
 import workdata from "../utils/workdata";
 
-const miguel = require("../images/job_logos/miguel.jpeg");
-
 const sortedWorkData = workdata.sort((a, b) => b.datestart - a.datestart);
 
 const Timeline = () =>

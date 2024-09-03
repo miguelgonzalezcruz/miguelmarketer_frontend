@@ -1,26 +1,17 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import "../blocks/HeaderBurger.css";
 
 import logo from "../images/job_logos/logomiguelmarketer.svg";
-import logoIcon from "../images/job_logos/logomiguelmarketer.svg";
 import closeIcon from "../images/CloseIcon.svg";
 
 function HeaderBurger() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
   const sidebarRef = useRef(null);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
-  };
-
-  const navigate = useNavigate();
-
-  const handleButtonClick = () => {
-    setIsOpen(false);
-    navigate("/reserva-una-sesion-de-prueba");
   };
 
   useEffect(() => {
@@ -66,8 +57,6 @@ function HeaderBurger() {
             <button
               className="burgerheader__close"
               onClick={() => setIsOpen(false)}
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
             >
               <img src={closeIcon} alt="Close menu" />
             </button>
