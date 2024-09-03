@@ -28,7 +28,7 @@ const NewBlogPosts = () => {
     };
 
     fetchPosts();
-  }, [baseURL]); // Empty dependency array ensures the fetch runs once when component mounts
+  }, [baseURL]);
 
   return (
     <div>
