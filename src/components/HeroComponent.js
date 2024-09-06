@@ -23,36 +23,43 @@ const HeroComponent = () => {
       setHasError(false);
 
       try {
-        // const response = await fetch(`${baseURL}/api/hero-image`);
         console.log("Fetching hero image from API...");
-        const response = await fetch("/api/hero-image"); // Llamada a la API de Vercel
+        const response = await fetch("/api/hero-image");
+
         console.log("Response status from API:", response.status);
 
-        const data = await response.json();
-        const timestamp = Date.now();
-        const imageUrlWithCacheBuster = `${data.imageUrl}?v=${timestamp}`;
+        // Verifica si la respuesta es JSON o no
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const data = await response.json();
+          console.log("Data received from API:", data);
 
-        // Create a new image and set the source
-        const image = new Image();
-        image.src = imageUrlWithCacheBuster;
-        image.onload = () => {
-          // Set the hero image state only after the image has fully loaded
-          setHeroImage({ ...data, imageUrl: imageUrlWithCacheBuster });
-          localStorage.setItem(
-            "heroImage",
-            JSON.stringify({
-              data: { ...data, imageUrl: imageUrlWithCacheBuster },
-              timestamp,
-            })
-          );
-          setIsLoading(false);
-        };
-        image.onerror = () => {
+          const timestamp = Date.now();
+          const imageUrlWithCacheBuster = `${data.imageUrl}?v=${timestamp}`;
+
+          const image = new Image();
+          image.src = imageUrlWithCacheBuster;
+          image.onload = () => {
+            setHeroImage({ ...data, imageUrl: imageUrlWithCacheBuster });
+            localStorage.setItem(
+              "heroImage",
+              JSON.stringify({
+                data: { ...data, imageUrl: imageUrlWithCacheBuster },
+                timestamp,
+              })
+            );
+            setIsLoading(false);
+          };
+          image.onerror = () => {
+            setHasError(true);
+            setIsLoading(false);
+          };
+        } else {
+          console.error("Received non-JSON response from API");
           setHasError(true);
-          setIsLoading(false);
-        };
+        }
       } catch (error) {
-        console.log(error);
+        console.error("Error fetching hero image:", error);
         setHasError(true);
         setIsLoading(false);
       }
