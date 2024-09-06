@@ -27,9 +27,11 @@ const HeroComponent = () => {
         const response = await fetch("/api/hero-image");
 
         console.log("Response status from API:", response.status);
+        console.log("Response headers from API:", response.headers);
 
         // Verifica si la respuesta es JSON o no
         const contentType = response.headers.get("content-type");
+        console.log("Content type of response:", contentType);
         if (contentType && contentType.includes("application/json")) {
           const data = await response.json();
           console.log("Data received from API:", data);
