@@ -1,6 +1,9 @@
 // src/api/hero-image.js
 
 export default async function handler(req, res) {
+  console.log("Serverless function hero-image invoked"); // Log inicial
+  console.log("Simple test log");
+  res.status(200).json({ message: "Function is working!" });
   const accessKey = process.env.UNSPLASH_ACCESS_KEY;
   const collections = "Wallpapers";
   const apiUrl = `https://api.unsplash.com/photos/random?client_id=${accessKey}&collections=${collections}&orientation=landscape&content_filter=high`;
