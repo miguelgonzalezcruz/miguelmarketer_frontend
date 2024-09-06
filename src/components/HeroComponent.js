@@ -24,7 +24,10 @@ const HeroComponent = () => {
 
       try {
         // const response = await fetch(`${baseURL}/api/hero-image`);
+        console.log("Fetching hero image from API...");
         const response = await fetch("/api/hero-image"); // Llamada a la API de Vercel
+        console.log("Response status from API:", response.status);
+
         const data = await response.json();
         const timestamp = Date.now();
         const imageUrlWithCacheBuster = `${data.imageUrl}?v=${timestamp}`;
