@@ -23,7 +23,8 @@ const HeroComponent = () => {
       setHasError(false);
 
       try {
-        const response = await fetch(`${baseURL}/api/hero-image`);
+        // const response = await fetch(`${baseURL}/api/hero-image`);
+        const response = await fetch("/api/hero-image"); // Llamada a la API de Vercel
         const data = await response.json();
         const timestamp = Date.now();
         const imageUrlWithCacheBuster = `${data.imageUrl}?v=${timestamp}`;
