@@ -7,10 +7,10 @@ import animationData from "../utils/118202-success-icon.json";
 import "../blocks/Contact.css";
 
 const Contact = () => {
-  const baseURL =
-    process.env.NODE_ENV === "production"
-      ? "https://api.miguelmarketer.com"
-      : "http://localhost:3001";
+  // const baseURL =
+  //   process.env.NODE_ENV === "production"
+  //     ? "https://api.miguelmarketer.com"
+  //     : "http://localhost:3001";
 
   const [formData, setFormData] = useState({
     email: "",
@@ -39,7 +39,7 @@ const Contact = () => {
       body: JSON.stringify(formData),
     };
 
-    fetch(`${baseURL}/api/create-contact`, requestOptions)
+    fetch("/api/create-contact", requestOptions) // Actualizamos la URL para que apunte a la función serverless
       .then((response) => {
         console.log(response);
         if (response.ok) {
