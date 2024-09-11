@@ -19,6 +19,11 @@ export default async function handler(req, res) {
     const contentType = response.headers.get("content-type");
     console.log(`Content type of response: ${contentType}`);
 
+    const responseBody = await response.text(); // Lee la respuesta como texto
+    console.log("Response body as text:", responseBody); // Log del cuerpo de la respuesta
+
+    // Si la respuesta es JSON, la parseamos
+
     if (contentType && contentType.includes("application/json")) {
       const data = await response.json();
       console.log("Fetched data from Unsplash API:", data);
