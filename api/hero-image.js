@@ -3,6 +3,8 @@
 export default async function handler(req, res) {
   console.log("Serverless function hero-image invoked");
 
+  res.setHeader("Cache-Control", "no-store"); // Desactiva el caché
+
   const accessKey = process.env.UNSPLASH_ACCESS_KEY;
   const collections = "Wallpapers";
   const apiUrl = `https://api.unsplash.com/photos/random?client_id=${accessKey}&collections=${collections}&orientation=landscape&content_filter=high`;
