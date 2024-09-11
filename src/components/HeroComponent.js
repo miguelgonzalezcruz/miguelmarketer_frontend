@@ -1,3 +1,5 @@
+// src/components/HeroComponent.js
+
 import React, { useState, useEffect } from "react";
 import emojis from "../emoji.json";
 import "../blocks/Hero.css";
