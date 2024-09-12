@@ -10,29 +10,31 @@ import syncrentalslogo from "../images/history/syncrentals.jpeg";
 import roibacklogo from "../images/history/roiback.jpeg";
 import logitravellogo from "../images/history/logitravel.jpeg";
 import carmensupermarket from "../images/history/CarmenSupermarketPortada-bn-mov.png";
+import felipemoreno from "../images/history/cesfelipemoreno_logo.jpeg";
+import universidadmalaga from "../images/history/universidad_de_malaga_logo.jpeg";
 
 const workdata = [
-  // {
-  //   id: 1,
-  //   title: "Publicidad y RRPP",
-  //   text: "Universidad de Málaga",
-  //   datestart: "1998",
-  //   date: "2002",
-  //   category: {
-  //     tag: "formación",
-  //     color: "#495057",
-  //   },
-  //   link: {
-  //     url: "https://www.linkedin.com/school/universidad-de-malaga/",
-  //     text: "Descubre más",
-  //   },
-  //   logo: {
-  //     img: "https://media.licdn.com/dms/image/C4E0BAQFkkwhTtoGaHA/company-logo_200_200/0/1646996711291?e=1687996800&v=beta&t=UepCG0k4MqgsP4aZyyEuNXKSAw0WVFserkIbqwOXis0",
-  //     alt: "Universidad de Málaga",
-  //   },
-  //   description:
-  //     "Recuerdo esta etapa con mucho cariño. Aunque me licencié por la UMA, cursé la mitad de la carrera en la Autónoma de BCN. Muchos momentos para recordar, aprendizajes de todo tipo pero, sobre todo, la primera experiencia de independencia total. ",
-  // },
+  {
+    id: 1,
+    title: "Publicidad y RRPP",
+    text: "Universidad de Málaga",
+    datestart: "1998",
+    date: "2002",
+    category: {
+      tag: "formación",
+      color: "#495057",
+    },
+    link: {
+      url: "https://www.linkedin.com/school/universidad-de-malaga/",
+      text: "Descubre más",
+    },
+    logo: {
+      img: universidadmalaga,
+      alt: "Universidad de Málaga",
+    },
+    description:
+      "Recuerdo esta etapa con mucho cariño. Aunque me licencié por la UMA, cursé la mitad de la carrera en la Autónoma de BCN. Muchos momentos para recordar.",
+  },
   {
     id: 2,
     title: "Programa de Desarrollo Directivo (PDD)",
@@ -285,6 +287,27 @@ const workdata = [
     },
     description:
       "Banda de Pop-Rock desde Mallorca. Sonidos guitarreros de los 90 con letras en castellano. Hemos lanzado dos singles en Spotify y estamos programando conciertos en Mallorca.",
+  },
+  {
+    id: 14,
+    title: "Professor of Marketing",
+    text: "Centro de Educación Superior Felipe Moreno",
+    datestart: "2024",
+    date: "Actualmente",
+    category: {
+      tag: "trabajo",
+      color: "#495057",
+    },
+    link: {
+      url: "https://etb-baleares.es/",
+      text: "Descubre más",
+    },
+    logo: {
+      img: felipemoreno,
+      alt: "CES Felipe Moreno",
+    },
+    description:
+      "El Centro de Educación Superior Felipe Moreno - Nebrija (Centro Adscrito a la Universidad Nebrija) es una institución académica de prestigio internacional.",
   },
 ];
 
