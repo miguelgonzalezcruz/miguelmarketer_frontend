@@ -8,12 +8,10 @@ import "../blocks/BlogPost.css";
 
 const BlogPostDetail = () => {
   const { slug } = useParams();
-
-  // Asegúrate de que la URL base esté correcta
   const baseURL =
     process.env.NODE_ENV === "production"
-      ? "https://miguelmarketerfront-miguelgonzalezcruzs-projects.vercel.app"
-      : "http://localhost:3000"; // Actualiza si es necesario
+      ? "https://api.miguelmarketer.com"
+      : "http://localhost:3001";
 
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -24,7 +22,7 @@ const BlogPostDetail = () => {
     const fetchPost = async () => {
       console.log("Fetching post data...");
       try {
-        const response = await fetch(`${baseURL}/api/blog-post?slug=${slug}`);
+        const response = await fetch(`${baseURL}/api/blog-posts/${slug}`);
         if (!response.ok) {
           throw new Error("Failed to fetch post.");
         }
