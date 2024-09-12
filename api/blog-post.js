@@ -46,6 +46,7 @@ export default async function handler(req, res) {
       title: item.fields.title,
       description: item.fields.description,
       content: item.fields.content,
+      richContent: item.fields.richcontent, // Asegúrate de estar accediendo al campo correcto
       heroImageUrl: item.fields.heroimage
         ? assets[item.fields.heroimage.sys.id]
         : null,
@@ -53,6 +54,8 @@ export default async function handler(req, res) {
       slug: item.fields.slug,
       date: item.fields.date,
     };
+
+    console.log("Post data:", post); // Asegúrate de ver qué datos están siendo retornados
 
     res.status(200).json(post);
   } catch (error) {
