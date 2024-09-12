@@ -2,6 +2,14 @@
 import { createClient } from "contentful";
 
 export default async function handler(req, res) {
+  // Añadir CORS headers
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://miguelmarketerfront-miguelgonzalezcruzs-projects.vercel.app"
+  );
+  res.setHeader("Access-Control-Allow-Methods", "GET");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
   if (req.method !== "GET") {
     return res.status(405).json({ message: "Only GET requests are allowed" });
   }
