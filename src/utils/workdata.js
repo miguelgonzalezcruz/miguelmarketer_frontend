@@ -307,7 +307,7 @@ const workdata = [
       alt: "CES Felipe Moreno",
     },
     description:
-      "El Centro de Educación Superior Felipe Moreno - Nebrija (Centro Adscrito a la Universidad Nebrija) es una institución académica de prestigio internacional.",
+      "Imparto dos asignaturas en el grado de Marketing del Centro de Educación Superior Felipe Moreno - Nebrija.",
   },
 ];
 
