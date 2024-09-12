@@ -15,7 +15,7 @@ export default async function handler(req, res) {
 
   try {
     const response = await client.getEntries({
-      content_type: "BlogPost", // Cambia esto según tu content type en Contentful
+      content_type: "blogPost", // Cambia esto según tu content type en Contentful
       "fields.slug": slug,
       limit: 1,
     });
