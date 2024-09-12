@@ -12,7 +12,7 @@ const BlogPostDetail = () => {
   // Asegúrate de que la URL base esté correcta
   const baseURL =
     process.env.NODE_ENV === "production"
-      ? "https://miguelmarketerfront-miguelgonzalezcruzs-projects.vercel.app"
+      ? "https://miguelmarketer.com"
       : "http://localhost:3000"; // Actualiza si es necesario
 
   const [post, setPost] = useState(null);
