@@ -55,8 +55,6 @@ export default async function handler(req, res) {
       date: item.fields.date,
     };
 
-    console.log("Post data:", post); // Asegúrate de ver qué datos están siendo retornados
-
     res.status(200).json(post);
   } catch (error) {
     console.error("Error fetching post from Contentful:", error);
