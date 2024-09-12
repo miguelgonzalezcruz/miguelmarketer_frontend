@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import "../blocks/BlogList.css";
 
 const NewBlogPosts = () => {
-  const baseURL =
-    process.env.NODE_ENV === "production"
-      ? "https://api.miguelmarketer.com"
-      : "http://localhost:3001";
+  // const baseURL =
+  //   process.env.NODE_ENV === "production"
+  //     ? "https://api.miguelmarketer.com"
+  //     : "http://localhost:3001";
 
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -16,7 +16,7 @@ const NewBlogPosts = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch(`${baseURL}/api/blog-posts`);
+        const response = await fetch("/api/blog-posts"); // Actualiza la URL a la ruta serverless
         const data = await response.json();
 
         setPosts(data);
@@ -28,7 +28,7 @@ const NewBlogPosts = () => {
     };
 
     fetchPosts();
-  }, [baseURL]);
+  }, []);
 
   return (
     <div>
