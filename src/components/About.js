@@ -41,7 +41,7 @@ const About = () => {
       title: "Educación - Formación",
       description: [
         "Me encanta compartir mis conocimientos y experiencias con otros. Es una buena forma de devolver a la comunidad y seguir aprendiendo.",
-        "He impartido algunas clases y talleres sobre marketing digital. Si tienes un centro educativo, no dudes en contactarme.",
+        "Actualmente imparto dos asignaturas en el Grado del Marketing del Centro de Educación Superior Felipe Moreno - Nebrija (Centro Adscrito a la Universidad Nebrija)",
       ],
     },
     {
