@@ -16,7 +16,7 @@ const NewBlogPosts = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch("/api/blog-posts"); // Actualiza la URL a la ruta serverless
+        const response = await fetch("/api/blog-posts"); // Actualiza la URL a la ruta serverless.
         const data = await response.json();
 
         setPosts(data);
