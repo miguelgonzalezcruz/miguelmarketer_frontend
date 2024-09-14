@@ -14,10 +14,12 @@ import ScrollToTop from "./ScrollToTop";
 import PageContent from "./PageContent";
 import NewBlogPosts from "./NewBlogPosts";
 import BlogPostDetail from "./BlogPostDetail";
+import { inject } from "@vercel/analytics";
 
 import "../blocks/App.css";
 
 function App() {
+  inject();
   return (
     <HelmetProvider>
       <main className="app-container">
