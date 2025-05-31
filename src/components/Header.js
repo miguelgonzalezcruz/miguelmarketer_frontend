@@ -31,9 +31,9 @@ function Header() {
               <Link className="header__menu-list-item-link" to="/contacta">
                 Contacto
               </Link>
-              <Link className="header__menu-list-item-link" to="/blog-posts">
+              {/* <Link className="header__menu-list-item-link" to="/blog-posts">
                 Blog
-              </Link>
+              </Link> */}
             </li>
           </ul>
         </div>
