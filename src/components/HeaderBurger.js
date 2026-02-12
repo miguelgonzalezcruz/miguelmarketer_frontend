@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
-
-import "../blocks/HeaderBurger.css";
+import Link from "next/link";
 
 import logo from "../images/job_logos/logomiguelmarketer.svg";
 import closeIcon from "../images/CloseIcon.svg";
+
+const logoSrc = logo?.src || logo;
+const closeIconSrc = closeIcon?.src || closeIcon;
 
 function HeaderBurger() {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,10 +35,10 @@ function HeaderBurger() {
     <header className="burgerheader">
       <div className="burgerheader__container">
         <div className="burgerheader__logo">
-          <Link to="/">
-            <img className="burgerheader__logo-image" src={logo} alt="logo" />
+          <Link href="/">
+            <img className="burgerheader__logo-image" src={logoSrc} alt="logo" />
           </Link>
-          <Link className="burgerheader__menu-list-item-brand" to="/">
+          <Link className="burgerheader__menu-list-item-brand" href="/">
             Miguel Marketer
           </Link>
         </div>
@@ -58,13 +59,13 @@ function HeaderBurger() {
               className="burgerheader__close"
               onClick={() => setIsOpen(false)}
             >
-              <img src={closeIcon} alt="Close menu" />
+              <img src={closeIconSrc} alt="Close menu" />
             </button>
             <ul className="burgerheader__menu-list-column">
               <li className="burgerheader__menu-list-item">
                 <Link
                   className="burgerheader__menu-list-item-link"
-                  to="/sobre-mi"
+                  href="/sobre-mi"
                   onClick={() => setIsOpen(false)}
                 >
                   Sobre mi
@@ -73,7 +74,7 @@ function HeaderBurger() {
               <li className="burgerheader__menu-list-item">
                 <Link
                   className="burgerheader__menu-list-item-link"
-                  to="/mi-trayectoria"
+                  href="/mi-trayectoria"
                   onClick={() => setIsOpen(false)}
                 >
                   Trayectoria
@@ -82,19 +83,10 @@ function HeaderBurger() {
               <li className="burgerheader__menu-list-item">
                 <Link
                   className="burgerheader__menu-list-item-link"
-                  to="/contacta"
+                  href="/contacta"
                   onClick={() => setIsOpen(false)}
                 >
                   Contacto
-                </Link>
-              </li>
-              <li className="burgerheader__menu-list-item">
-                <Link
-                  className="burgerheader__menu-list-item-link"
-                  to="/blog-posts"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Blog
                 </Link>
               </li>
             </ul>

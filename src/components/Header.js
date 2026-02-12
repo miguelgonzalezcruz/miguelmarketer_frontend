@@ -1,39 +1,35 @@
 import logo from "../images/job_logos/logomiguelmarketer.svg";
+import Link from "next/link";
 
-import { Link } from "react-router-dom";
-
-import "../blocks/Header.css";
+const logoSrc = logo?.src || logo;
 
 function Header() {
   return (
     <header className="header">
       <div className="header__container">
         <div className="header__logo">
-          <Link to="/">
-            <img className="header__logo-image" src={logo} alt="logo" />
+          <Link href="/">
+            <img className="header__logo-image" src={logoSrc} alt="logo" />
           </Link>
-          <Link className="header__menu-list-item-brand" to="/">
+          <Link className="header__menu-list-item-brand" href="/">
             Miguel Marketer
           </Link>
         </div>
         <div className="header__menu">
           <ul className="header__menu-list">
             <li className="header__menu-list-item">
-              <Link className="header__menu-list-item-link" to="/sobre-mi">
+              <Link className="header__menu-list-item-link" href="/sobre-mi">
                 Sobre mi
               </Link>
               <Link
                 className="header__menu-list-item-link"
-                to="/mi-trayectoria"
+                href="/mi-trayectoria"
               >
                 Trayectoria
               </Link>
-              <Link className="header__menu-list-item-link" to="/contacta">
+              <Link className="header__menu-list-item-link" href="/contacta">
                 Contacto
               </Link>
-              {/* <Link className="header__menu-list-item-link" to="/blog-posts">
-                Blog
-              </Link> */}
             </li>
           </ul>
         </div>

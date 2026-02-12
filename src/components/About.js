@@ -2,8 +2,6 @@ import React, { useEffect, useRef } from "react";
 import lottie from "lottie-web";
 import animationData from "../utils/animation.json";
 
-import "../blocks/About.css";
-
 const About = () => {
   const lottieContainer = useRef();
 

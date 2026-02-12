@@ -1,7 +1,5 @@
 import React from "react";
 
-import "../blocks/TimelineItem.css";
-
 const TimelineItem = ({ data }) => (
   <div className="timeline-item">
     <div className="timeline-item-content">
@@ -22,7 +20,7 @@ const TimelineItem = ({ data }) => (
       )}
       <span
         className="circle"
-        style={{ backgroundImage: `url(${data.logo.img})` }}
+        style={{ backgroundImage: `url(${data.logo.img?.src || data.logo.img})` }}
       />
     </div>
   </div>

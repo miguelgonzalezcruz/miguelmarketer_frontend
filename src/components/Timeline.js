@@ -1,6 +1,4 @@
 import React from "react";
-
-import "../blocks/TimelineList.css";
 import TimelineItem from "./TimelineItem";
 import workdata from "../utils/workdata";
 

@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import emojis from "../emoji.json";
-import "../blocks/Hero.css";
 
 const HeroComponent = () => {
   // const baseURL =
@@ -10,14 +9,15 @@ const HeroComponent = () => {
   //     ? "https://api.miguelmarketer.com"
   //     : "http://localhost:3001";
 
-  const getRandomEmoji = () => {
-    const randomIndex = Math.floor(Math.random() * emojis.length);
-    return emojis[randomIndex].emoji;
-  };
-
   const [heroImage, setHeroImage] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
+  const [heroEmoji, setHeroEmoji] = useState("😎");
+
+  useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * emojis.length);
+    setHeroEmoji(emojis[randomIndex].emoji);
+  }, []);
 
   useEffect(() => {
     const fetchHeroImage = async () => {
@@ -78,7 +78,7 @@ const HeroComponent = () => {
         <h1>
           Marketing &
           <br />
-          Software Development {getRandomEmoji()}
+          Software Development {heroEmoji}
         </h1>
         {/* <h2>Marketing && Software Development</h2> */}
       </div>

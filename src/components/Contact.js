@@ -4,8 +4,6 @@ import lottie from "lottie-web";
 
 import animationData from "../utils/118202-success-icon.json";
 
-import "../blocks/Contact.css";
-
 const Contact = () => {
   // const baseURL =
   //   process.env.NODE_ENV === "production"
@@ -152,7 +150,7 @@ const Contact = () => {
                       className="form-control"
                       required
                       placeholder="¿En qué puedo ayudarte?"
-                      maxength="500"
+                      maxLength="500"
                     ></textarea>
                   </div>
                   <div className="form-group btn-block">
