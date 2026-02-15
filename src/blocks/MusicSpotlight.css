@@ -1,0 +1,108 @@
+.music-spotlight {
+  margin: 72px auto 0;
+  max-width: 1180px;
+  border-radius: 24px;
+  padding: 46px;
+  background:
+    radial-gradient(circle at 92% 8%, rgba(15, 138, 106, 0.16) 0%, transparent 36%),
+    linear-gradient(146deg, #ffffff 0%, #f8fbff 56%, #f3f8fe 100%);
+  color: var(--hs-ink);
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 42px;
+  align-items: center;
+  border: 1px solid var(--hs-border);
+  box-shadow: 0 24px 52px rgba(17, 37, 57, 0.1);
+}
+
+.music-spotlight__eyebrow {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: var(--hs-orange);
+  border: 1px solid #b7d8cf;
+  background: #e8f5f1;
+  border-radius: 999px;
+  padding: 8px 12px;
+}
+
+.music-spotlight__title {
+  margin: 18px 0 0;
+  font-size: clamp(30px, 3.7vw, 44px);
+  line-height: 1.12;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.music-spotlight__lead {
+  margin: 18px 0 0;
+  font-size: clamp(17px, 1.9vw, 21px);
+  line-height: 1.56;
+  color: #35506c;
+  max-width: 680px;
+}
+
+.music-spotlight__actions {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.music-spotlight__action {
+  text-decoration: none;
+  color: #ffffff;
+  background-color: var(--hs-orange);
+  border-radius: 10px;
+  padding: 11px 16px;
+  font-size: 14px;
+  font-weight: 800;
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.music-spotlight__action:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(15, 138, 106, 0.26);
+  background-color: var(--hs-orange-strong);
+}
+
+.music-spotlight__media {
+  margin: 0;
+}
+
+.music-spotlight__media img {
+  width: 100%;
+  display: block;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: 0 16px 34px rgba(19, 43, 65, 0.2);
+}
+
+@media screen and (max-width: 980px) {
+  .music-spotlight {
+    grid-template-columns: 1fr;
+    padding: 36px 24px;
+    gap: 30px;
+  }
+
+  .music-spotlight__lead {
+    max-width: 100%;
+  }
+
+  .music-spotlight__media {
+    max-width: 560px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .music-spotlight {
+    margin-top: 56px;
+    border-radius: 18px;
+    padding: 26px 16px;
+  }
+}

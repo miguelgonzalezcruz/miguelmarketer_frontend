@@ -1,14 +1,16 @@
 .header {
-  padding: 15px 40px;
-  display: flex;
-  justify-content: space-between;
-  background-color: rgba(33, 37, 41, 0.9);
   position: sticky;
   top: 0;
   z-index: 1000;
+  background-color: #162b40;
+  backdrop-filter: blur(10px);
+  border-bottom: 4px solid var(--hs-orange);
 }
 
 .header__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 14px 24px;
   display: flex;
   width: 100%;
   justify-content: space-between;
@@ -18,61 +20,67 @@
 .header__logo {
   display: flex;
   align-items: center;
+  gap: 10px;
 }
 
-.header__menu {
-  display: flex;
-  align-items: center;
+.header__logo-image {
+  height: 36px;
+  width: auto;
 }
 
 .header__menu-list-item-brand {
   list-style-type: none;
   font-size: 20px;
-  font-weight: 500;
-  font-family: "Inter", sans-serif;
+  font-weight: 800;
   margin: 0;
-  display: flex;
   text-decoration: none;
-  padding: 12px 16px;
-  color: #f5f5f5;
+  color: #f1f5f9;
+  letter-spacing: -0.01em;
 }
 
 .header__menu-list-item-brand:hover {
   color: #ffffff;
-  transform: translateY(-2px);
-
-  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out, ease-in-out;
 }
 
 .header__menu-list {
   list-style-type: none;
-  font-size: 16px;
-  font-weight: 600;
-  font-family: "Inter", sans-serif;
+  padding: 0;
   margin: 0;
   display: flex;
+  align-items: center;
+  gap: 2px;
 }
 
 .header__menu-list-item-link {
   text-decoration: none;
-  padding: 12px 16px;
-  color: #f5f5f5;
+  padding: 10px 14px;
+  color: #dce7f3;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 9px;
+  transition: color 0.2s ease, background-color 0.2s ease;
 }
 
 .header__menu-list-item-link:hover {
   color: #ffffff;
-  text-decoration: underline;
-  transition: color 0.3s ease-in-out;
+  background: rgba(255, 255, 255, 0.12);
 }
 
-.header__logo-image {
-  height: 40px;
-  width: auto;
+.header__menu-cta {
+  text-decoration: none;
+  margin-left: 8px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: var(--hs-orange);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 800;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.header__logo-image:hover {
-  transform: scale(1.1);
-  transition: transform 0.3s ease-in-out;
+.header__menu-cta:hover {
+  background: var(--hs-orange-strong);
+  transform: translateY(-1px);
 }
 
 @media screen and (max-width: 1150px) {

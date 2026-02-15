@@ -7,6 +7,7 @@ import "../src/blocks/About.css";
 import "../src/blocks/TimelineList.css";
 import "../src/blocks/TimelineItem.css";
 import "../src/blocks/Contact.css";
+import "../src/blocks/MusicSpotlight.css";
 import "../src/blocks/Footer.css";
 import { Analytics } from "@vercel/analytics/react";
 import GTMNoScript from "../src/components/GTMNoScript";

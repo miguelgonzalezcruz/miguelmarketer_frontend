@@ -10,7 +10,7 @@ function Footer() {
     <footer className="footer">
       <div className="footer__name-content">
         <img src={logoSrc} alt="Miguel González" />
-        <p className="footer__text">Miguel Marketer</p>
+        <p className="footer__text">Miguel González | Marketing Director</p>
       </div>
       <div className="footer__linkedin-badge">
         <a
@@ -26,9 +26,6 @@ function Footer() {
           />
         </a>
       </div>
-      <p className="footer__text">
-        Desarrollado por Miguel González | {new Date().getFullYear()}
-      </p>
     </footer>
   );
 }

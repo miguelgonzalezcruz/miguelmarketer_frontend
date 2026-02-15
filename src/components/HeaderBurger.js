@@ -35,11 +35,11 @@ function HeaderBurger() {
     <header className="burgerheader">
       <div className="burgerheader__container">
         <div className="burgerheader__logo">
-          <Link href="/">
+          <Link href="/#home">
             <img className="burgerheader__logo-image" src={logoSrc} alt="logo" />
           </Link>
-          <Link className="burgerheader__menu-list-item-brand" href="/">
-            Miguel Marketer
+          <Link className="burgerheader__menu-list-item-brand" href="/#home">
+            Miguel González
           </Link>
         </div>
         <div className="burgerheader__burger" onClick={toggleMenu}>
@@ -65,28 +65,28 @@ function HeaderBurger() {
               <li className="burgerheader__menu-list-item">
                 <Link
                   className="burgerheader__menu-list-item-link"
-                  href="/sobre-mi"
+                  href="/#about"
                   onClick={() => setIsOpen(false)}
                 >
-                  Sobre mi
+                  Mi Propuesta
                 </Link>
               </li>
               <li className="burgerheader__menu-list-item">
                 <Link
                   className="burgerheader__menu-list-item-link"
-                  href="/mi-trayectoria"
+                  href="/#career"
                   onClick={() => setIsOpen(false)}
                 >
-                  Trayectoria
+                  Experiencia
                 </Link>
               </li>
               <li className="burgerheader__menu-list-item">
                 <Link
-                  className="burgerheader__menu-list-item-link"
-                  href="/contacta"
+                  className="burgerheader__menu-cta"
+                  href="/#contact"
                   onClick={() => setIsOpen(false)}
                 >
-                  Contacto
+                  Solicitar reunión
                 </Link>
               </li>
             </ul>

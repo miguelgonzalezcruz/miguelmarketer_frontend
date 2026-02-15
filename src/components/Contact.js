@@ -15,9 +15,12 @@ const Contact = () => {
     firstname: "",
     lastname: "",
     message: "",
+    website: "",
   });
 
   const [responseStatus, setResponseStatus] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const animationContainer = useRef(null);
 
   const { email, firstname, lastname, message } = formData;
@@ -25,8 +28,10 @@ const Contact = () => {
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitError("");
+    setIsSubmitting(true);
 
     const requestOptions = {
       method: "POST",
@@ -37,26 +42,30 @@ const Contact = () => {
       body: JSON.stringify(formData),
     };
 
-    fetch("/api/create-contact", requestOptions) // Actualizamos la URL para que apunte a la función serverless
-      .then((response) => {
-        console.log(response);
-        if (response.ok) {
-          setResponseStatus(response.status);
-          return response.json();
-        } else {
-          throw new Error("Server response was not ok.");
-        }
-      })
-      .then((data) => {
-        console.log(data);
-        setFormData({
-          email: "",
-          firstname: "",
-          lastname: "",
-          message: "",
-        });
-      })
-      .catch((error) => console.error(error));
+    try {
+      const response = await fetch("/api/create-contact", requestOptions);
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        throw new Error(data.message || "Server response was not ok.");
+      }
+
+      setResponseStatus(response.status);
+      setFormData({
+        email: "",
+        firstname: "",
+        lastname: "",
+        message: "",
+        website: "",
+      });
+    } catch (error) {
+      console.error(error);
+      setSubmitError(
+        "No se pudo enviar el mensaje. Escríbeme por LinkedIn o inténtalo de nuevo en unos minutos."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const isFormValid = email && firstname && lastname && message.length >= 1;
@@ -84,21 +93,13 @@ const Contact = () => {
     }
   }, [responseStatus]);
 
-  useEffect(() => {
-    if (responseStatus !== 201) {
-      // Reset the form fields if the response status changes
-      setFormData({
-        email: "",
-        firstname: "",
-        lastname: "",
-        message: "",
-      });
-    }
-  }, [responseStatus]);
-
   return (
     <div className="contact-container" id="contact">
-      <h2 className="contact-title">Contacta</h2>
+      <h2 className="contact-title">Contacto</h2>
+      <p className="contact-subtitle">
+        Si buscas liderazgo de marketing con impacto real en negocio, cuenta tu
+        contexto y te respondo personalmente.
+      </p>
 
       <div className="container">
         <div className="row justify-content-center">
@@ -106,7 +107,16 @@ const Contact = () => {
             <div className="contact-card">
               <div className="card-body">
                 <form onSubmit={(e) => handleSubmit(e)}>
-                  <input type="hidden" name="_csrf" value={formData._csrf} />
+                  <input
+                    className="contact-honeypot"
+                    type="text"
+                    name="website"
+                    value={formData.website}
+                    onChange={(e) => handleChange(e)}
+                    autoComplete="off"
+                    tabIndex="-1"
+                    aria-hidden="true"
+                  />
                   <div className="form-group contact-field">
                     <label>Email</label>
                     <input
@@ -157,11 +167,16 @@ const Contact = () => {
                     <button
                       type="submit"
                       className="btn btn-primary "
-                      disabled={!isFormValid}
+                      disabled={!isFormValid || isSubmitting}
                     >
-                      Enviar
+                      {isSubmitting ? "Enviando..." : "Solicitar conversación"}
                     </button>
                   </div>
+                  {submitError && (
+                    <p className="contact-error-message" aria-live="polite">
+                      {submitError}
+                    </p>
+                  )}
                 </form>
               </div>
               {responseStatus === 201 && (

@@ -9,60 +9,41 @@ import rnalogo from "../images/history/rna.jpeg";
 import syncrentalslogo from "../images/history/syncrentals.jpeg";
 import roibacklogo from "../images/history/roiback.jpeg";
 import logitravellogo from "../images/history/logitravel.jpeg";
-import carmensupermarket from "../images/history/CarmenSupermarketPortada-bn-mov.png";
 import felipemoreno from "../images/history/cesfelipemoreno_logo.jpeg";
 import universidadmalaga from "../images/history/universidad_de_malaga_logo.jpeg";
+import hylovipunto from "../images/job_logos/hylovi_punto.png";
 
 const workdata = [
   {
     id: 1,
-    title: "Publicidad y RRPP",
-    text: "Universidad de Málaga",
-    datestart: "1998",
-    date: "2002",
+    title: "Founder, Developer & Product Owner",
+    text: "Hylovi.com",
+    datestart: "2025",
+    date: "Actualmente",
+    group: "side",
     category: {
-      tag: "formación",
+      tag: "proyecto",
       color: "#495057",
     },
     link: {
-      url: "https://www.linkedin.com/school/universidad-de-malaga/",
-      text: "Descubre más",
+      url: "https://hylovi.com",
+      text: "Ver proyecto",
     },
     logo: {
-      img: universidadmalaga,
-      alt: "Universidad de Málaga",
+      img: hylovipunto,
+      alt: "Hylovi",
     },
     description:
-      "Recuerdo esta etapa con mucho cariño. Aunque me licencié por la UMA, cursé la mitad de la carrera en la Autónoma de BCN. Muchos momentos para recordar.",
+      "Proyecto propio de descubrimiento musical con IA. Lidero visión de producto, desarrollo, arquitectura de contenido y estrategia de crecimiento orgánico.",
   },
   {
     id: 2,
-    title: "Programa de Desarrollo Directivo (PDD)",
-    text: "IESE Business School",
-    datestart: "2017",
-    date: "2017",
-    category: {
-      tag: "formación",
-      color: "#495057",
-    },
-    link: {
-      url: "https://www.linkedin.com/school/iese-business-school/",
-      text: "Descubre más",
-    },
-    logo: {
-      img: ieselogo,
-      alt: "IESE Business School",
-    },
-    description:
-      "Gracias a este programa directivo fortalecí mi pensamiento estratégico y habilidades para la dirección. Conseguí una visión global 360 a través del método del caso, que aúna el aprendizaje individual, las discusiones de equipo y el diálogo en un pleno interdisciplinar. Es muy enriquecedora la discusión con distintos puntos de vista y experiencias de diferentes sectores, además de formar amistades que perduran.",
-  },
-
-  {
-    id: 3,
-    title: "Head Of Marketing & Communications",
-    text: "Roiback",
+    title: "Head of Marketing Communications",
+    text: "Roiback (HBX Group)",
     datestart: "2022",
     date: "Actualmente",
+    featured: true,
+    group: "core",
     category: {
       tag: "trabajo",
       color: "#495057",
@@ -76,35 +57,15 @@ const workdata = [
       alt: "Roiback",
     },
     description:
-      "Es una galardonada traveltech especializada en la gestión del canal directo para hoteles. Roiback ofrece a más de 2.000 hoteles independientes y cadenas hoteleras de todo el mundo un motor de reservas líder en el mercado, soluciones web enfocadas a la conversión y servicios de gestión integral del marketing online enfocado en la generación de reservas.",
+      "Dirección de posicionamiento global, website strategy y generación de demanda. Integro marketing, ventas y producto con enfoque en pipeline cualificado y eficiencia operativa.",
   },
   {
-    id: 5,
-    title: "Software Engineer",
-    text: "Tripleten USA",
-    datestart: "2022",
-    date: "2023",
-    category: {
-      tag: "formación",
-      color: "#495057",
-    },
-    link: {
-      url: "https://drive.google.com/file/d/10ZG0zTMiiDpMY_0hBbOq4lTSI0UbgSor/edit",
-      text: "Descubre más",
-    },
-    logo: {
-      img: tripletenlogo,
-      alt: "Tripleten USA",
-    },
-    description:
-      "Tripleten es un bootcamp online a tiempo parcial. He aprendido Desarrollo de Software a través de su plataforma interactiva, con la ayuda tutores expertos, otros miembros de la comunidad y la orientación de estudiantes senior. Ha sido una experiencia alucinante que me permite desarrollar desde cero páginas web como esta.",
-  },
-  {
-    id: 6,
+    id: 3,
     title: "Global Growth Marketing Manager",
-    text: "Hotelbeds",
+    text: "Hotelbeds (HBX Group)",
     datestart: "2018",
     date: "2022",
+    group: "core",
     category: {
       tag: "trabajo",
       color: "#495057",
@@ -118,35 +79,15 @@ const workdata = [
       alt: "Hotelbeds",
     },
     description:
-      "Como miembro del principal banco de camas B2B del mundo, trabajé en la digitalización y automatización de los procesos con hoteles long-tail con contrato directo, reduciendo costos operativos y optimizando ratios de conversión. También participé en la consolidación de la marca global después del rebranding, lo que involucró la migración de 35k agencias de viajes, 3k clientes API y más de 300k hoteles.",
+      "Impulso de growth internacional con automatización de procesos, optimización de journeys y consolidación de marca en mercados complejos.",
   },
   {
-    id: 7,
-    title: "Co-Founder",
-    text: "Sync Rentals",
-    datestart: "2017",
-    date: "2021",
-    category: {
-      tag: "proyecto paralelo",
-      color: "#495057",
-    },
-    link: {
-      url: "https://www.linkedin.com/company/sync-rentals",
-      text: "Descubre más",
-    },
-    logo: {
-      img: syncrentalslogo,
-      alt: "Sync Rentals",
-    },
-    description:
-      "Era un channel manager para viviendas vacacionales. Permitía a los propietarios mantener un calendario de disponibilidad centralizado que se actualizaba automáticamente en portales compatibles como Airbnb, Booking o Vrbo.",
-  },
-  {
-    id: 8,
-    title: "Marketing & E-Commerce Director",
+    id: 4,
+    title: "Marketing & eCommerce Director",
     text: "Rafa Nadal Academy by Movistar",
     datestart: "2016",
     date: "2018",
+    group: "core",
     category: {
       tag: "trabajo",
       color: "#495057",
@@ -157,38 +98,18 @@ const workdata = [
     },
     logo: {
       img: rnalogo,
-      alt: "Rafa Nadal Academy by Movistar",
+      alt: "Rafa Nadal Academy",
     },
     description:
-      "Formar parte de la RNA fué un sueño hecho realidad. No soy especialmente fan del tenis, pero a nivel profesional y personal es una de las mejores experiencias que he tenido. Como uno de los primeros miembros del equipo tuve la oportunidad de desarrollar la marca, comunicaciones, estrategias de marketing y creación de producto. Gracias a nuestro arduo trabajo, pudimos superar el presupuesto y logramos posicionar todos los servicios que ofrece este espectacular centro deportivo.",
+      "Construcción de ecosistema digital desde cero, lanzamiento de iniciativas de marca internacional y desarrollo de una operativa de marketing orientada a crecimiento sostenido.",
   },
   {
-    id: 9,
-    title: "Executive Director",
-    text: "Geniuzz",
-    datestart: "2015",
-    date: "2016",
-    category: {
-      tag: "trabajo",
-      color: "#495057",
-    },
-    link: {
-      url: "https://www.linkedin.com/company/geniuzz",
-      text: "Descubre más",
-    },
-    logo: {
-      img: geniuzzlogo,
-      alt: "Geniuzz",
-    },
-    description:
-      "Participé en el rediseño del modelo de negocio, la estrategia de marketing y ventas para el principal marketplace español para freelancers. Gracias a nuestros esfuerzos, logramos mejorar la posición de la empresa en el mercado, lo que resultó en un aumento del 20% en las ventas. Además, conseguimos con éxito una nueva ronda de financiación.",
-  },
-  {
-    id: 10,
+    id: 5,
     title: "Head of Marketing & Communications",
     text: "PortBlue Hotels & Resorts",
     datestart: "2014",
     date: "2016",
+    group: "core",
     category: {
       tag: "trabajo",
       color: "#495057",
@@ -202,35 +123,37 @@ const workdata = [
       alt: "PortBlue Hotels & Resorts",
     },
     description:
-      "Gestioné la creación de marca de esta cadena de hoteles mallorquina. Conseguimos crear una exitosa estrategia de venta directa y posicionamiento.",
+      "Redefinición de marca y mejora integral de activos digitales con foco en venta directa, conversión y consistencia de experiencia.",
   },
   {
-    id: 11,
-    title: "Co-Founder",
-    text: "fitboo",
-    datestart: "2012",
-    date: "2014",
+    id: 6,
+    title: "Executive Director",
+    text: "Geniuzz",
+    datestart: "2015",
+    date: "2016",
+    group: "core",
     category: {
       tag: "trabajo",
       color: "#495057",
     },
     link: {
-      url: "https://www.linkedin.com/company/fitboo",
+      url: "https://www.linkedin.com/company/geniuzz",
       text: "Descubre más",
     },
     logo: {
-      img: fitboologo,
-      alt: "fitboo",
+      img: geniuzzlogo,
+      alt: "Geniuzz",
     },
     description:
-      "Fitboo era como un Booking.com, pero para centros de fitness. Integré la disponibilidad de miles de centros, permitiendo a los usuarios reservar clases grupales en múltiples ubicaciones a su conveniencia. Con este proyecto logré obtener financiación de capital privado y el apoyo de ENISA, el Fondo de Coinversión para Startups de España. Además, fuimos seleccionados para unirnos al programa StartUp Brasil.",
+      "Liderazgo de reposicionamiento de marketplace B2B, reordenando propuesta comercial, estrategia de marketing y experiencia de usuario.",
   },
   {
-    id: 12,
+    id: 7,
     title: "Managing Director Southern Europe",
-    text: "lowcostholidays",
+    text: "Low Cost Travel Group",
     datestart: "2011",
     date: "2012",
+    group: "core",
     category: {
       tag: "trabajo",
       color: "#495057",
@@ -241,17 +164,18 @@ const workdata = [
     },
     logo: {
       img: lowcostlogo,
-      alt: "lowcostholidays",
+      alt: "Low Cost Travel Group",
     },
     description:
-      "Como Director del mercado español de este operador turístico de viajes con sede en el Reino Unido, fui responsable de liderar la expansión tanto B2B como B2C. En el plazo de un año conseguimos, desde cero, un gran volumen ventas posicionando la marca como uno de los players a tener en cuenta en aquel momento.",
+      "Apertura y consolidación de mercado en el sur de Europa, liderando estrategia de captación, localización digital y coordinación con equipos globales.",
   },
   {
-    id: 13,
+    id: 8,
     title: "Marketing & Communications Director",
-    text: "Logitravel",
+    text: "Logitravel Group",
     datestart: "2008",
     date: "2011",
+    group: "core",
     category: {
       tag: "trabajo",
       color: "#495057",
@@ -262,40 +186,65 @@ const workdata = [
     },
     logo: {
       img: logitravellogo,
-      alt: "Logitravel",
+      alt: "Logitravel Group",
     },
     description:
-      "Exitosa ejecución de una estrategia de marketing completamente optimizada, generando un aumento significativo de la facturación anual. Logramos posicionarnos como uno de los principales anunciantes de viajes en España, superamos nuestros objetivos, mejoramos el alcance de nuestros canales de marketing y logramos tasas de conversión muy altas para una amplia gama de productos turísticos.",
+      "Dirección de growth y comunicación para OTA líder, impulsando evolución del modelo comercial digital y mejora continua de performance web.",
   },
   {
-    id: 3,
-    title: "Drummer",
-    text: "Carmen Supermarket",
-    datestart: "2024",
-    date: "Actualmente",
+    id: 9,
+    title: "Co-Founder & CMO",
+    text: "Sync Rentals",
+    datestart: "2017",
+    date: "2021",
+    group: "side",
     category: {
-      tag: "trabajo",
+      tag: "emprendimiento",
       color: "#495057",
     },
     link: {
-      url: "https://open.spotify.com/artist/4Ms17M4YF5EZfoUPEUCGny?si=eNnehIINTnqMk35ygfjNew",
-      text: "Escúchanos en Spotify",
+      url: "https://www.linkedin.com/company/sync-rentals",
+      text: "Descubre más",
     },
     logo: {
-      img: carmensupermarket,
-      alt: "Roiback",
+      img: syncrentalslogo,
+      alt: "Sync Rentals",
     },
     description:
-      "Banda de Pop-Rock desde Mallorca. Sonidos guitarreros de los 90 con letras en castellano. Hemos lanzado dos singles en Spotify y estamos programando conciertos en Mallorca.",
+      "Liderazgo de estrategia de producto y marketing para plataforma SaaS de gestión de alquiler vacacional, priorizando adopción y retención.",
   },
   {
-    id: 14,
-    title: "Professor of Marketing",
-    text: "Centro de Educación Superior Felipe Moreno",
-    datestart: "2024",
-    date: "Actualmente",
+    id: 10,
+    title: "Founder",
+    text: "Fitboo",
+    datestart: "2012",
+    date: "2014",
+    group: "side",
     category: {
-      tag: "trabajo",
+      tag: "emprendimiento",
+      color: "#495057",
+    },
+    link: {
+      url: "https://www.linkedin.com/company/fitboo",
+      text: "Descubre más",
+    },
+    logo: {
+      img: fitboologo,
+      alt: "Fitboo",
+      bgColor: "#ededed",
+    },
+    description:
+      "Creación de plataforma digital de reservas en fitness, combinando adquisición, producto y operaciones para activar crecimiento en etapa inicial.",
+  },
+  {
+    id: 11,
+    title: "Marketing Lecturer",
+    text: "CES Felipe Moreno - Universidad Nebrija",
+    datestart: "2024",
+    date: "2025",
+    group: "side",
+    category: {
+      tag: "académico",
       color: "#495057",
     },
     link: {
@@ -307,7 +256,75 @@ const workdata = [
       alt: "CES Felipe Moreno",
     },
     description:
-      "Imparto dos asignaturas en el grado de Marketing del Centro de Educación Superior Felipe Moreno - Nebrija.",
+      "Docencia en estrategia de marketing y gestión digital, conectando teoría con prácticas reales de crecimiento y toma de decisión.",
+  },
+  {
+    id: 12,
+    title: "Programa de Desarrollo Directivo (PDD)",
+    text: "IESE Business School",
+    datestart: "2017",
+    date: "2017",
+    group: "learning",
+    category: {
+      tag: "formación",
+      color: "#495057",
+    },
+    link: {
+      url: "https://www.linkedin.com/school/iese-business-school/",
+      text: "Descubre más",
+    },
+    logo: {
+      img: ieselogo,
+      alt: "IESE Business School",
+      bgColor: "#fe0000",
+    },
+    description:
+      "Formación ejecutiva orientada a estrategia, liderazgo y toma de decisiones en contextos de alta exigencia empresarial.",
+  },
+  {
+    id: 13,
+    title: "Full-Stack Software Engineering",
+    text: "TripleTen",
+    datestart: "2022",
+    date: "2023",
+    group: "learning",
+    category: {
+      tag: "formación",
+      color: "#495057",
+    },
+    link: {
+      url: "https://tripleten.com",
+      text: "Descubre más",
+    },
+    logo: {
+      img: tripletenlogo,
+      alt: "TripleTen",
+      bgColor: "#000000",
+    },
+    description:
+      "Base técnica aplicada a marketing digital para colaborar mejor con equipos de producto y acelerar implementaciones web con criterio de negocio.",
+  },
+  {
+    id: 14,
+    title: "Publicidad y RRPP",
+    text: "Universidad de Málaga",
+    datestart: "1998",
+    date: "2002",
+    group: "learning",
+    category: {
+      tag: "formación",
+      color: "#495057",
+    },
+    link: {
+      url: "https://www.linkedin.com/school/universidad-de-malaga/",
+      text: "Descubre más",
+    },
+    logo: {
+      img: universidadmalaga,
+      alt: "Universidad de Málaga",
+    },
+    description:
+      "Base académica en comunicación, marca y planificación publicitaria, con enfoque en pensamiento estratégico y ejecución.",
   },
 ];
 

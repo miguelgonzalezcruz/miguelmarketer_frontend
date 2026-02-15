@@ -1,7 +1,11 @@
 // src/components/HeroComponent.js
 
 import React, { useState, useEffect } from "react";
-import emojis from "../emoji.json";
+import Link from "next/link";
+import miguelmarketerprofile from "../images/history/miguelmarketer_.png";
+
+const miguelmarketerprofileSrc =
+  miguelmarketerprofile?.src || miguelmarketerprofile;
 
 const HeroComponent = () => {
   // const baseURL =
@@ -12,12 +16,6 @@ const HeroComponent = () => {
   const [heroImage, setHeroImage] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
-  const [heroEmoji, setHeroEmoji] = useState("😎");
-
-  useEffect(() => {
-    const randomIndex = Math.floor(Math.random() * emojis.length);
-    setHeroEmoji(emojis[randomIndex].emoji);
-  }, []);
 
   useEffect(() => {
     const fetchHeroImage = async () => {
@@ -74,13 +72,36 @@ const HeroComponent = () => {
       }}
     >
       <div className="gradient-overlay"></div>
+      <div className="hero-accent hero-accent--one" aria-hidden="true"></div>
+      <div className="hero-accent hero-accent--two" aria-hidden="true"></div>
       <div className="hero-text">
-        <h1>
-          Marketing &
-          <br />
-          Software Development {heroEmoji}
-        </h1>
-        {/* <h2>Marketing && Software Development</h2> */}
+        <div className="hero-card">
+          <div className="hero-profile-chip">
+            <img src={miguelmarketerprofileSrc} alt="Miguel González" loading="lazy" />
+          </div>
+          <p className="hero-eyebrow">Dirección de marketing</p>
+          <h1>
+            Estrategia, demanda y ejecución para compañías que quieren crecer
+            mejor
+          </h1>
+          <p className="hero-subtitle">
+            Construyo sistemas de marketing que conectan marca, pipeline y
+            operación comercial con una lógica clara de resultados.
+          </p>
+          <div className="hero-actions">
+            <Link href="/contacta" className="hero-action hero-action--primary">
+              Solicitar conversación
+            </Link>
+            <a
+              href="https://www.linkedin.com/in/miguelgonzalezcruz/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hero-action hero-action--secondary"
+            >
+              Ver perfil en LinkedIn
+            </a>
+          </div>
+        </div>
       </div>
       {!isLoading && heroImage && (
         <div className="hero-author">
