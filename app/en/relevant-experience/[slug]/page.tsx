@@ -10,11 +10,11 @@ interface CasePageProps {
 }
 
 function getCaseBySlug(slug: string) {
-  return getSiteData("es").caseDetails.find((item) => item.slug === slug);
+  return getSiteData("en").caseDetails.find((item) => item.slug === slug);
 }
 
 export function generateStaticParams() {
-  return getSiteData("es").caseDetails.map((item) => ({ slug: item.slug }));
+  return getSiteData("en").caseDetails.map((item) => ({ slug: item.slug }));
 }
 
 export function generateMetadata({ params }: CasePageProps): Metadata {
@@ -22,23 +22,23 @@ export function generateMetadata({ params }: CasePageProps): Metadata {
 
   if (!caseStudy) {
     return buildPageMetadata({
-      locale: "es",
-      title: "Caso no encontrado",
-      description: "No se ha encontrado el caso solicitado.",
-      pathname: `/experiencia-relevante/${params.slug}`,
+      locale: "en",
+      title: "Case not found",
+      description: "The requested case study could not be found.",
+      pathname: `/en/relevant-experience/${params.slug}`,
       type: "article",
     });
   }
 
   return buildPageMetadata({
-    locale: "es",
+    locale: "en",
     title: caseStudy.title,
     description: caseStudy.intro,
-    pathname: `/experiencia-relevante/${caseStudy.slug}`,
+    pathname: `/en/relevant-experience/${caseStudy.slug}`,
     type: "article",
   });
 }
 
-export default function CaseDetailPage({ params }: CasePageProps) {
-  return <CaseDetailPageView locale="es" slug={params.slug} />;
+export default function CaseDetailPageEn({ params }: CasePageProps) {
+  return <CaseDetailPageView locale="en" slug={params.slug} />;
 }

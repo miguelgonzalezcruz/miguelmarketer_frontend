@@ -7,14 +7,37 @@ import { usePathname } from "next/navigation";
 import profileImage from "@/src/images/history/miguelmarketer_.png";
 import { Container } from "@/src/components/ui/Container";
 import { Button } from "@/src/components/ui/Button";
+import { getSiteData } from "@/content/siteData";
+import type { Locale } from "@/src/lib/i18n";
+import { getLocalizedPath } from "@/src/lib/routes";
 
-const navItems = [
-  { href: "/experiencia-relevante", label: "Experiencia Relevante" },
-];
+interface SiteHeaderProps {
+  locale: Locale;
+}
 
-export function SiteHeader() {
+export function SiteHeader({ locale }: SiteHeaderProps) {
   const [showProfile, setShowProfile] = useState(false);
   const pathname = usePathname();
+  const siteData = getSiteData(locale);
+  const homePath = getLocalizedPath(locale, "home");
+  const copy =
+    locale === "en"
+      ? {
+          homeAria: "Back to home",
+          navLabel: "Primary navigation",
+          talk: "Let's talk",
+          relevantExperience: "Relevant Experience",
+        }
+      : {
+          homeAria: "Volver al inicio",
+          navLabel: "Navegación principal",
+          talk: "Hablemos",
+          relevantExperience: "Experiencia Relevante",
+        };
+
+  const navItems = [
+    { href: getLocalizedPath(locale, "relevantExperience"), label: copy.relevantExperience },
+  ];
 
   const isActivePath = (href: string) => {
     if (href === "/") return pathname === "/";
@@ -22,7 +45,7 @@ export function SiteHeader() {
   };
 
   useEffect(() => {
-    if (pathname !== "/") {
+    if (pathname !== homePath) {
       setShowProfile(false);
       return;
     }
@@ -66,12 +89,16 @@ export function SiteHeader() {
       if (observer) observer.disconnect();
       if (retryTimer) clearTimeout(retryTimer);
     };
-  }, [pathname]);
+  }, [homePath, pathname]);
 
   return (
     <header className="site-header">
       <Container className="site-header__inner">
-        <Link href="/" className="site-header__brand" aria-label="Volver al inicio">
+        <Link
+          href={getLocalizedPath(locale, "home")}
+          className="site-header__brand"
+          aria-label={copy.homeAria}
+        >
           <img
             src="/logos/miguelmarketer-white.svg"
             alt=""
@@ -79,13 +106,13 @@ export function SiteHeader() {
             className="site-header__brand-logo"
           />
           <span className="site-header__brand-text">
-            <span className="site-header__brand-name">Miguel González</span>
+            <span className="site-header__brand-name">{siteData.person.displayName}</span>
             <span className="site-header__brand-separator"> | </span>
-            <span className="site-header__brand-role">Marketing Director</span>
+            <span className="site-header__brand-role">{siteData.person.jobTitle}</span>
           </span>
         </Link>
 
-        <nav className="site-header__nav site-header__nav--desktop" aria-label="Navegación principal">
+        <nav className="site-header__nav site-header__nav--desktop" aria-label={copy.navLabel}>
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -98,11 +125,11 @@ export function SiteHeader() {
         </nav>
 
         <Button
-          href="/contacto"
+          href={getLocalizedPath(locale, "contact")}
           className="site-header__cta"
           track={{ event: "cta_click", payload: { cta: "meeting_request", source: "header" } }}
         >
-          Hablemos
+          {copy.talk}
         </Button>
 
         <div
@@ -115,7 +142,7 @@ export function SiteHeader() {
         </div>
       </Container>
       <Container>
-        <nav className="site-header__nav site-header__nav--mobile" aria-label="Navegación principal">
+        <nav className="site-header__nav site-header__nav--mobile" aria-label={copy.navLabel}>
           {navItems.map((item) => (
             <Link
               key={item.href}

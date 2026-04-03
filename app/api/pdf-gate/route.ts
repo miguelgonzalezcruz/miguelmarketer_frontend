@@ -10,13 +10,45 @@ import {
   sanitizeValues,
   type IncomingFormBody,
 } from "../../../src/lib/apiForms";
+import type { Locale } from "../../../src/lib/i18n";
 
 const RATE_LIMIT = {
   max: 10,
   windowMs: 10 * 60 * 1000,
 };
 
+function getLocaleFromRequest(request: NextRequest, payload?: IncomingFormBody): Locale {
+  const value = asString(payload?.values?.locale);
+  if (value === "en") return "en";
+  if (value === "es") return "es";
+
+  const acceptLanguage = request.headers.get("accept-language")?.toLowerCase() || "";
+  return acceptLanguage.startsWith("en") || acceptLanguage.includes(",en") ? "en" : "es";
+}
+
+function getCopy(locale: Locale) {
+  return locale === "en"
+    ? {
+        tooManyAttempts: "Too many attempts. Please wait a few minutes and try again.",
+        invalidRequest: "Invalid request format.",
+        received: "Received.",
+        invalidEmail: "Enter a valid email address.",
+        unlocked: "PDF unlocked.",
+        processError: "The PDF request could not be processed.",
+      }
+    : {
+        tooManyAttempts: "Demasiados intentos. Espera unos minutos para volver a intentarlo.",
+        invalidRequest: "Formato de petición no válido.",
+        received: "Recibido.",
+        invalidEmail: "Introduce un email válido.",
+        unlocked: "PDF desbloqueado.",
+        processError: "No se pudo procesar la solicitud de PDF.",
+      };
+}
+
 export async function POST(request: NextRequest) {
+  const requestLocale = getLocaleFromRequest(request);
+  const requestCopy = getCopy(requestLocale);
   const forwardedFor = request.headers.get("x-forwarded-for");
   const ip = getClientIp(forwardedFor);
   const rateResult = consumeRateLimit(`pdf_gate:${ip}`, RATE_LIMIT.max, RATE_LIMIT.windowMs);
@@ -24,7 +56,7 @@ export async function POST(request: NextRequest) {
   if (!rateResult.allowed) {
     return NextResponse.json(
       {
-        message: "Demasiados intentos. Espera unos minutos para volver a intentarlo.",
+        message: requestCopy.tooManyAttempts,
       },
       {
         status: 429,
@@ -40,15 +72,18 @@ export async function POST(request: NextRequest) {
   try {
     payload = (await request.json()) as IncomingFormBody;
   } catch {
-    return NextResponse.json({ message: "Formato de petición no válido." }, { status: 400 });
+    return NextResponse.json({ message: requestCopy.invalidRequest }, { status: 400 });
   }
+
+  const locale = getLocaleFromRequest(request, payload);
+  const copy = getCopy(locale);
 
   const honeypot = asString(payload.honeypot);
 
   if (honeypot) {
     return NextResponse.json(
       {
-        message: "Recibido.",
+        message: copy.received,
         downloadUrl: siteData.resources.leadMagnet.downloadUrl,
       },
       { status: 200 }
@@ -59,7 +94,7 @@ export async function POST(request: NextRequest) {
   const email = asString(values.email);
 
   if (!email || !isValidEmail(email)) {
-    return NextResponse.json({ message: "Introduce un email válido." }, { status: 400 });
+    return NextResponse.json({ message: copy.invalidEmail }, { status: 400 });
   }
 
   const rows = buildPayloadList(values);
@@ -90,7 +125,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(
       {
-        message: "PDF desbloqueado.",
+        message: copy.unlocked,
         downloadUrl: siteData.resources.leadMagnet.downloadUrl,
       },
       { status: 200 }
@@ -101,7 +136,7 @@ export async function POST(request: NextRequest) {
         message:
           error instanceof Error
             ? error.message
-            : "No se pudo procesar la solicitud de PDF.",
+            : copy.processError,
       },
       { status: 500 }
     );

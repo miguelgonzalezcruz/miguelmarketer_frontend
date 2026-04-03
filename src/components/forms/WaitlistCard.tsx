@@ -1,17 +1,21 @@
 "use client";
 
 import { useState } from "react";
-import { formSchemas, siteData } from "@/content/siteData";
+import { getFormSchemas, getSiteData } from "@/content/siteData";
 import { SchemaForm } from "@/src/components/forms/SchemaForm";
 import { Button } from "@/src/components/ui/Button";
 import { trackEvent } from "@/src/lib/tracking";
+import type { Locale } from "@/src/lib/i18n";
 
 interface WaitlistCardProps {
   source?: string;
+  locale: Locale;
 }
 
-export function WaitlistCard({ source = "recursos" }: WaitlistCardProps) {
+export function WaitlistCard({ source = "recursos", locale }: WaitlistCardProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const siteData = getSiteData(locale);
+  const formSchemas = getFormSchemas(locale);
 
   const handleOpen = () => {
     setIsOpen(true);
@@ -28,7 +32,11 @@ export function WaitlistCard({ source = "recursos" }: WaitlistCardProps) {
           {siteData.resources.tool.cta}
         </Button>
       ) : (
-        <SchemaForm schema={formSchemas.waitlist} hiddenFields={{ intent: "waitlist", source }} />
+        <SchemaForm
+          schema={formSchemas.waitlist}
+          hiddenFields={{ intent: "waitlist", source, locale }}
+          locale={locale}
+        />
       )}
     </div>
   );

@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { buildPageMetadata } from "@/src/lib/seo";
-import { BreadcrumbJsonLd } from "@/src/components/seo/BreadcrumbJsonLd";
-import { Section } from "@/src/components/ui/Section";
-import { ContactBlock } from "@/src/components/sections/ContactBlock";
+import { ContactPageView } from "@/src/views/ContactPageView";
 
 export const metadata: Metadata = buildPageMetadata({
+  locale: "es",
   title: "Contacto",
   description:
     "Formulario de contacto cualificado para procesos de contratación de Marketing Director, Head of Marketing o CMO.",
@@ -12,20 +11,5 @@ export const metadata: Metadata = buildPageMetadata({
 });
 
 export default function ContactoPage() {
-  return (
-    <>
-      <BreadcrumbJsonLd
-        items={[
-          { name: "Inicio", path: "/" },
-          { name: "Contacto", path: "/contacto" },
-        ]}
-      />
-
-      <Section
-        title="Contacta"
-      >
-        <ContactBlock source="contacto" />
-      </Section>
-    </>
-  );
+  return <ContactPageView locale="es" />;
 }

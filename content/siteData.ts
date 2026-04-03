@@ -1,4 +1,6 @@
 import type { FormSchema } from "@/src/types/forms";
+import type { Locale } from "@/src/lib/i18n";
+import { formSchemasEn, siteDataEn } from "@/content/siteData.en";
 
 export const SITE_URL = "https://miguelmarketer.com";
 
@@ -1084,3 +1086,24 @@ export const formSchemas: Record<string, FormSchema> = {
     ],
   },
 };
+
+export type SiteData = typeof siteData;
+export type FormSchemas = typeof formSchemas;
+
+const siteDataByLocale: Record<Locale, SiteData> = {
+  es: siteData,
+  en: siteDataEn,
+};
+
+const formSchemasByLocale: Record<Locale, FormSchemas> = {
+  es: formSchemas,
+  en: formSchemasEn,
+};
+
+export function getSiteData(locale: Locale) {
+  return siteDataByLocale[locale];
+}
+
+export function getFormSchemas(locale: Locale) {
+  return formSchemasByLocale[locale];
+}

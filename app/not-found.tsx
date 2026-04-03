@@ -1,12 +1,8 @@
-import Link from "next/link";
-import { Section } from "@/src/components/ui/Section";
+import { cookies } from "next/headers";
+import { LOCALE_COOKIE, resolveLocale } from "@/src/lib/i18n";
+import { NotFoundPageView } from "@/src/views/NotFoundPageView";
 
 export default function NotFoundPage() {
-  return (
-    <Section title="Página no encontrada" description="La ruta solicitada no existe o ya no está disponible.">
-      <Link href="/" className="btn btn--primary">
-        Volver al inicio
-      </Link>
-    </Section>
-  );
+  const locale = resolveLocale(cookies().get(LOCALE_COOKIE)?.value);
+  return <NotFoundPageView locale={locale} />;
 }

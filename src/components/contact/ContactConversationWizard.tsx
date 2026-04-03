@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { isGenericEmailDomain } from "@/src/lib/contactEmail";
 import { trackEvent } from "@/src/lib/tracking";
+import type { Locale } from "@/src/lib/i18n";
 
 type RoleType = "headhunter" | "ceo_founder" | "people_talent_hr" | "other_profile";
 type WizardStep = 1 | 2 | 3 | 4;
@@ -46,114 +47,13 @@ interface ContactWizardFormData {
 
 interface ContactConversationWizardProps {
   source?: string;
+  locale: Locale;
 }
 
 const FORM_ID = "contact_multistep_v5";
 const FORM_VERSION = "v5";
 const STORAGE_KEY = "contact_conversation_wizard_v5";
 const STEP_COUNT = 4;
-const CONTEXT_REQUIRED_MESSAGE =
-  "Has marcado una opción abierta. Añade algo de contexto para que pueda responderte con más precisión.";
-
-const ROLE_OPTIONS: RoleOption[] = [
-  {
-    value: "headhunter",
-    label: "Headhunter",
-    icon: "user-search",
-  },
-  {
-    value: "ceo_founder",
-    label: "CEO / Founder",
-    icon: "compass",
-  },
-  {
-    value: "people_talent_hr",
-    label: "People / Talent / HR",
-    icon: "users",
-  },
-  {
-    value: "other_profile",
-    label: "Otro perfil",
-    icon: "ellipsis",
-  },
-];
-
-const TIMING_OPTIONS: OptionItem[] = [
-  { label: "Inmediato", value: "immediate_0_30" },
-  { label: "1–3 meses", value: "one_to_three_months" },
-  { label: "3–6 meses", value: "three_to_six_months" },
-  { label: "Exploratorio / más adelante", value: "exploratory_later" },
-];
-
-const ROLE_FLOW_CONFIG: Record<RoleType, RoleFlowConfig> = {
-  headhunter: {
-    stepTwoTitle: "Tipo de búsqueda y timing",
-    stepTwoQuestion: "¿Qué tipo de rol estáis valorando?",
-    timingQuestion: "¿Cuál es el timing de decisión?",
-    goalMode: "single",
-    goals: [
-      {
-        label: "Marketing Director / Head of Marketing",
-        value: "marketing_director_head_of_marketing",
-      },
-      { label: "CMO", value: "cmo" },
-      {
-        label: "Perfil híbrido (marketing + growth / digital)",
-        value: "hybrid_marketing_growth_digital",
-      },
-      { label: "Otro", value: "other", requiresComment: true },
-    ],
-    stepThreeTitle: "Contexto de la búsqueda y datos de contacto",
-    stepThreePlaceholder:
-      "Tipo de compañía, alcance del rol, momento del proceso y perfil que estáis buscando.",
-  },
-  ceo_founder: {
-    stepTwoTitle: "Objetivo y timing",
-    stepTwoQuestion: "¿Qué necesitas resolver ahora desde marketing?",
-    timingQuestion: "¿Cuál es vuestro horizonte de decisión?",
-    goalMode: "multi",
-    goalHint: "Puedes marcar más de una opción.",
-    goals: [
-      { label: "Posicionamiento y propuesta de valor", value: "positioning_value_proposition" },
-      { label: "Más demanda cualificada", value: "more_qualified_demand" },
-      { label: "Alinear marketing con ventas", value: "marketing_sales_alignment" },
-      { label: "Otro", value: "other", requiresComment: true },
-    ],
-    stepThreeTitle: "Datos de contacto y contexto",
-    stepThreePlaceholder:
-      "Objetivos de negocio, punto de partida, principales fricciones y tipo de liderazgo que estáis valorando.",
-  },
-  people_talent_hr: {
-    stepTwoTitle: "Necesidad y timing",
-    stepTwoQuestion: "¿Qué necesitáis reforzar en esta búsqueda?",
-    timingQuestion: "¿Cuál es el timing previsto?",
-    goalMode: "multi",
-    goalHint: "Puedes marcar más de una opción.",
-    goals: [
-      { label: "Posicionamiento y propuesta de valor", value: "positioning_value_proposition" },
-      { label: "Más demanda cualificada", value: "more_qualified_demand" },
-      { label: "Liderazgo de marketing", value: "marketing_leadership" },
-      { label: "Otro", value: "other", requiresComment: true },
-    ],
-    stepThreeTitle: "Contexto de la búsqueda y datos de contacto",
-    stepThreePlaceholder:
-      "Contexto del equipo, alcance de la posición, retos del área y nivel de liderazgo que necesitáis incorporar o reforzar.",
-  },
-  other_profile: {
-    stepTwoTitle: "Motivo de contacto y timing",
-    stepTwoQuestion: "¿Qué te gustaría plantearme?",
-    timingQuestion: "¿En qué horizonte lo estás moviendo?",
-    goalMode: "single",
-    goals: [
-      { label: "Valorar encaje para un rol", value: "assess_role_fit" },
-      { label: "Compartir una oportunidad", value: "share_opportunity" },
-      { label: "Explorar colaboración", value: "explore_collaboration" },
-      { label: "Otro", value: "other", requiresComment: true },
-    ],
-    stepThreeTitle: "Contexto y datos de contacto",
-    stepThreePlaceholder: "Cuéntame brevemente el contexto y qué te gustaría explorar.",
-  },
-};
 
 const INITIAL_FORM_DATA: ContactWizardFormData = {
   roleType: "",
@@ -166,8 +66,259 @@ const INITIAL_FORM_DATA: ContactWizardFormData = {
   phone: "",
 };
 
-function getRoleLabel(roleType: RoleType | ""): string {
-  return ROLE_OPTIONS.find((option) => option.value === roleType)?.label || "";
+function getWizardDictionary(locale: Locale) {
+  if (locale === "en") {
+    return {
+      contextRequiredMessage:
+        "You selected an open option. Add a bit of context so I can respond with more precision.",
+      roleOptions: [
+        { value: "headhunter", label: "Recruiter / Headhunter", icon: "user-search" },
+        { value: "ceo_founder", label: "CEO / Founder", icon: "compass" },
+        { value: "people_talent_hr", label: "People / Talent / HR", icon: "users" },
+        { value: "other_profile", label: "Other profile", icon: "ellipsis" },
+      ] as RoleOption[],
+      timingOptions: [
+        { label: "Immediate", value: "immediate_0_30" },
+        { label: "1-3 months", value: "one_to_three_months" },
+        { label: "3-6 months", value: "three_to_six_months" },
+        { label: "Exploratory / later", value: "exploratory_later" },
+      ] as OptionItem[],
+      roleFlowConfig: {
+        headhunter: {
+          stepTwoTitle: "Search type and timing",
+          stepTwoQuestion: "What kind of role are you assessing?",
+          timingQuestion: "What is the decision timeline?",
+          goalMode: "single",
+          goals: [
+            { label: "Marketing Director / Head of Marketing", value: "marketing_director_head_of_marketing" },
+            { label: "CMO", value: "cmo" },
+            { label: "Hybrid profile (marketing + growth / digital)", value: "hybrid_marketing_growth_digital" },
+            { label: "Other", value: "other", requiresComment: true },
+          ],
+          stepThreeTitle: "Search context and contact details",
+          stepThreePlaceholder:
+            "Company type, scope of the role, stage of the process and the profile you are looking for.",
+        },
+        ceo_founder: {
+          stepTwoTitle: "Priority and timing",
+          stepTwoQuestion: "What do you need marketing to solve right now?",
+          timingQuestion: "What is your decision horizon?",
+          goalMode: "single",
+          goals: [
+            { label: "Positioning and value proposition", value: "positioning_value_proposition" },
+            { label: "More qualified demand", value: "more_qualified_demand" },
+            { label: "Align marketing with sales", value: "marketing_sales_alignment" },
+            { label: "Other", value: "other", requiresComment: true },
+          ],
+          stepThreeTitle: "Contact details and business context",
+          stepThreePlaceholder:
+            "Business goals, starting point, main friction points and the kind of leadership you are considering.",
+        },
+        people_talent_hr: {
+          stepTwoTitle: "Need and timing",
+          stepTwoQuestion: "What do you need to strengthen in this search?",
+          timingQuestion: "What is the expected timeline?",
+          goalMode: "single",
+          goals: [
+            { label: "Positioning and value proposition", value: "positioning_value_proposition" },
+            { label: "More qualified demand", value: "more_qualified_demand" },
+            { label: "Marketing leadership", value: "marketing_leadership" },
+            { label: "Other", value: "other", requiresComment: true },
+          ],
+          stepThreeTitle: "Search context and contact details",
+          stepThreePlaceholder:
+            "Team context, role scope, area challenges and the level of leadership you need to hire or strengthen.",
+        },
+        other_profile: {
+          stepTwoTitle: "Reason for contact and timing",
+          stepTwoQuestion: "What would you like to discuss?",
+          timingQuestion: "What timeline are you working with?",
+          goalMode: "single",
+          goals: [
+            { label: "Assess fit for a role", value: "assess_role_fit" },
+            { label: "Share an opportunity", value: "share_opportunity" },
+            { label: "Explore collaboration", value: "explore_collaboration" },
+            { label: "Other", value: "other", requiresComment: true },
+          ],
+          stepThreeTitle: "Context and contact details",
+          stepThreePlaceholder: "Briefly share the context and what you would like to explore.",
+        },
+      } as Record<RoleType, RoleFlowConfig>,
+      stepOneQuestion: "Select your profile so I can tailor my response",
+      fullNameLabel: "Full name",
+      fullNamePlaceholder: "Your full name",
+      emailLabel: "Work email",
+      phoneLabel: "Phone",
+      companyLabel: "Company",
+      companyPlaceholder: "Company",
+      companyHint:
+        "If you use a generic email address, I need the company name to understand the context better.",
+      additionalContext: "Additional context",
+      back: "Back",
+      continue: "Continue",
+      send: "Send",
+      sending: "Sending...",
+      successTitle: "Message sent",
+      successTime: "Typical response time: under 24 business hours.",
+      submitAnother: "Send another request",
+      stepOf: "Step",
+      processRoleAria: "Role in the process",
+      chooseOption: "Select an option to continue.",
+      chooseOneOption: "Select at least one option to continue.",
+      chooseTiming: "Select the timing to continue.",
+      addFullName: "Enter your full name.",
+      minChars: "Enter at least 2 characters.",
+      invalidName: "The name does not look valid.",
+      emailRequired: "Email is required.",
+      invalidEmail: "Enter a valid email address.",
+      companyRequired: "Enter the company name.",
+      phoneRequired: "Phone is required.",
+      invalidPhone: "Enter a valid phone number.",
+      successMessage: "Request sent. I will reply with a clear assessment and next steps.",
+      sendError:
+        "The form could not be submitted right now. If you prefer, message me on LinkedIn while I review it.",
+      openRole:
+        "Choose your profile",
+      headhunterStep2: "Define the type of search",
+      founderStep2: "Clarify the main priority",
+      talentStep2: "Define the search need",
+      otherStep2: "Summarize the main reason",
+      founderStep3: "Set the decision horizon",
+      headhunterStep3: "Set the decision timeline",
+      talentStep3: "Set the expected timing",
+      otherStep3: "Set the timing horizon",
+      founderStep4: "Share the business context and your details",
+      searchStep4: "Share the search context and your details",
+      genericStep4: "Share the context and your details",
+    };
+  }
+
+  return {
+    contextRequiredMessage:
+      "Has marcado una opción abierta. Añade algo de contexto para que pueda responderte con más precisión.",
+    roleOptions: [
+      { value: "headhunter", label: "Headhunter", icon: "user-search" },
+      { value: "ceo_founder", label: "CEO / Founder", icon: "compass" },
+      { value: "people_talent_hr", label: "People / Talent / HR", icon: "users" },
+      { value: "other_profile", label: "Otro perfil", icon: "ellipsis" },
+    ] as RoleOption[],
+    timingOptions: [
+      { label: "Inmediato", value: "immediate_0_30" },
+      { label: "1–3 meses", value: "one_to_three_months" },
+      { label: "3–6 meses", value: "three_to_six_months" },
+      { label: "Exploratorio / más adelante", value: "exploratory_later" },
+    ] as OptionItem[],
+    roleFlowConfig: {
+      headhunter: {
+        stepTwoTitle: "Tipo de búsqueda y timing",
+        stepTwoQuestion: "¿Qué tipo de rol estáis valorando?",
+        timingQuestion: "¿Cuál es el timing de decisión?",
+        goalMode: "single",
+        goals: [
+          { label: "Marketing Director / Head of Marketing", value: "marketing_director_head_of_marketing" },
+          { label: "CMO", value: "cmo" },
+          { label: "Perfil híbrido (marketing + growth / digital)", value: "hybrid_marketing_growth_digital" },
+          { label: "Otro", value: "other", requiresComment: true },
+        ],
+        stepThreeTitle: "Contexto de la búsqueda y datos de contacto",
+        stepThreePlaceholder:
+          "Tipo de compañía, alcance del rol, momento del proceso y perfil que estáis buscando.",
+      },
+      ceo_founder: {
+        stepTwoTitle: "Objetivo y timing",
+        stepTwoQuestion: "¿Qué necesitas resolver ahora desde marketing?",
+        timingQuestion: "¿Cuál es vuestro horizonte de decisión?",
+        goalMode: "single",
+        goals: [
+          { label: "Posicionamiento y propuesta de valor", value: "positioning_value_proposition" },
+          { label: "Más demanda cualificada", value: "more_qualified_demand" },
+          { label: "Alinear marketing con ventas", value: "marketing_sales_alignment" },
+          { label: "Otro", value: "other", requiresComment: true },
+        ],
+        stepThreeTitle: "Datos de contacto y contexto",
+        stepThreePlaceholder:
+          "Objetivos de negocio, punto de partida, principales fricciones y tipo de liderazgo que estáis valorando.",
+      },
+      people_talent_hr: {
+        stepTwoTitle: "Necesidad y timing",
+        stepTwoQuestion: "¿Qué necesitáis reforzar en esta búsqueda?",
+        timingQuestion: "¿Cuál es el timing previsto?",
+        goalMode: "single",
+        goals: [
+          { label: "Posicionamiento y propuesta de valor", value: "positioning_value_proposition" },
+          { label: "Más demanda cualificada", value: "more_qualified_demand" },
+          { label: "Liderazgo de marketing", value: "marketing_leadership" },
+          { label: "Otro", value: "other", requiresComment: true },
+        ],
+        stepThreeTitle: "Contexto de la búsqueda y datos de contacto",
+        stepThreePlaceholder:
+          "Contexto del equipo, alcance de la posición, retos del área y nivel de liderazgo que necesitáis incorporar o reforzar.",
+      },
+      other_profile: {
+        stepTwoTitle: "Motivo de contacto y timing",
+        stepTwoQuestion: "¿Qué te gustaría plantearme?",
+        timingQuestion: "¿En qué horizonte lo estás moviendo?",
+        goalMode: "single",
+        goals: [
+          { label: "Valorar encaje para un rol", value: "assess_role_fit" },
+          { label: "Compartir una oportunidad", value: "share_opportunity" },
+          { label: "Explorar colaboración", value: "explore_collaboration" },
+          { label: "Otro", value: "other", requiresComment: true },
+        ],
+        stepThreeTitle: "Contexto y datos de contacto",
+        stepThreePlaceholder: "Cuéntame brevemente el contexto y qué te gustaría explorar.",
+      },
+    } as Record<RoleType, RoleFlowConfig>,
+    stepOneQuestion: "Selecciona tu perfil para personalizar mi respuesta",
+    fullNameLabel: "Nombre y apellidos",
+    fullNamePlaceholder: "Tu nombre y apellidos",
+    emailLabel: "Email de trabajo",
+    phoneLabel: "Teléfono",
+    companyLabel: "Empresa",
+    companyPlaceholder: "Empresa",
+    companyHint:
+      "Si usas un email genérico, necesito la empresa para valorar mejor el contexto.",
+    additionalContext: "Contexto adicional",
+    back: "Volver",
+    continue: "Continuar",
+    send: "Enviar",
+    sending: "Enviando...",
+    successTitle: "Mensaje enviado",
+    successTime: "Tiempo de respuesta habitual: menos de 24h laborables.",
+    submitAnother: "Enviar otra solicitud",
+    stepOf: "Paso",
+    processRoleAria: "Rol en el proceso",
+    chooseOption: "Selecciona una opción para continuar.",
+    chooseOneOption: "Selecciona al menos una opción para continuar.",
+    chooseTiming: "Selecciona el timing para continuar.",
+    addFullName: "Introduce nombre y apellidos.",
+    minChars: "Introduce al menos 2 caracteres.",
+    invalidName: "El nombre parece no válido.",
+    emailRequired: "El email es obligatorio.",
+    invalidEmail: "Introduce un email válido.",
+    companyRequired: "Indica el nombre de la empresa.",
+    phoneRequired: "El teléfono es obligatorio.",
+    invalidPhone: "Introduce un teléfono válido.",
+    successMessage: "Solicitud enviada. Te responderé con una valoración clara y siguientes pasos.",
+    sendError:
+      "No se pudo enviar ahora mismo. Si lo prefieres, escríbeme por LinkedIn mientras lo reviso.",
+    openRole: "Elige tu perfil",
+    headhunterStep2: "Define el tipo de busqueda",
+    founderStep2: "Aclara la prioridad principal",
+    talentStep2: "Aterriza la necesidad de la busqueda",
+    otherStep2: "Resume el motivo principal",
+    founderStep3: "Marca el horizonte de decision",
+    headhunterStep3: "Define el timing de decision",
+    talentStep3: "Marca el timing previsto",
+    otherStep3: "Define el horizonte de decision",
+    founderStep4: "Comparte el contexto de negocio y tus datos",
+    searchStep4: "Comparte el contexto de la busqueda y tus datos",
+    genericStep4: "Comparte el contexto y tus datos",
+  };
+}
+
+function getRoleLabel(roleType: RoleType | "", roleOptions: RoleOption[]): string {
+  return roleOptions.find((option) => option.value === roleType)?.label || "";
 }
 
 function getLegacyRoleType(value: string): RoleType | "" {
@@ -177,34 +328,40 @@ function getLegacyRoleType(value: string): RoleType | "" {
 
   if (value === "other_profile") return value;
   if (value === "Headhunter") return "headhunter";
+  if (value === "Recruiter / Headhunter") return "headhunter";
   if (value === "CEO / Founder") return "ceo_founder";
   if (value === "People / HR" || value === "People / Talent / HR") return "people_talent_hr";
+  if (value === "Other profile") return "other_profile";
   if (value === "Otro" || value === "Otro perfil") return "other_profile";
   return "";
 }
 
-function getStepTopline(step: WizardStep, roleType: RoleType | ""): string {
-  if (step === 1) return "Elige tu perfil";
+function getStepTopline(
+  step: WizardStep,
+  roleType: RoleType | "",
+  copy: ReturnType<typeof getWizardDictionary>
+): string {
+  if (step === 1) return copy.openRole;
 
   if (step === 2) {
-    if (roleType === "headhunter") return "Define el tipo de busqueda";
-    if (roleType === "ceo_founder") return "Aclara la prioridad principal";
-    if (roleType === "people_talent_hr") return "Aterriza la necesidad de la busqueda";
-    return "Resume el motivo principal";
+    if (roleType === "headhunter") return copy.headhunterStep2;
+    if (roleType === "ceo_founder") return copy.founderStep2;
+    if (roleType === "people_talent_hr") return copy.talentStep2;
+    return copy.otherStep2;
   }
 
   if (step === 3) {
-    if (roleType === "ceo_founder") return "Marca el horizonte de decision";
-    if (roleType === "headhunter") return "Define el timing de decision";
-    if (roleType === "people_talent_hr") return "Marca el timing previsto";
-    return "Define el horizonte de decision";
+    if (roleType === "ceo_founder") return copy.founderStep3;
+    if (roleType === "headhunter") return copy.headhunterStep3;
+    if (roleType === "people_talent_hr") return copy.talentStep3;
+    return copy.otherStep3;
   }
 
-  if (roleType === "ceo_founder") return "Comparte el contexto de negocio y tus datos";
+  if (roleType === "ceo_founder") return copy.founderStep4;
   if (roleType === "headhunter" || roleType === "people_talent_hr") {
-    return "Comparte el contexto de la busqueda y tus datos";
+    return copy.searchStep4;
   }
-  return "Comparte el contexto y tus datos";
+  return copy.genericStep4;
 }
 
 function getSafeStep(value: unknown): WizardStep {
@@ -212,12 +369,15 @@ function getSafeStep(value: unknown): WizardStep {
   return 1;
 }
 
-function getRoleConfig(roleType: RoleType | ""): RoleFlowConfig {
-  if (roleType && ROLE_FLOW_CONFIG[roleType]) {
-    return ROLE_FLOW_CONFIG[roleType];
+function getRoleConfig(
+  roleType: RoleType | "",
+  roleFlowConfig: Record<RoleType, RoleFlowConfig>
+): RoleFlowConfig {
+  if (roleType && roleFlowConfig[roleType]) {
+    return roleFlowConfig[roleType];
   }
 
-  return ROLE_FLOW_CONFIG.other_profile;
+  return roleFlowConfig.other_profile;
 }
 
 function isValidEmail(email: string): boolean {
@@ -319,6 +479,7 @@ function trimPayload(values: Record<string, unknown>) {
 
 export function ContactConversationWizard({
   source = "website_contact_multistep_v5",
+  locale,
 }: ContactConversationWizardProps) {
   const pathname = usePathname();
   const startedRef = useRef(false);
@@ -332,8 +493,12 @@ export function ContactConversationWizard({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [statusMessage, setStatusMessage] = useState("");
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>("idle");
+  const copy = useMemo(() => getWizardDictionary(locale), [locale]);
 
-  const roleConfig = useMemo(() => getRoleConfig(formData.roleType), [formData.roleType]);
+  const roleConfig = useMemo(
+    () => getRoleConfig(formData.roleType, copy.roleFlowConfig),
+    [copy.roleFlowConfig, formData.roleType]
+  );
 
   const selectedGoalOptions = useMemo(
     () => roleConfig.goals.filter((goal) => formData.selectedGoals.includes(goal.value)),
@@ -420,7 +585,7 @@ export function ContactConversationWizard({
       trackEvent("abandonment_by_step", {
         step: stepRef.current,
         roleType: formDataRef.current.roleType || "unknown",
-        roleLabel: getRoleLabel(formDataRef.current.roleType),
+        roleLabel: getRoleLabel(formDataRef.current.roleType, copy.roleOptions),
         source,
         page: pathname || "/contacto",
       });
@@ -432,7 +597,7 @@ export function ContactConversationWizard({
       window.removeEventListener("pagehide", trackAbandonment);
       trackAbandonment();
     };
-  }, [pathname, source]);
+  }, [copy.roleOptions, pathname, source]);
 
   function markFormStarted() {
     if (startedRef.current) return;
@@ -483,14 +648,14 @@ export function ContactConversationWizard({
 
     trackEvent("selected_role_type", {
       roleType,
-      roleLabel: getRoleLabel(roleType),
+      roleLabel: getRoleLabel(roleType, copy.roleOptions),
       source,
     });
 
     if (step === 1) {
       trackEvent("step_1_completed", {
         roleType,
-        roleLabel: getRoleLabel(roleType),
+        roleLabel: getRoleLabel(roleType, copy.roleOptions),
         source,
       });
       setStep(2);
@@ -523,26 +688,50 @@ export function ContactConversationWizard({
 
     trackEvent("selected_goals", {
       roleType: formData.roleType || "unknown",
-      roleLabel: getRoleLabel(formData.roleType),
+      roleLabel: getRoleLabel(formData.roleType, copy.roleOptions),
       selectedGoals: nextSelectedGoals,
       selectedGoalLabels: nextLabels,
       source,
     });
+
+    if (step === 2 && nextSelectedGoals.length > 0) {
+      trackEvent("step_2_completed", {
+        roleType: formData.roleType,
+        roleLabel: getRoleLabel(formData.roleType, copy.roleOptions),
+        selectedGoals: nextSelectedGoals,
+        selectedGoalLabels: nextLabels,
+        source,
+      });
+      setStatusMessage("");
+      setStep(3);
+    }
   }
 
   function handleTimingSelect(value: string) {
     markFormStarted();
     setField("decisionTiming", value);
 
-    const timingLabel = TIMING_OPTIONS.find((option) => option.value === value)?.label || value;
+    const timingLabel = copy.timingOptions.find((option) => option.value === value)?.label || value;
 
     trackEvent("selected_timing", {
       roleType: formData.roleType || "unknown",
-      roleLabel: getRoleLabel(formData.roleType),
+      roleLabel: getRoleLabel(formData.roleType, copy.roleOptions),
       decisionTiming: value,
       decisionTimingLabel: timingLabel,
       source,
     });
+
+    if (step === 3) {
+      trackEvent("step_3_completed", {
+        roleType: formData.roleType,
+        roleLabel: getRoleLabel(formData.roleType, copy.roleOptions),
+        decisionTiming: value,
+        decisionTimingLabel: timingLabel,
+        source,
+      });
+      setStatusMessage("");
+      setStep(4);
+    }
   }
 
   function handleStepValidation(targetStep: WizardStep) {
@@ -550,49 +739,49 @@ export function ContactConversationWizard({
 
     if (targetStep === 1) {
       if (!formData.roleType) {
-        nextErrors.roleType = "Selecciona una opción para continuar.";
+        nextErrors.roleType = copy.chooseOption;
       }
     }
 
     if (targetStep === 2) {
       if (formData.selectedGoals.length === 0) {
-        nextErrors.selectedGoals = "Selecciona al menos una opción para continuar.";
+        nextErrors.selectedGoals = copy.chooseOneOption;
       }
     }
 
     if (targetStep === 3) {
       if (!formData.decisionTiming) {
-        nextErrors.decisionTiming = "Selecciona el timing para continuar.";
+        nextErrors.decisionTiming = copy.chooseTiming;
       }
     }
 
     if (targetStep === 4) {
       if (requiresContext && formData.comments.trim().length < 20) {
-        nextErrors.comments = CONTEXT_REQUIRED_MESSAGE;
+        nextErrors.comments = copy.contextRequiredMessage;
       }
 
       if (!formData.fullName.trim()) {
-        nextErrors.fullName = "Introduce nombre y apellidos.";
+        nextErrors.fullName = copy.addFullName;
       } else if (formData.fullName.trim().length < 2) {
-        nextErrors.fullName = "Introduce al menos 2 caracteres.";
+        nextErrors.fullName = copy.minChars;
       } else if (isSuspiciousName(formData.fullName)) {
-        nextErrors.fullName = "El nombre parece no válido.";
+        nextErrors.fullName = copy.invalidName;
       }
 
       if (!formData.email.trim()) {
-        nextErrors.email = "El email es obligatorio.";
+        nextErrors.email = copy.emailRequired;
       } else if (!hasValidEmail) {
-        nextErrors.email = "Introduce un email válido.";
+        nextErrors.email = copy.invalidEmail;
       }
 
       if (showCompanyField && !formData.company.trim()) {
-        nextErrors.company = "Indica el nombre de la empresa.";
+        nextErrors.company = copy.companyRequired;
       }
 
       if (!formData.phone.trim()) {
-        nextErrors.phone = "El teléfono es obligatorio.";
+        nextErrors.phone = copy.phoneRequired;
       } else if (!isValidPhone(formData.phone)) {
-        nextErrors.phone = "Introduce un teléfono válido.";
+        nextErrors.phone = copy.invalidPhone;
       }
     }
 
@@ -641,7 +830,7 @@ export function ContactConversationWizard({
     }
 
     const selectedTiming =
-      TIMING_OPTIONS.find((option) => option.value === formData.decisionTiming)?.label ||
+      copy.timingOptions.find((option) => option.value === formData.decisionTiming)?.label ||
       formData.decisionTiming;
 
     setSubmitStatus("submitting");
@@ -649,14 +838,14 @@ export function ContactConversationWizard({
 
     trackEvent("form_submitted", {
       roleType: formData.roleType || "unknown",
-      roleLabel: getRoleLabel(formData.roleType),
+      roleLabel: getRoleLabel(formData.roleType, copy.roleOptions),
       source,
       formVersion: FORM_VERSION,
     });
 
     const payload = trimPayload({
       roleType: formData.roleType,
-      roleLabel: getRoleLabel(formData.roleType),
+      roleLabel: getRoleLabel(formData.roleType, copy.roleOptions),
       selectedGoals: formData.selectedGoals,
       selectedGoalLabels: selectedGoalOptions.map((goal) => goal.label),
       decisionTiming: formData.decisionTiming,
@@ -667,6 +856,7 @@ export function ContactConversationWizard({
       email: formData.email,
       company: showCompanyField ? formData.company : "",
       phone: formData.phone,
+      locale,
       source,
       page: pathname || "/contacto",
       formVersion: FORM_VERSION,
@@ -691,13 +881,13 @@ export function ContactConversationWizard({
       if (!response.ok) {
         throw new Error(
           result.message ||
-            "No se pudo enviar ahora mismo. Si lo prefieres, escríbeme por LinkedIn mientras lo reviso."
+            copy.sendError
         );
       }
 
       submittedRef.current = true;
       setSubmitStatus("success");
-      setStatusMessage("Solicitud enviada. Te responderé con una valoración clara y siguientes pasos.");
+      setStatusMessage(copy.successMessage);
 
       if (typeof window !== "undefined") {
         window.sessionStorage.removeItem(STORAGE_KEY);
@@ -706,7 +896,7 @@ export function ContactConversationWizard({
       const message =
         error instanceof Error
           ? error.message
-          : "No se pudo enviar ahora mismo. Si lo prefieres, escríbeme por LinkedIn mientras lo reviso.";
+          : copy.sendError;
 
       setSubmitStatus("error");
       setStatusMessage(message);
@@ -733,42 +923,16 @@ export function ContactConversationWizard({
     if (step === 1) {
       trackEvent("step_1_completed", {
         roleType: formData.roleType,
-        roleLabel: getRoleLabel(formData.roleType),
+        roleLabel: getRoleLabel(formData.roleType, copy.roleOptions),
         source,
       });
       setStep(2);
       return;
     }
 
-    if (step === 2) {
-      trackEvent("step_2_completed", {
-        roleType: formData.roleType,
-        roleLabel: getRoleLabel(formData.roleType),
-        selectedGoals: formData.selectedGoals,
-        selectedGoalLabels: selectedGoalOptions.map((goal) => goal.label),
-        source,
-      });
-      setStep(3);
-      return;
-    }
-
-    if (step === 3) {
-      trackEvent("step_3_completed", {
-        roleType: formData.roleType,
-        roleLabel: getRoleLabel(formData.roleType),
-        decisionTiming: formData.decisionTiming,
-        decisionTimingLabel:
-          TIMING_OPTIONS.find((option) => option.value === formData.decisionTiming)?.label ||
-          formData.decisionTiming,
-        source,
-      });
-      setStep(4);
-      return;
-    }
-
     trackEvent("step_4_completed", {
       roleType: formData.roleType,
-      roleLabel: getRoleLabel(formData.roleType),
+      roleLabel: getRoleLabel(formData.roleType, copy.roleOptions),
       requiresContext,
       hasComments: Boolean(formData.comments.trim()),
       source,
@@ -797,13 +961,11 @@ export function ContactConversationWizard({
         <span className="contact-wizard__success-icon" aria-hidden="true">
           <WizardIcon kind="success" />
         </span>
-        <h3>Mensaje enviado</h3>
+        <h3>{copy.successTitle}</h3>
         <p>{statusMessage}</p>
-        <p className="contact-wizard__response-time">
-          Tiempo de respuesta habitual: menos de 24h laborables.
-        </p>
+        <p className="contact-wizard__response-time">{copy.successTime}</p>
         <button type="button" className="btn btn--secondary" onClick={restartWizard}>
-          Enviar otra solicitud
+          {copy.submitAnother}
         </button>
       </div>
     );
@@ -830,18 +992,20 @@ export function ContactConversationWizard({
 
       <WizardStepHeader
         step={step}
-        title={getStepTopline(step, formData.roleType)}
+        title={getStepTopline(step, formData.roleType, copy)}
         progress={(step / STEP_COUNT) * 100}
+        stepOfLabel={copy.stepOf}
       />
 
       {step === 1 ? (
         <section className="contact-wizard__step" aria-labelledby="contact-step-1-title">
-          <h3 id="contact-step-1-title">¿Cuál es tu papel en este proceso?</h3>
+          <h3 id="contact-step-1-title">{copy.stepOneQuestion}</h3>
           <RoleSelectorCards
-            options={ROLE_OPTIONS}
+            options={copy.roleOptions}
             selected={formData.roleType}
             onSelect={handleRoleSelect}
             describedBy={errors.roleType ? "contact-role-error" : undefined}
+            ariaLabel={copy.processRoleAria}
           />
           {errors.roleType ? (
             <p className="form-field__error" id="contact-role-error" role="alert">
@@ -891,7 +1055,7 @@ export function ContactConversationWizard({
 
           <div className="contact-wizard__field-wrap">
             <ChoiceChipsSingle
-              options={TIMING_OPTIONS}
+              options={copy.timingOptions}
               selectedValue={formData.decisionTiming}
               onSelect={handleTimingSelect}
               ariaLabel={roleConfig.timingQuestion}
@@ -914,12 +1078,12 @@ export function ContactConversationWizard({
             <div className="contact-wizard__contact-box">
               <div className="contact-wizard__grid contact-wizard__grid--contact">
                 <div className="form-field">
-                  <label htmlFor="contact-full-name">Nombre y apellidos</label>
+                  <label htmlFor="contact-full-name">{copy.fullNameLabel}</label>
                   <input
                     id="contact-full-name"
                     name="fullName"
                     type="text"
-                    placeholder="Tu nombre y apellidos"
+                    placeholder={copy.fullNamePlaceholder}
                     value={formData.fullName}
                     onChange={(event) => setField("fullName", event.target.value)}
                     aria-invalid={Boolean(errors.fullName)}
@@ -934,12 +1098,12 @@ export function ContactConversationWizard({
                 </div>
 
                 <div className="form-field">
-                  <label htmlFor="contact-email">Email de trabajo</label>
+                  <label htmlFor="contact-email">{copy.emailLabel}</label>
                   <input
                     id="contact-email"
                     name="email"
                     type="email"
-                    placeholder="nombre@empresa.com"
+                    placeholder={locale === "en" ? "name@company.com" : "nombre@empresa.com"}
                     value={formData.email}
                     onChange={(event) => setField("email", event.target.value)}
                     aria-invalid={Boolean(errors.email)}
@@ -954,7 +1118,7 @@ export function ContactConversationWizard({
                 </div>
 
                 <div className="form-field">
-                  <label htmlFor="contact-phone">Teléfono</label>
+                  <label htmlFor="contact-phone">{copy.phoneLabel}</label>
                   <input
                     id="contact-phone"
                     name="phone"
@@ -975,12 +1139,12 @@ export function ContactConversationWizard({
 
                 {showCompanyField ? (
                   <div className="form-field form-field--company">
-                    <label htmlFor="contact-company">Empresa</label>
+                    <label htmlFor="contact-company">{copy.companyLabel}</label>
                     <input
                       id="contact-company"
                       name="company"
                       type="text"
-                      placeholder="Empresa"
+                      placeholder={copy.companyPlaceholder}
                       value={formData.company}
                       onChange={(event) => setField("company", event.target.value)}
                       aria-invalid={Boolean(errors.company)}
@@ -990,7 +1154,7 @@ export function ContactConversationWizard({
                       autoComplete="organization"
                     />
                     <p className="form-field__hint" id="contact-company-hint">
-                      Si usas un email genérico, necesito la empresa para valorar mejor el contexto.
+                      {copy.companyHint}
                     </p>
                     {errors.company ? (
                       <p className="form-field__error" id="contact-company-error" role="alert">
@@ -1004,11 +1168,11 @@ export function ContactConversationWizard({
 
             <div className="contact-wizard__field-wrap">
               <label className="contact-wizard__field-label" htmlFor="contact-comments">
-                Contexto adicional
+                {copy.additionalContext}
               </label>
               {requiresContext ? (
                 <p className="contact-wizard__context-alert" aria-live="polite">
-                  {CONTEXT_REQUIRED_MESSAGE}
+                  {copy.contextRequiredMessage}
                 </p>
               ) : null}
               <div className="form-field">
@@ -1043,19 +1207,22 @@ export function ContactConversationWizard({
         <div className="contact-wizard__nav">
           {step > 1 ? (
             <button type="button" className="btn btn--secondary" onClick={handleBack}>
-              Volver
+              {copy.back}
             </button>
           ) : (
             <span />
           )}
-
-          <button
-            type="submit"
-            className="btn btn--primary contact-wizard__cta"
-            disabled={!isCurrentStepReady || submitStatus === "submitting"}
-          >
-            {step < 4 ? "Continuar" : submitStatus === "submitting" ? "Enviando..." : "Enviar"}
-          </button>
+          {step === 4 ? (
+            <button
+              type="submit"
+              className="btn btn--primary contact-wizard__cta"
+              disabled={!isCurrentStepReady || submitStatus === "submitting"}
+            >
+              {submitStatus === "submitting" ? copy.sending : copy.send}
+            </button>
+          ) : (
+            <span />
+          )}
         </div>
       )}
     </form>
@@ -1066,16 +1233,17 @@ interface WizardStepHeaderProps {
   step: WizardStep;
   title: string;
   progress: number;
+  stepOfLabel: string;
 }
 
-function WizardStepHeader({ step, title, progress }: WizardStepHeaderProps) {
+function WizardStepHeader({ step, title, progress, stepOfLabel }: WizardStepHeaderProps) {
   return (
     <header className="contact-wizard__header">
       <div className="contact-wizard__step-topline">
         <span className="contact-wizard__step-icon" aria-hidden="true">
           <WizardIcon kind={`step-${step}`} />
         </span>
-        <p>{`Paso ${step} de ${STEP_COUNT} · ${title}`}</p>
+        <p>{`${stepOfLabel} ${step} / ${STEP_COUNT} · ${title}`}</p>
       </div>
       <div className="contact-wizard__progress" aria-hidden="true">
         <span style={{ width: `${progress}%` }} />
@@ -1089,6 +1257,7 @@ interface RoleSelectorCardsProps {
   selected: RoleType | "";
   onSelect: (value: RoleType) => void;
   describedBy?: string;
+  ariaLabel: string;
 }
 
 function RoleSelectorCards({
@@ -1096,12 +1265,13 @@ function RoleSelectorCards({
   selected,
   onSelect,
   describedBy,
+  ariaLabel,
 }: RoleSelectorCardsProps) {
   return (
     <div
       className="role-selector"
       role="radiogroup"
-      aria-label="Rol en el proceso"
+      aria-label={ariaLabel}
       aria-describedby={describedBy}
     >
       {options.map((option) => {

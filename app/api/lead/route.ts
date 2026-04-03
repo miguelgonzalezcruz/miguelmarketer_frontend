@@ -12,6 +12,7 @@ import {
   sanitizeValues,
   type IncomingFormBody,
 } from "../../../src/lib/apiForms";
+import type { Locale } from "../../../src/lib/i18n";
 
 const RATE_LIMIT = {
   max: 8,
@@ -77,7 +78,74 @@ function renderSection(title: string, rows: string) {
   `;
 }
 
+function getLocaleFromRequest(request: NextRequest, payload?: IncomingFormBody): Locale {
+  const value = asString(payload?.values?.locale);
+  if (value === "en") return "en";
+  if (value === "es") return "es";
+
+  const acceptLanguage = request.headers.get("accept-language")?.toLowerCase() || "";
+  return acceptLanguage.startsWith("en") || acceptLanguage.includes(",en") ? "en" : "es";
+}
+
+function getCopy(locale: Locale) {
+  if (locale === "en") {
+    return {
+      rateLimited: "You have reached the temporary submission limit. Please try again in a few minutes.",
+      invalidRequest: "Invalid request format.",
+      received: "Received.",
+      invalidEmail: "Enter a valid email address.",
+      invalidFirstName: "Please review the first name. It does not look valid.",
+      invalidLastName: "Please review the last name. It does not look valid.",
+      invalidPhoneWithPrefix: "Enter a valid phone number, including country code if needed.",
+      selectGoal: "Select at least one primary goal.",
+      selectTiming: "Select the decision timeline.",
+      selectRole: "Select your role.",
+      companyRequired: "Enter the company name.",
+      contextRequired: "This field is required when you select an open option.",
+      fullNameRequired: "Enter your full name.",
+      phoneRequired: "Phone is required.",
+      selectMarketingGoal: "Select at least one marketing goal.",
+      addSearchContext: "Add search context so I can assess fit.",
+      addMoreSearchContext: "Add more search context (minimum 20 characters).",
+      nameRequired: "Name is required.",
+      messageRequired: "Message is required.",
+      addMessageContext: "Add a bit more context in the message.",
+      success: "Form submitted successfully.",
+      sendError:
+        "The form could not be submitted right now. If you prefer, message me on LinkedIn while I review it.",
+    };
+  }
+
+  return {
+    rateLimited: "Has superado el límite temporal de envíos. Inténtalo de nuevo en unos minutos.",
+    invalidRequest: "Formato de petición no válido.",
+    received: "Recibido.",
+    invalidEmail: "Introduce un email válido.",
+    invalidFirstName: "Revisa el nombre. Parece un valor no válido.",
+    invalidLastName: "Revisa los apellidos. Parece un valor no válido.",
+    invalidPhoneWithPrefix: "Introduce un teléfono válido, incluyendo prefijo si aplica.",
+    selectGoal: "Selecciona al menos un objetivo principal.",
+    selectTiming: "Selecciona el timing de decisión.",
+    selectRole: "Selecciona tu rol.",
+    companyRequired: "Indica el nombre de la empresa.",
+    contextRequired: "Este campo es necesario si seleccionas una opción abierta.",
+    fullNameRequired: "Introduce nombre y apellidos.",
+    phoneRequired: "El teléfono es obligatorio.",
+    selectMarketingGoal: "Selecciona al menos un objetivo de marketing.",
+    addSearchContext: "Añade contexto de la búsqueda para valorar el encaje.",
+    addMoreSearchContext: "Añade más contexto de la búsqueda (mínimo 20 caracteres).",
+    nameRequired: "El nombre es obligatorio.",
+    messageRequired: "El mensaje es obligatorio.",
+    addMessageContext: "Añade un poco más de contexto en el mensaje.",
+    success: "Formulario enviado correctamente.",
+    sendError:
+      "No se pudo enviar ahora mismo. Si prefieres, escríbeme por LinkedIn mientras lo reviso.",
+  };
+}
+
 export async function POST(request: NextRequest) {
+  const requestLocale = getLocaleFromRequest(request);
+  const requestCopy = getCopy(requestLocale);
   const forwardedFor = request.headers.get("x-forwarded-for");
   const ip = getClientIp(forwardedFor);
 
@@ -87,8 +155,7 @@ export async function POST(request: NextRequest) {
   if (!rateResult.allowed) {
     return NextResponse.json(
       {
-        message:
-          "Has superado el límite temporal de envíos. Inténtalo de nuevo en unos minutos.",
+        message: requestCopy.rateLimited,
       },
       {
         status: 429,
@@ -104,14 +171,17 @@ export async function POST(request: NextRequest) {
   try {
     payload = (await request.json()) as IncomingFormBody;
   } catch {
-    return NextResponse.json({ message: "Formato de petición no válido." }, { status: 400 });
+    return NextResponse.json({ message: requestCopy.invalidRequest }, { status: 400 });
   }
+
+  const locale = getLocaleFromRequest(request, payload);
+  const copy = getCopy(locale);
 
   const formId = asString(payload.formId) || "contact";
   const honeypot = asString(payload.honeypot);
 
   if (honeypot) {
-    return NextResponse.json({ message: "Recibido." }, { status: 200 });
+    return NextResponse.json({ message: copy.received }, { status: 200 });
   }
 
   const values = sanitizeValues(payload.values);
@@ -139,129 +209,95 @@ export async function POST(request: NextRequest) {
   const timestamp = new Date().toISOString();
 
   if (!email || !isValidEmail(email)) {
-    return NextResponse.json({ message: "Introduce un email válido." }, { status: 400 });
+    return NextResponse.json({ message: copy.invalidEmail }, { status: 400 });
   }
 
   if (fullName && hasSuspiciousName(fullName)) {
-    return NextResponse.json(
-      { message: "Revisa el nombre. Parece un valor no válido." },
-      { status: 400 }
-    );
+    return NextResponse.json({ message: copy.invalidFirstName }, { status: 400 });
   }
 
   if (lastName && hasSuspiciousName(lastName)) {
-    return NextResponse.json(
-      { message: "Revisa los apellidos. Parece un valor no válido." },
-      { status: 400 }
-    );
+    return NextResponse.json({ message: copy.invalidLastName }, { status: 400 });
   }
 
   if (phone && !isValidPhone(phone)) {
-    return NextResponse.json(
-      { message: "Introduce un teléfono válido, incluyendo prefijo si aplica." },
-      { status: 400 }
-    );
+    return NextResponse.json({ message: copy.invalidPhoneWithPrefix }, { status: 400 });
   }
 
   if (isMultistepV3(formId)) {
     if (!selectedGoals) {
-      return NextResponse.json(
-        { message: "Selecciona al menos un objetivo principal." },
-        { status: 400 }
-      );
+      return NextResponse.json({ message: copy.selectGoal }, { status: 400 });
     }
 
     if (!decisionTiming) {
-      return NextResponse.json({ message: "Selecciona el timing de decisión." }, { status: 400 });
+      return NextResponse.json({ message: copy.selectTiming }, { status: 400 });
     }
 
     if (!roleType) {
-      return NextResponse.json({ message: "Selecciona tu rol." }, { status: 400 });
+      return NextResponse.json({ message: copy.selectRole }, { status: 400 });
     }
 
     if (isValidEmail(email) && isGenericEmailDomain(email) && !company) {
-      return NextResponse.json({ message: "Indica el nombre de la empresa." }, { status: 400 });
+      return NextResponse.json({ message: copy.companyRequired }, { status: 400 });
     }
 
     if (requiresContext && !comments) {
-      return NextResponse.json(
-        {
-          message: "Este campo es necesario si seleccionas una opción abierta.",
-        },
-        { status: 400 }
-      );
+      return NextResponse.json({ message: copy.contextRequired }, { status: 400 });
     }
 
     if (requiresContext && comments.length < 20) {
-      return NextResponse.json(
-        {
-          message: "Este campo es necesario si seleccionas una opción abierta.",
-        },
-        { status: 400 }
-      );
+      return NextResponse.json({ message: copy.contextRequired }, { status: 400 });
     }
 
     if (!fullName) {
-      return NextResponse.json({ message: "Introduce nombre y apellidos." }, { status: 400 });
+      return NextResponse.json({ message: copy.fullNameRequired }, { status: 400 });
     }
 
     if (!phone) {
-      return NextResponse.json({ message: "El teléfono es obligatorio." }, { status: 400 });
+      return NextResponse.json({ message: copy.phoneRequired }, { status: 400 });
     }
   }
 
   if (isMultistepLegacy(formId)) {
     if (!marketingGoals) {
-      return NextResponse.json(
-        { message: "Selecciona al menos un objetivo de marketing." },
-        { status: 400 }
-      );
+      return NextResponse.json({ message: copy.selectMarketingGoal }, { status: 400 });
     }
 
     if (!decisionTiming) {
-      return NextResponse.json({ message: "Selecciona el timing de decisión." }, { status: 400 });
+      return NextResponse.json({ message: copy.selectTiming }, { status: 400 });
     }
 
     if (!roleType) {
-      return NextResponse.json({ message: "Selecciona tu rol." }, { status: 400 });
+      return NextResponse.json({ message: copy.selectRole }, { status: 400 });
     }
 
     if (isValidEmail(email) && isGenericEmailDomain(email) && !company) {
-      return NextResponse.json({ message: "Indica el nombre de la empresa." }, { status: 400 });
+      return NextResponse.json({ message: copy.companyRequired }, { status: 400 });
     }
 
     if (isHeadhunter(roleType) && !comments) {
-      return NextResponse.json(
-        { message: "Añade contexto de la búsqueda para valorar el encaje." },
-        { status: 400 }
-      );
+      return NextResponse.json({ message: copy.addSearchContext }, { status: 400 });
     }
 
     if (isHeadhunter(roleType) && comments.length < 20) {
-      return NextResponse.json(
-        { message: "Añade más contexto de la búsqueda (mínimo 20 caracteres)." },
-        { status: 400 }
-      );
+      return NextResponse.json({ message: copy.addMoreSearchContext }, { status: 400 });
     }
 
     if (!fullName) {
-      return NextResponse.json({ message: "El nombre es obligatorio." }, { status: 400 });
+      return NextResponse.json({ message: copy.nameRequired }, { status: 400 });
     }
 
     if (!phone) {
-      return NextResponse.json({ message: "El teléfono es obligatorio." }, { status: 400 });
+      return NextResponse.json({ message: copy.phoneRequired }, { status: 400 });
     }
   }
 
   if (requiresLegacyMessage(formId) && !message) {
-    return NextResponse.json({ message: "El mensaje es obligatorio." }, { status: 400 });
+    return NextResponse.json({ message: copy.messageRequired }, { status: 400 });
   }
 
   if (requiresLegacyMessage(formId) && message.length < 12) {
-    return NextResponse.json(
-      { message: "Añade un poco más de contexto en el mensaje." },
-      { status: 400 }
-    );
+    return NextResponse.json({ message: copy.addMessageContext }, { status: 400 });
   }
 
   const isV3 = isMultistepV3(formId);
@@ -421,15 +457,14 @@ export async function POST(request: NextRequest) {
       html: emailHtml,
     });
 
-    return NextResponse.json({ message: "Formulario enviado correctamente." }, { status: 200 });
+    return NextResponse.json({ message: copy.success }, { status: 200 });
   } catch (error) {
     // Keep technical details out of end-user responses.
     // eslint-disable-next-line no-console
     console.error("[api/lead] resend send failed", error);
     return NextResponse.json(
       {
-        message:
-          "No se pudo enviar ahora mismo. Si prefieres, escríbeme por LinkedIn mientras lo reviso.",
+        message: copy.sendError,
       },
       { status: 500 }
     );
