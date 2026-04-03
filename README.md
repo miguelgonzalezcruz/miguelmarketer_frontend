@@ -1,70 +1,110 @@
-# Getting Started with Create React App
+# MiguelMarketer - Next.js App Router
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Sitio personal orientado a lead generation ejecutivo para posiciones de Marketing Director / Head of Marketing / CMO.
 
-## Available Scripts
+## Stack
 
-In the project directory, you can run:
+- Next.js 13 (App Router)
+- TypeScript
+- Formularios config-driven
+- API routes con Resend
 
-### `npm start`
+## Scripts
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+npm run dev
+npm run build
+npm run start
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Variables de entorno
 
-### `npm test`
+Copia `.env.example` a `.env.local` y completa:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+RESEND_API_KEY=...
+CONTACT_FROM_EMAIL=Web Miguel <contacto@miguelmarketer.com>
+CONTACT_TO_EMAIL=miguelgonzalezcruz@icloud.com
+```
 
-### `npm run build`
+## Contenido (single source of truth)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Todo el contenido principal está en:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- `content/siteData.ts`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Cómo actualizar KPIs
 
-### `npm run eject`
+Editar:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- `siteData.kpisHome` (barra de prueba en Home)
+- `siteData.kpisAll` (listado completo en `/prueba`)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Importante: en KPIs y casos no incluir nombres de empresa.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Cómo actualizar casos
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Editar:
 
-## Learn More
+- `siteData.caseStudies`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Cada caso usa `slug` para generar la ruta `/casos/[slug]`.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Cómo actualizar experiencia
 
-### Code Splitting
+Editar:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- `siteData.experience`
 
-### Analyzing the Bundle Size
+Aquí sí pueden aparecer nombres de empresa.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Cómo actualizar PDF del lead magnet
 
-### Making a Progressive Web App
+1. Sube el PDF final en:
+   - `public/resources/perfil-ejecutivo.pdf`
+2. Verifica URL en:
+   - `siteData.resources.leadMagnet.downloadUrl`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Cómo actualizar formularios
 
-### Advanced Configuration
+Esquemas en:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- `formSchemas` dentro de `content/siteData.ts`
 
-### Deployment
+El renderer está en:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- `src/components/forms/SchemaForm.tsx`
 
-### `npm run build` fails to minify
+La estructura está preparada para evolucionar a multi-step sin refactor de datos.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Endpoints
+
+- `POST /api/lead`
+  - contacto principal y waitlist
+  - validación + honeypot + rate limit por IP
+- `POST /api/pdf-gate`
+  - gate de descarga PDF
+  - validación + honeypot + rate limit por IP
+
+## Tracking (vendor-agnostic)
+
+Wrapper en:
+
+- `src/lib/tracking.ts`
+
+Eventos implementados:
+
+- `cta_click`
+- `form_submit`
+- `case_open`
+- `resource_open`
+
+En desarrollo hace `console.log`; se puede sustituir por GA4, Segment, etc.
+
+## SEO
+
+- Metadata única por página
+- Canonical + OG
+- JSON-LD global (Person + WebSite)
+- JSON-LD Breadcrumb por ruta
+- JSON-LD CreativeWork en detalle de casos

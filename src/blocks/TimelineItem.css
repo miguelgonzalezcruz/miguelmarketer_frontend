@@ -6,9 +6,9 @@
 }
 
 .timeline-item-content {
-  border-radius: 18px;
-  background: #ffffff;
-  box-shadow: none;
+  border-radius: 24px;
+  background: #f8fbfd;
+  box-shadow: 0 12px 35px rgba(16, 42, 67, 0.08);
   border: 1px solid #d8e2ec;
   padding: 18px 20px 20px;
 }
@@ -96,13 +96,13 @@
   min-width: 62px;
   border-radius: 50%;
   border: 2px solid #d9e4ef;
-  background: #ffffff;
+  background: #f8fbfd;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   padding: 7px;
-  box-shadow: none;
+  box-shadow: 0 12px 35px rgba(16, 42, 67, 0.08);
 }
 
 .timeline-logo img {
