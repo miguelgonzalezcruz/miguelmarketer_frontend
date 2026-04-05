@@ -927,6 +927,18 @@ export function ContactConversationWizard({
       return;
     }
 
+    if (step === 2) {
+      trackEvent("step_2_completed", {
+        roleType: formData.roleType,
+        roleLabel: getRoleLabel(formData.roleType, copy.roleOptions),
+        selectedGoals: formData.selectedGoals,
+        selectedGoalLabels: selectedGoalOptions.map((goal) => goal.label),
+        source,
+      });
+      setStep(3);
+      return;
+    }
+
     trackEvent("step_4_completed", {
       roleType: formData.roleType,
       roleLabel: getRoleLabel(formData.roleType, copy.roleOptions),

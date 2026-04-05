@@ -1,6 +1,6 @@
 import Image from "next/image";
 import profileImage from "@/src/images/history/miguelmarketer_.png";
-import musicImage from "@/src/images/history/CarmenSupermarketConcierto_1.jpg";
+import musicImage from "@/src/images/history/Miguel_zafarraya.jpg";
 import { getSiteData } from "@/content/siteData";
 import type { Locale } from "@/src/lib/i18n";
 import { getLocalizedPath } from "@/src/lib/routes";
@@ -43,7 +43,7 @@ export function HomePageView({ locale }: HomePageViewProps) {
           impact: "Impact",
           viewAll: "View full experience",
           contact: "Contact",
-          liveAlt: "Carmen Supermarket performing live",
+          liveAlt: "Miguel in Zafarraya",
           seeMore: "See more",
           seeLess: "See less",
         }
@@ -58,7 +58,7 @@ export function HomePageView({ locale }: HomePageViewProps) {
           impact: "Impacto",
           viewAll: "Ver experiencia completa",
           contact: "Contacta",
-          liveAlt: "Carmen Supermarket en directo",
+          liveAlt: "Miguel en Zafarraya",
           seeMore: "Ver más",
           seeLess: "Ver menos",
         };
