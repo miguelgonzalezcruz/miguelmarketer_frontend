@@ -141,21 +141,6 @@ export function SiteHeader({ locale }: SiteHeaderProps) {
           <Image src={profileImage} alt="Miguel González" width={40} height={40} />
         </div>
       </Container>
-      <Container>
-        <nav className="site-header__nav site-header__nav--mobile" aria-label={copy.navLabel}>
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`site-header__mobile-link ${
-                isActivePath(item.href) ? "site-header__mobile-link--active" : ""
-              }`.trim()}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-      </Container>
       <div className="site-header__line" aria-hidden="true" />
     </header>
   );
