@@ -3315,6 +3315,8 @@ img {
     gap: 20px;
     padding-top: 28px;
     padding-bottom: 34px;
+    padding-left: max(8px, env(safe-area-inset-left));
+    padding-right: max(8px, env(safe-area-inset-right));
   }
 
   .site-footer__nav {
