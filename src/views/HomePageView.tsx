@@ -13,6 +13,7 @@ import { Container } from "@/src/components/ui/Container";
 import { Section } from "@/src/components/ui/Section";
 import { ContactBlock } from "@/src/components/sections/ContactBlock";
 import { HowIHelpSticky } from "@/src/components/sections/HowIHelpSticky";
+import { CollapsibleCaseCard } from "@/src/components/cases/CollapsibleCaseCard";
 
 interface HomePageViewProps {
   locale: Locale;
@@ -43,6 +44,8 @@ export function HomePageView({ locale }: HomePageViewProps) {
           viewAll: "View full experience",
           contact: "Contact",
           liveAlt: "Carmen Supermarket performing live",
+          seeMore: "See more",
+          seeLess: "See less",
         }
       : {
           breadcrumbHome: "Inicio",
@@ -56,6 +59,8 @@ export function HomePageView({ locale }: HomePageViewProps) {
           viewAll: "Ver experiencia completa",
           contact: "Contacta",
           liveAlt: "Carmen Supermarket en directo",
+          seeMore: "Ver más",
+          seeLess: "Ver menos",
         };
 
   const heroProofLogos = [
@@ -232,43 +237,47 @@ export function HomePageView({ locale }: HomePageViewProps) {
             const role = override?.role ?? item.role;
 
             return (
-              <Card key={item.slug} className="case-card case-card--overview">
-                <div className="case-card__top case-card__top--overview">
-                  <Badge>{item.tag}</Badge>
-                  <div className={`case-card__logo case-card__logo--${item.slug}`} aria-hidden="true">
-                    {item.logo ? (
-                      <Image
-                        src={item.logo}
-                        alt={`${company} logo`}
-                        width={120}
-                        height={42}
-                        className="case-card__logo-image"
-                      />
-                    ) : (
-                      <span className="case-card__logo-fallback">{getCompanyInitials(company)}</span>
-                    )}
+              <CollapsibleCaseCard
+                key={item.slug}
+                moreLabel={copy.seeMore}
+                lessLabel={copy.seeLess}
+                top={
+                  <div className="case-card__top case-card__top--overview">
+                    <Badge>{item.tag}</Badge>
+                    <div className={`case-card__logo case-card__logo--${item.slug}`} aria-hidden="true">
+                      {item.logo ? (
+                        <Image
+                          src={item.logo}
+                          alt={`${company} logo`}
+                          width={120}
+                          height={42}
+                          className="case-card__logo-image"
+                        />
+                      ) : (
+                        <span className="case-card__logo-fallback">{getCompanyInitials(company)}</span>
+                      )}
+                    </div>
                   </div>
-                </div>
-                <div className="case-card__body case-card__body--overview">
-                  <h3>{item.title}</h3>
-                  <p className="case-card__block">
-                    <strong>{copy.challenge}:</strong> {item.challenge}
-                  </p>
-                  {item.approach ? (
-                    <p className="case-card__block">
-                      <strong>{copy.approach}:</strong> {item.approach}
-                    </p>
-                  ) : null}
-                  <p className="case-card__block">
-                    <strong>{copy.impact}:</strong> {item.impact}
-                  </p>
-                </div>
-                <div className="case-card__credentials">
+                }
+                title={item.title}
+                footer={
                   <p className="case-card__signature">
                     {company} · {role} · {item.years}
                   </p>
-                </div>
-              </Card>
+                }
+              >
+                <p className="case-card__block">
+                  <strong>{copy.challenge}:</strong> {item.challenge}
+                </p>
+                {item.approach ? (
+                  <p className="case-card__block">
+                    <strong>{copy.approach}:</strong> {item.approach}
+                  </p>
+                ) : null}
+                <p className="case-card__block">
+                  <strong>{copy.impact}:</strong> {item.impact}
+                </p>
+              </CollapsibleCaseCard>
             );
           })}
         </div>

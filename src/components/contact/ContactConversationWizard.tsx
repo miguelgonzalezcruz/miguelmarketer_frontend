@@ -88,7 +88,8 @@ function getWizardDictionary(locale: Locale) {
           stepTwoTitle: "Search type and timing",
           stepTwoQuestion: "What kind of role are you assessing?",
           timingQuestion: "What is the decision timeline?",
-          goalMode: "single",
+          goalMode: "multi",
+          goalHint: "You can select more than one option.",
           goals: [
             { label: "Marketing Director / Head of Marketing", value: "marketing_director_head_of_marketing" },
             { label: "CMO", value: "cmo" },
@@ -103,7 +104,8 @@ function getWizardDictionary(locale: Locale) {
           stepTwoTitle: "Priority and timing",
           stepTwoQuestion: "What do you need marketing to solve right now?",
           timingQuestion: "What is your decision horizon?",
-          goalMode: "single",
+          goalMode: "multi",
+          goalHint: "You can select more than one option.",
           goals: [
             { label: "Positioning and value proposition", value: "positioning_value_proposition" },
             { label: "More qualified demand", value: "more_qualified_demand" },
@@ -118,7 +120,8 @@ function getWizardDictionary(locale: Locale) {
           stepTwoTitle: "Need and timing",
           stepTwoQuestion: "What do you need to strengthen in this search?",
           timingQuestion: "What is the expected timeline?",
-          goalMode: "single",
+          goalMode: "multi",
+          goalHint: "You can select more than one option.",
           goals: [
             { label: "Positioning and value proposition", value: "positioning_value_proposition" },
             { label: "More qualified demand", value: "more_qualified_demand" },
@@ -133,7 +136,8 @@ function getWizardDictionary(locale: Locale) {
           stepTwoTitle: "Reason for contact and timing",
           stepTwoQuestion: "What would you like to discuss?",
           timingQuestion: "What timeline are you working with?",
-          goalMode: "single",
+          goalMode: "multi",
+          goalHint: "You can select more than one option.",
           goals: [
             { label: "Assess fit for a role", value: "assess_role_fit" },
             { label: "Share an opportunity", value: "share_opportunity" },
@@ -213,7 +217,8 @@ function getWizardDictionary(locale: Locale) {
         stepTwoTitle: "Tipo de búsqueda y timing",
         stepTwoQuestion: "¿Qué tipo de rol estáis valorando?",
         timingQuestion: "¿Cuál es el timing de decisión?",
-        goalMode: "single",
+        goalMode: "multi",
+        goalHint: "Puedes marcar más de una opción.",
         goals: [
           { label: "Marketing Director / Head of Marketing", value: "marketing_director_head_of_marketing" },
           { label: "CMO", value: "cmo" },
@@ -228,7 +233,8 @@ function getWizardDictionary(locale: Locale) {
         stepTwoTitle: "Objetivo y timing",
         stepTwoQuestion: "¿Qué necesitas resolver ahora desde marketing?",
         timingQuestion: "¿Cuál es vuestro horizonte de decisión?",
-        goalMode: "single",
+        goalMode: "multi",
+        goalHint: "Puedes marcar más de una opción.",
         goals: [
           { label: "Posicionamiento y propuesta de valor", value: "positioning_value_proposition" },
           { label: "Más demanda cualificada", value: "more_qualified_demand" },
@@ -243,7 +249,8 @@ function getWizardDictionary(locale: Locale) {
         stepTwoTitle: "Necesidad y timing",
         stepTwoQuestion: "¿Qué necesitáis reforzar en esta búsqueda?",
         timingQuestion: "¿Cuál es el timing previsto?",
-        goalMode: "single",
+        goalMode: "multi",
+        goalHint: "Puedes marcar más de una opción.",
         goals: [
           { label: "Posicionamiento y propuesta de valor", value: "positioning_value_proposition" },
           { label: "Más demanda cualificada", value: "more_qualified_demand" },
@@ -258,7 +265,8 @@ function getWizardDictionary(locale: Locale) {
         stepTwoTitle: "Motivo de contacto y timing",
         stepTwoQuestion: "¿Qué te gustaría plantearme?",
         timingQuestion: "¿En qué horizonte lo estás moviendo?",
-        goalMode: "single",
+        goalMode: "multi",
+        goalHint: "Puedes marcar más de una opción.",
         goals: [
           { label: "Valorar encaje para un rol", value: "assess_role_fit" },
           { label: "Compartir una oportunidad", value: "share_opportunity" },
@@ -694,17 +702,6 @@ export function ContactConversationWizard({
       source,
     });
 
-    if (step === 2 && nextSelectedGoals.length > 0) {
-      trackEvent("step_2_completed", {
-        roleType: formData.roleType,
-        roleLabel: getRoleLabel(formData.roleType, copy.roleOptions),
-        selectedGoals: nextSelectedGoals,
-        selectedGoalLabels: nextLabels,
-        source,
-      });
-      setStatusMessage("");
-      setStep(3);
-    }
   }
 
   function handleTimingSelect(value: string) {
@@ -1212,13 +1209,13 @@ export function ContactConversationWizard({
           ) : (
             <span />
           )}
-          {step === 4 ? (
+          {step === 2 || step === 4 ? (
             <button
               type="submit"
               className="btn btn--primary contact-wizard__cta"
               disabled={!isCurrentStepReady || submitStatus === "submitting"}
             >
-              {submitStatus === "submitting" ? copy.sending : copy.send}
+              {step === 2 ? copy.continue : submitStatus === "submitting" ? copy.sending : copy.send}
             </button>
           ) : (
             <span />

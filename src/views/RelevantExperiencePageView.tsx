@@ -7,6 +7,7 @@ import { Section } from "@/src/components/ui/Section";
 import { Card } from "@/src/components/ui/Card";
 import { Badge } from "@/src/components/ui/Badge";
 import { Button } from "@/src/components/ui/Button";
+import { CollapsibleCaseCard } from "@/src/components/cases/CollapsibleCaseCard";
 
 interface RelevantExperiencePageViewProps {
   locale: Locale;
@@ -38,6 +39,8 @@ export function RelevantExperiencePageView({ locale }: RelevantExperiencePageVie
             "Would you like a clearer view of my experience and how it could connect to your company's challenges?",
           cta: "Let's talk",
           degree: "Degree in Advertising and Public Relations",
+          seeMore: "See more",
+          seeLess: "See less",
         }
       : {
           home: "Inicio",
@@ -52,6 +55,8 @@ export function RelevantExperiencePageView({ locale }: RelevantExperiencePageVie
             "¿Te interesa conocer mejor mi experiencia y cómo puede conectar con los retos de tu empresa?",
           cta: "Hablemos",
           degree: "Licenciatura en Publicidad y Relaciones Públicas",
+          seeMore: "Ver más",
+          seeLess: "Ver menos",
         };
 
   return (
@@ -66,45 +71,49 @@ export function RelevantExperiencePageView({ locale }: RelevantExperiencePageVie
       <Section title={copy.page}>
         <div className="case-grid case-grid--overview">
           {siteData.caseSummaries.map((item) => (
-            <Card key={item.slug} className="case-card case-card--overview">
-              <div className="case-card__top case-card__top--overview">
-                <Badge>{item.tag}</Badge>
-                <div className={`case-card__logo case-card__logo--${item.slug}`} aria-hidden="true">
-                  {item.logo ? (
-                    <Image
-                      src={item.logo}
-                      alt={`${item.company} logo`}
-                      width={120}
-                      height={42}
-                      className="case-card__logo-image"
-                    />
-                  ) : (
-                    <span className="case-card__logo-fallback">
-                      {getCompanyInitials(item.company)}
-                    </span>
-                  )}
+            <CollapsibleCaseCard
+              key={item.slug}
+              moreLabel={copy.seeMore}
+              lessLabel={copy.seeLess}
+              top={
+                <div className="case-card__top case-card__top--overview">
+                  <Badge>{item.tag}</Badge>
+                  <div className={`case-card__logo case-card__logo--${item.slug}`} aria-hidden="true">
+                    {item.logo ? (
+                      <Image
+                        src={item.logo}
+                        alt={`${item.company} logo`}
+                        width={120}
+                        height={42}
+                        className="case-card__logo-image"
+                      />
+                    ) : (
+                      <span className="case-card__logo-fallback">
+                        {getCompanyInitials(item.company)}
+                      </span>
+                    )}
+                  </div>
                 </div>
-              </div>
-              <div className="case-card__body case-card__body--overview">
-                <h3>{item.title}</h3>
-                <p className="case-card__block">
-                  <strong>{copy.challenge}:</strong> {item.challenge}
-                </p>
-                {item.approach ? (
-                  <p className="case-card__block">
-                    <strong>{copy.approach}:</strong> {item.approach}
-                  </p>
-                ) : null}
-                <p className="case-card__block">
-                  <strong>{copy.impact}:</strong> {item.impact}
-                </p>
-              </div>
-              <div className="case-card__credentials">
+              }
+              title={item.title}
+              footer={
                 <p className="case-card__signature">
                   {item.company} · {item.role} · {item.years}
                 </p>
-              </div>
-            </Card>
+              }
+            >
+              <p className="case-card__block">
+                <strong>{copy.challenge}:</strong> {item.challenge}
+              </p>
+              {item.approach ? (
+                <p className="case-card__block">
+                  <strong>{copy.approach}:</strong> {item.approach}
+                </p>
+              ) : null}
+              <p className="case-card__block">
+                <strong>{copy.impact}:</strong> {item.impact}
+              </p>
+            </CollapsibleCaseCard>
           ))}
 
           <Card className="case-card case-card--overview case-card--education">

@@ -1115,6 +1115,14 @@ img {
   line-height: 1.5;
 }
 
+.case-card__mobile-toggle {
+  display: none;
+}
+
+.case-card__mobile-panel {
+  display: block;
+}
+
 .case-card--overview .case-card__credentials {
   margin-top: 24px;
   padding-top: 20px;
@@ -3062,6 +3070,36 @@ img {
 
   .case-card__body--overview {
     gap: 14px;
+  }
+
+  .case-card--collapsible .case-card__mobile-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-height: 32px;
+    padding: 0 10px;
+    border: 1px solid rgba(16, 42, 67, 0.12);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.72);
+    color: #26415e;
+    font: inherit;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  .case-card--collapsible[data-expanded="false"] .case-card__mobile-panel {
+    display: none;
+  }
+
+  .case-card--collapsible[data-expanded="false"] .case-card__body--overview {
+    gap: 10px;
+  }
+
+  .case-card--collapsible[data-expanded="false"] {
+    padding-top: 18px;
+    padding-bottom: 18px;
   }
 
   .case-card__body--education {
