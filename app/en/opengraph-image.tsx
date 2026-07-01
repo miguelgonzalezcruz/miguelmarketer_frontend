@@ -37,22 +37,6 @@ export default function OpenGraphImage() {
           >
             Miguel González
           </div>
-          <div
-            style={{
-              width: 118,
-              height: 118,
-              border: "3px solid #101010",
-              borderRadius: 999,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontFamily: "Arial, sans-serif",
-              fontSize: 34,
-              fontWeight: 700,
-            }}
-          >
-            MG
-          </div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>

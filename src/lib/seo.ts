@@ -8,7 +8,7 @@ export function absoluteUrl(pathname: string) {
 }
 
 export function getSocialImagePath(locale: Locale) {
-  return locale === "en" ? "/en/opengraph-image" : "/opengraph-image";
+  return locale === "en" ? "/en/opengraph-image?v=20260701" : "/opengraph-image?v=20260701";
 }
 
 export function buildPageMetadata(input: {
