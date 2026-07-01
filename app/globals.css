@@ -4658,6 +4658,22 @@ a {
     border-right: 0;
   }
 
+  .proof-grid--featured .kpi-stat {
+    gap: 6px;
+    justify-content: flex-start;
+    min-height: 0;
+    padding: 18px 0;
+  }
+
+  .proof-grid--featured .kpi-stat__value {
+    margin-bottom: 4px;
+  }
+
+  .proof-grid--featured .kpi-stat__label,
+  .proof-grid--featured .kpi-stat__note {
+    margin-top: 2px;
+  }
+
   .how-help__card-inner {
     grid-template-columns: 1fr;
   }
