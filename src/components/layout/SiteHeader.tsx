@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -16,10 +15,11 @@ interface SiteHeaderProps {
 }
 
 export function SiteHeader({ locale }: SiteHeaderProps) {
-  const [showProfile, setShowProfile] = useState(false);
+  // const [showProfile, setShowProfile] = useState(false);
+  const showProfile = true;
   const pathname = usePathname();
   const siteData = getSiteData(locale);
-  const homePath = getLocalizedPath(locale, "home");
+  // const homePath = getLocalizedPath(locale, "home");
   const copy =
     locale === "en"
       ? {
@@ -44,6 +44,7 @@ export function SiteHeader({ locale }: SiteHeaderProps) {
     return pathname === href || pathname.startsWith(`${href}/`);
   };
 
+  /*
   useEffect(() => {
     if (pathname !== homePath) {
       setShowProfile(false);
@@ -90,6 +91,7 @@ export function SiteHeader({ locale }: SiteHeaderProps) {
       if (retryTimer) clearTimeout(retryTimer);
     };
   }, [homePath, pathname]);
+  */
 
   return (
     <header className="site-header">

@@ -1,5 +1,4 @@
 import Image from "next/image";
-import profileImage from "@/src/images/history/miguelmarketer_.png";
 import musicImage from "@/src/images/history/Miguel_zafarraya.jpg";
 import { getSiteData } from "@/content/siteData";
 import type { Locale } from "@/src/lib/i18n";
@@ -161,7 +160,7 @@ export function HomePageView({ locale }: HomePageViewProps) {
       <Section className="section--hero">
         <div className="hero hero--minimal">
           <div className="hero__content">
-            <div className="hero__intro-grid">
+            <div className="hero__intro-grid" id="hero-profile-anchor">
               <div className="hero__headline-stack">
                 <h1 className="hero__title">
                   <span className="text-gradient">{siteData.hero.headline}</span>
@@ -169,13 +168,6 @@ export function HomePageView({ locale }: HomePageViewProps) {
                 <h2 className="hero__subheadline">
                   <span className="hero__subheadline-line">{siteData.hero.subheadline}</span>
                 </h2>
-              </div>
-              <div className="hero__aside" id="hero-profile-anchor">
-                <div className="hero__profile">
-                  <div className="hero__avatar-wrap hero__avatar-wrap--hero">
-                    <Image src={profileImage} alt="Miguel González" width={220} height={220} priority />
-                  </div>
-                </div>
               </div>
             </div>
 
@@ -331,13 +323,7 @@ export function HomePageView({ locale }: HomePageViewProps) {
       </Section>
 
       <Container>
-        <hr
-          style={{
-            border: 0,
-            borderTop: "1px solid #d6dee6",
-            margin: "0 0 32px",
-          }}
-        />
+        <hr className="home-closing-rule" />
       </Container>
     </>
   );

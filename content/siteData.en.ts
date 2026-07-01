@@ -801,7 +801,7 @@ export const siteDataEn: SiteData = {
   },
   music: {
     title: "Off the clock",
-    copy: "I also play drums in Carmen Supermarket (pop-rock, Mallorca). Music reminds me of the same thing good marketing does: rhythm, consistency and teamwork.",
+    copy: "I also play drums in Carmen Supermarket, a pop-rock band from Mallorca. Maybe that is why I understand marketing as a combination of rhythm, consistency and teamwork.",
     links: [
       { label: "Official site", href: "https://www.carmensupermarket.com/" },
       {

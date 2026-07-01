@@ -143,7 +143,7 @@ export const siteData = {
     {
       id: "revenue-target",
       value: "+55%",
-      label: "Sobre objetivo de ingresos año 1",
+      label: "Sobre objetivo de ingresos",
     },
     {
       id: "revenue-growth",
@@ -869,7 +869,7 @@ export const siteData = {
   } satisfies { leadMagnet: ResourceItem; tool: ResourceItem },
   music: {
     title: "Off the clock",
-    copy: "También soy batería en Carmen Supermarket (pop-rock, Mallorca). La música me recuerda lo mismo que el marketing bien hecho: ritmo, consistencia y equipo.",
+    copy: "También soy batería en Carmen Supermarket, una banda de pop-rock de Mallorca. Quizá por eso entiendo el marketing como una combinación de ritmo, consistencia y trabajo en equipo.",
     links: [
       { label: "Web oficial", href: "https://www.carmensupermarket.com/" },
       {

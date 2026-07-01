@@ -660,14 +660,8 @@ export function ContactConversationWizard({
       source,
     });
 
-    if (step === 1) {
-      trackEvent("step_1_completed", {
-        roleType,
-        roleLabel: getRoleLabel(roleType, copy.roleOptions),
-        source,
-      });
-      setStep(2);
-    }
+    // Keep the user on step 1 after selection so the active profile is visible.
+    // Step completion is tracked when the user clicks Continue.
   }
 
   function handleGoalSelect(value: string) {
@@ -1212,28 +1206,26 @@ export function ContactConversationWizard({
         </p>
       ) : null}
 
-      {step === 1 ? null : (
-        <div className="contact-wizard__nav">
-          {step > 1 ? (
-            <button type="button" className="btn btn--secondary" onClick={handleBack}>
-              {copy.back}
-            </button>
-          ) : (
-            <span />
-          )}
-          {step === 2 || step === 4 ? (
-            <button
-              type="submit"
-              className="btn btn--primary contact-wizard__cta"
-              disabled={!isCurrentStepReady || submitStatus === "submitting"}
-            >
-              {step === 2 ? copy.continue : submitStatus === "submitting" ? copy.sending : copy.send}
-            </button>
-          ) : (
-            <span />
-          )}
-        </div>
-      )}
+      <div className="contact-wizard__nav">
+        {step > 1 ? (
+          <button type="button" className="btn btn--secondary" onClick={handleBack}>
+            {copy.back}
+          </button>
+        ) : (
+          <span />
+        )}
+        {step === 1 || step === 2 || step === 4 ? (
+          <button
+            type="submit"
+            className="btn btn--primary contact-wizard__cta"
+            disabled={!isCurrentStepReady || submitStatus === "submitting"}
+          >
+            {step === 4 ? (submitStatus === "submitting" ? copy.sending : copy.send) : copy.continue}
+          </button>
+        ) : (
+          <span />
+        )}
+      </div>
     </form>
   );
 }
