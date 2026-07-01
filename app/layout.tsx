@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import "./globals.css";
 import { SITE_URL, getSiteData } from "@/content/siteData";
+import { absoluteUrl, getSocialImagePath } from "@/src/lib/seo";
 import { SiteHeader } from "@/src/components/layout/SiteHeader";
 import { SiteFooter } from "@/src/components/layout/SiteFooter";
 import { JsonLd } from "@/src/components/seo/JsonLd";
@@ -14,6 +15,13 @@ export function generateMetadata(): Metadata {
     locale === "en"
       ? "Executive profile of Miguel González: positioning, demand and conversion aligned with business results."
       : "Perfil ejecutivo de Miguel González: posicionamiento, demanda y conversión conectados a resultados de negocio.";
+  const socialTitle = `${siteData.person.displayName} | ${siteData.person.jobTitle}`;
+  const socialImage = {
+    url: absoluteUrl(getSocialImagePath(locale)),
+    width: 1200,
+    height: 630,
+    alt: `${siteData.person.displayName}, ${siteData.person.jobTitle}`,
+  };
 
   return {
     metadataBase: new URL(SITE_URL),
@@ -35,6 +43,13 @@ export function generateMetadata(): Metadata {
         locale === "en"
           ? "Marketing leadership for companies that need predictable growth and high-level execution."
           : "Marketing leadership para compañías que necesitan crecimiento predecible y ejecución de alto nivel.",
+      images: [socialImage],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: socialTitle,
+      description,
+      images: [socialImage.url],
     },
   };
 }

@@ -8,6 +8,9 @@ export const metadata: Metadata = buildPageMetadata({
   description:
     "Executive profile of Miguel González for CEOs and recruiters looking for a marketing leader with sound judgment, business perspective and growth impact.",
   pathname: "/en",
+  socialTitle: "Miguel González | Marketing Director",
+  socialDescription:
+    "Executive marketing profile: positioning, demand and conversion aligned with business outcomes.",
 });
 
 export default function HomePageEn() {

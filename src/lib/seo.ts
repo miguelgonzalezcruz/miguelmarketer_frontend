@@ -7,6 +7,10 @@ export function absoluteUrl(pathname: string) {
   return `${SITE_URL}${normalized}`;
 }
 
+export function getSocialImagePath(locale: Locale) {
+  return locale === "en" ? "/en/opengraph-image" : "/opengraph-image";
+}
+
 export function buildPageMetadata(input: {
   locale?: Locale;
   title: string;
@@ -14,10 +18,23 @@ export function buildPageMetadata(input: {
   pathname: string;
   type?: "website" | "article";
   canonical?: string;
+  socialTitle?: string;
+  socialDescription?: string;
 }): Metadata {
   const url = absoluteUrl(input.pathname);
   const locale = input.locale ?? "es";
   const siteData = getSiteData(locale);
+  const socialTitle = input.socialTitle ?? input.title;
+  const socialDescription = input.socialDescription ?? input.description;
+  const socialImage = {
+    url: absoluteUrl(getSocialImagePath(locale)),
+    width: 1200,
+    height: 630,
+    alt:
+      locale === "en"
+        ? "Miguel González, Marketing Director"
+        : "Miguel González, Marketing Director",
+  };
 
   return {
     title: input.title,
@@ -26,17 +43,19 @@ export function buildPageMetadata(input: {
       canonical: input.canonical ?? input.pathname,
     },
     openGraph: {
-      title: input.title,
-      description: input.description,
+      title: socialTitle,
+      description: socialDescription,
       url,
       siteName: siteData.person.displayName,
       type: input.type ?? "website",
       locale: locale === "en" ? "en_US" : "es_ES",
+      images: [socialImage],
     },
     twitter: {
       card: "summary_large_image",
-      title: input.title,
-      description: input.description,
+      title: socialTitle,
+      description: socialDescription,
+      images: [socialImage.url],
     },
   };
 }
