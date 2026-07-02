@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/server";
 
 export const runtime = "edge";
-export const alt = "Miguel González, Marketing Director";
+export const alt = "Miguel González, Marketing Director & Growth Leader";
 export const size = {
   width: 1200,
   height: 630,
@@ -41,7 +41,7 @@ export default function OpenGraphImage() {
 
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ fontSize: 112, lineHeight: 0.92, letterSpacing: "-0.02em", maxWidth: 910 }}>
-            Marketing Director
+            Marketing Director & Growth Leader
           </div>
           <div
             style={{

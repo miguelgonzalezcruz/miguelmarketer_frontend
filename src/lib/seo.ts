@@ -14,6 +14,7 @@ export function getSocialImagePath(locale: Locale) {
 export function buildPageMetadata(input: {
   locale?: Locale;
   title: string;
+  absoluteTitle?: boolean;
   description: string;
   pathname: string;
   type?: "website" | "article";
@@ -30,14 +31,11 @@ export function buildPageMetadata(input: {
     url: absoluteUrl(getSocialImagePath(locale)),
     width: 1200,
     height: 630,
-    alt:
-      locale === "en"
-        ? "Miguel González, Marketing Director"
-        : "Miguel González, Marketing Director",
+    alt: "Miguel González, Marketing Director & Growth Leader",
   };
 
   return {
-    title: input.title,
+    title: input.absoluteTitle ? { absolute: input.title } : input.title,
     description: input.description,
     alternates: {
       canonical: input.canonical ?? input.pathname,

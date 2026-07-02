@@ -15,18 +15,18 @@ export function generateMetadata(): Metadata {
     locale === "en"
       ? "Executive profile of Miguel González: positioning, demand and conversion aligned with business results."
       : "Perfil ejecutivo de Miguel González: posicionamiento, demanda y conversión conectados a resultados de negocio.";
-  const socialTitle = `${siteData.person.displayName} | ${siteData.person.jobTitle}`;
+  const socialTitle = `${siteData.person.displayName} | Marketing Director & Growth Leader`;
   const socialImage = {
     url: absoluteUrl(getSocialImagePath(locale)),
     width: 1200,
     height: 630,
-    alt: `${siteData.person.displayName}, ${siteData.person.jobTitle}`,
+    alt: `${siteData.person.displayName}, Marketing Director & Growth Leader`,
   };
 
   return {
     metadataBase: new URL(SITE_URL),
     title: {
-      default: `${siteData.person.displayName} | ${siteData.person.jobTitle}`,
+      default: socialTitle,
       template: `%s | ${siteData.person.displayName}`,
     },
     description,
@@ -38,7 +38,7 @@ export function generateMetadata(): Metadata {
       locale: locale === "en" ? "en_US" : "es_ES",
       siteName: siteData.person.displayName,
       url: locale === "en" ? `${SITE_URL}/en` : SITE_URL,
-      title: `${siteData.person.displayName} | ${siteData.person.jobTitle}`,
+      title: socialTitle,
       description:
         locale === "en"
           ? "Marketing leadership for companies that need predictable growth and high-level execution."
